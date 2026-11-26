@@ -1,4 +1,4 @@
-const CACHE_NAME = 'maestro-app-v5';
+const CACHE_NAME = 'maestro-app-v7';
 const APP_ASSETS = [
   './index.html',
   './Devocional.html',

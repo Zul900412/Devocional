@@ -25,13 +25,26 @@
       theme: {
         extend: {
           colors: {
-            paper: '#FAF6F0',
-            card: '#F3ECE1',
-            forest: '#18362B',
-            terracotta: '#A6442A',
-            peach: '#E8C3AC',
-            sage: '#B8C7B9',
-            ink: '#2A2927',
+            paper: 'rgb(var(--paper-rgb) / <alpha-value>)',
+            card: 'rgb(var(--card-rgb) / <alpha-value>)',
+            forest: 'rgb(var(--forest-rgb) / <alpha-value>)',
+            terracotta: 'rgb(var(--terracotta-rgb) / <alpha-value>)',
+            peach: 'rgb(var(--peach-rgb) / <alpha-value>)',
+            sage: 'rgb(var(--sage-rgb) / <alpha-value>)',
+            ink: 'rgb(var(--ink-rgb) / <alpha-value>)',
+          },
+          fontSize: {
+            xs: ['calc(0.75rem * var(--font-scale))', { lineHeight: '1rem' }],
+            sm: ['calc(0.875rem * var(--font-scale))', { lineHeight: '1.25rem' }],
+            base: ['calc(1rem * var(--font-scale))', { lineHeight: '1.5rem' }],
+            lg: ['calc(1.125rem * var(--font-scale))', { lineHeight: '1.75rem' }],
+            xl: ['calc(1.25rem * var(--font-scale))', { lineHeight: '1.75rem' }],
+            '2xl': ['calc(1.5rem * var(--font-scale))', { lineHeight: '2rem' }],
+            '3xl': ['calc(1.875rem * var(--font-scale))', { lineHeight: '2.25rem' }],
+            '4xl': ['calc(2.25rem * var(--font-scale))', { lineHeight: '2.5rem' }],
+            '5xl': ['calc(3rem * var(--font-scale))', { lineHeight: '1' }],
+            '6xl': ['calc(3.75rem * var(--font-scale))', { lineHeight: '1' }],
+            reading: ['calc(1.0625rem * var(--font-scale))', { lineHeight: '1.8' }],
           },
           fontFamily: {
             serif: ['Lora', 'Georgia', 'serif'],
@@ -45,13 +58,41 @@
 
   <style>
     :root {
-      --paper: #FAF6F0;
-      --card: #F3ECE1;
-      --forest: #18362B;
-      --terracotta: #A6442A;
-      --peach: #E8C3AC;
-      --sage: #B8C7B9;
-      --ink: #2A2927;
+      --paper-rgb: 250 246 240;
+      --card-rgb: 243 236 225;
+      --forest-rgb: 24 54 43;
+      --terracotta-rgb: 166 68 42;
+      --peach-rgb: 232 195 172;
+      --sage-rgb: 184 199 185;
+      --ink-rgb: 42 41 39;
+      --paper: rgb(var(--paper-rgb));
+      --card: rgb(var(--card-rgb));
+      --forest: rgb(var(--forest-rgb));
+      --terracotta: rgb(var(--terracotta-rgb));
+      --peach: rgb(var(--peach-rgb));
+      --sage: rgb(var(--sage-rgb));
+      --ink: rgb(var(--ink-rgb));
+      --font-scale: 1;
+      color-scheme: light;
+    }
+
+    :root[data-theme="dark"] {
+      --paper-rgb: 19 25 21;
+      --card-rgb: 31 40 33;
+      --forest-rgb: 218 231 220;
+      --terracotta-rgb: 229 157 129;
+      --peach-rgb: 76 54 43;
+      --sage-rgb: 50 68 54;
+      --ink-rgb: 235 233 226;
+      color-scheme: dark;
+    }
+
+    :root[data-font-size="small"] {
+      --font-scale: 0.9;
+    }
+
+    :root[data-font-size="large"] {
+      --font-scale: 1.15;
     }
 
     html {
@@ -70,28 +111,28 @@
 
     /* Textura sutil de papel editorial */
     .paper-texture {
-      background-color: #FAF6F0;
-      background-image: radial-gradient(rgba(24, 54, 43, 0.03) 1px, transparent 0);
+      background-color: var(--paper);
+      background-image: radial-gradient(rgb(var(--forest-rgb) / 0.03) 1px, transparent 0);
       background-size: 20px 20px;
     }
 
     /* Insignia Día impares (Círculo) y pares (Arco) fiel al PDF */
     .badge-circle {
       border-radius: 9999px;
-      background-color: #E8C3AC;
+      background-color: var(--peach);
     }
     .badge-circle-ring {
       border-radius: 9999px;
-      border: 2px dashed #A6442A;
+      border: 2px dashed var(--terracotta);
     }
 
     .badge-arch {
       border-radius: 9999px 9999px 14px 14px;
-      background-color: #B8C7B9;
+      background-color: var(--sage);
     }
     .badge-arch-ring {
       border-radius: 9999px 9999px 16px 16px;
-      border: 2px dashed #18362B;
+      border: 2px dashed var(--forest);
       border-bottom: none;
     }
 
@@ -108,7 +149,7 @@
       right: -4px;
       bottom: 2px;
       height: 9px;
-      background-color: #E8C3AC;
+      background-color: var(--peach);
       opacity: 0.8;
       z-index: -1;
       border-radius: 4px;
@@ -116,10 +157,30 @@
 
     /* Líneas de escritura artesanal */
     .lined-textarea {
-      background-image: linear-gradient(to bottom, transparent 31px, rgba(24, 54, 43, 0.18) 32px);
+      background-image: linear-gradient(to bottom, transparent 31px, rgb(var(--forest-rgb) / 0.18) 32px);
       background-size: 100% 32px;
       line-height: 32px;
       padding-top: 4px;
+    }
+
+    .modal-backdrop {
+      background-color: rgb(24 54 43 / 0.7);
+    }
+
+    :root[data-theme="dark"] .modal-backdrop {
+      background-color: rgb(0 0 0 / 0.78);
+    }
+
+    :root[data-theme="dark"] .bg-white {
+      background-color: var(--card) !important;
+    }
+
+    :root[data-theme="dark"] .bg-terracotta {
+      background-color: #873f2a !important;
+    }
+
+    :root[data-theme="dark"] .print-diagram {
+      background-color: #FFFFFF !important;
     }
 
     /* Ocultar scrollbar en navegación horizontal */
@@ -144,7 +205,7 @@
 <body class="paper-texture min-h-screen flex flex-col selection:bg-peach selection:text-forest">
 
   <!-- BARRA SUPERIOR FIJA (Navegación, Instalación Directa PWA, Compartir e Imprimir) -->
-  <header class="no-print sticky top-0 z-40 bg-[#FAF6F0]/95 backdrop-blur-md border-b border-forest/10 shadow-sm">
+  <header class="no-print sticky top-0 z-40 bg-paper/95 backdrop-blur-md border-b border-forest/10 shadow-sm">
     <div class="max-w-4xl mx-auto px-3 sm:px-6 h-16 flex items-center justify-between gap-2">
       <!-- Marca / Volver al inicio -->
       <button onclick="navigateTo('cover')" class="flex items-center gap-2.5 text-left group focus:outline-none">
@@ -160,7 +221,7 @@
       <!-- Acciones Rápidas: Instalar App Directo, Imprimir, Compartir, Índice -->
       <div class="flex items-center gap-1.5 sm:gap-2">
         <!-- BOTÓN DE INSTALACIÓN DIRECTA EN CELULARES (Sin cuadros de instrucciones) -->
-        <button id="headerInstallBtn" onclick="triggerDirectInstall()" class="flex items-center gap-1.5 bg-terracotta hover:bg-[#8E3720] active:scale-95 text-white font-sans text-xs sm:text-sm font-semibold px-3 py-2 rounded-full shadow-md transition-all cursor-pointer">
+        <button id="headerInstallBtn" onclick="triggerDirectInstall()" class="flex items-center gap-1.5 bg-terracotta hover:brightness-90 active:scale-95 text-white font-sans text-xs sm:text-sm font-semibold px-3 py-2 rounded-full shadow-md transition-all cursor-pointer">
           <svg id="installIcon" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
           </svg>
@@ -184,7 +245,7 @@
         </button>
 
         <!-- Botón Índice / Contenido -->
-        <button onclick="navigateTo('toc')" class="flex items-center gap-1 bg-forest text-[#FAF6F0] hover:bg-[#11271F] font-sans text-xs sm:text-sm font-semibold px-3 py-2 rounded-full transition-colors cursor-pointer">
+        <button onclick="openIndexModal()" class="flex items-center gap-1 bg-forest text-paper hover:brightness-90 font-sans text-xs sm:text-sm font-semibold px-3 py-2 rounded-full transition-colors cursor-pointer">
           <span>Índice</span>
         </button>
       </div>
@@ -193,7 +254,7 @@
 
   <!-- NOTIFICACIÓN FLOTANTE (Toast sin usar alert()) -->
   <div id="toastBanner" class="no-print fixed bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform translate-y-3">
-    <div id="toastMessage" class="bg-forest text-[#FAF6F0] font-sans text-xs sm:text-sm font-medium px-5 py-3 rounded-full shadow-xl border border-peach/30 flex items-center gap-2">
+    <div id="toastMessage" class="bg-forest text-paper font-sans text-xs sm:text-sm font-medium px-5 py-3 rounded-full shadow-xl border border-peach/30 flex items-center gap-2">
       <span>Listo</span>
     </div>
   </div>
@@ -204,28 +265,51 @@
   </main>
 
   <!-- BARRA INFERIOR DE NAVEGACIÓN RÁPIDA EN MÓVIL -->
-  <nav id="bottomNav" class="no-print sticky bottom-0 z-30 bg-[#FAF6F0]/95 backdrop-blur-md border-t border-forest/10 px-4 py-2.5">
+  <nav id="bottomNav" class="no-print sticky bottom-0 z-30 bg-paper/95 backdrop-blur-md border-t border-forest/10 px-4 py-2.5">
     <div class="max-w-3xl mx-auto flex items-center justify-between gap-2">
       <button id="prevBtn" onclick="goPrev()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-sans text-xs sm:text-sm font-semibold text-forest bg-card hover:bg-peach/40 disabled:opacity-35 transition-colors cursor-pointer">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
         <span>Anterior</span>
       </button>
 
-      <button onclick="navigateTo('toc')" class="flex flex-col items-center justify-center px-3 py-1 rounded-xl hover:bg-card transition-colors cursor-pointer">
-        <span id="bottomIndicator" class="font-sans text-[11px] uppercase tracking-widest font-bold text-terracotta">Portada</span>
-        <span id="progressSummary" class="font-sans text-[11px] text-forest/75">0 de 16 días completados</span>
-      </button>
+      <div class="flex items-center gap-1">
+        <button onclick="openIndexModal()" aria-label="Abrir índice" class="flex flex-col items-center justify-center px-2 py-1 rounded-xl hover:bg-card transition-colors cursor-pointer">
+          <span id="bottomIndicator" class="font-sans text-[11px] uppercase tracking-widest font-bold text-terracotta">Portada</span>
+          <span id="progressSummary" class="font-sans text-[11px] text-forest/75">0 de 16 días completados</span>
+        </button>
+        <button id="appearanceTrigger" onclick="toggleAppearancePanel()" aria-label="Ajustes de lectura" aria-expanded="false" aria-controls="appearancePanel" class="w-9 h-9 shrink-0 rounded-xl bg-card hover:bg-peach/40 text-forest font-sans text-sm font-bold transition-colors cursor-pointer">Aa</button>
+      </div>
 
-      <button id="nextBtn" onclick="goNext()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-sans text-xs sm:text-sm font-semibold text-[#FAF6F0] bg-forest hover:bg-[#10251D] disabled:opacity-35 transition-colors cursor-pointer">
+      <button id="nextBtn" onclick="goNext()" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-sans text-xs sm:text-sm font-semibold text-paper bg-forest hover:brightness-90 disabled:opacity-35 transition-colors cursor-pointer">
         <span>Siguiente</span>
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
       </button>
     </div>
+    <section id="appearancePanel" class="no-print hidden absolute bottom-full left-1/2 z-50 mb-2 w-72 max-w-[calc(100vw-1rem)] -translate-x-1/2 rounded-2xl border border-forest/15 bg-paper p-4 shadow-xl" aria-label="Apariencia de lectura">
+      <div class="flex items-center justify-between gap-3 mb-4">
+        <h2 class="font-serif text-lg font-bold text-forest">Apariencia</h2>
+        <button onclick="closeAppearancePanel()" class="w-8 h-8 rounded-full bg-card hover:bg-peach/40 text-forest flex items-center justify-center" aria-label="Cerrar ajustes de lectura">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <button id="themeToggleBtn" onclick="toggleTheme()" aria-pressed="false" class="w-full flex items-center gap-3 rounded-xl bg-card hover:bg-peach/35 px-3 py-3 text-left font-sans text-sm font-semibold text-forest transition-colors">
+        <svg id="themeToggleIcon" class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.5 15.3A8.5 8.5 0 018.7 3.5 8.5 8.5 0 1020.5 15.3z"/>
+        </svg>
+        <span id="themeToggleLabel">Activar modo oscuro</span>
+      </button>
+      <p class="font-sans text-xs font-bold uppercase tracking-wider text-forest/70 mt-4 mb-2">Tamaño de letra</p>
+      <div class="grid grid-cols-3 gap-2" role="group" aria-label="Tamaño de letra">
+        <button onclick="setReadingFontSize('small')" data-font-size-choice="small" aria-pressed="false" class="rounded-lg bg-card px-2 py-2 font-sans text-xs font-semibold text-forest transition-colors">Pequeño</button>
+        <button onclick="setReadingFontSize('normal')" data-font-size-choice="normal" aria-pressed="true" class="rounded-lg bg-forest px-2 py-2 font-sans text-xs font-semibold text-paper transition-colors">Normal</button>
+        <button onclick="setReadingFontSize('large')" data-font-size-choice="large" aria-pressed="false" class="rounded-lg bg-card px-2 py-2 font-sans text-xs font-semibold text-forest transition-colors">Grande</button>
+      </div>
+    </section>
   </nav>
 
   <!-- MODAL DE DESCARGAS E INSTRUCCIONES DE IMPRESIÓN -->
-  <div id="printModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-    <div class="bg-[#FAF6F0] border-2 border-forest/15 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
+  <div id="printModal" class="no-print modal-backdrop fixed inset-0 z-50 hidden items-center justify-center backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-paper border-2 border-forest/15 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
       <button onclick="closePrintModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-card hover:bg-peach/50 text-forest flex items-center justify-center transition-colors cursor-pointer" aria-label="Cerrar">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
@@ -245,10 +329,10 @@
           </div>
           <h3 class="font-serif text-xl font-bold text-forest mb-2">Modo Lectura / Estándar</h3>
           <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">112 páginas verticales de 5,5 × 8,5 pulgadas (media carta), en orden de lectura. Ideal para leer en pantalla, anillar o imprimir página por página; no está impreso en pliegos para doblar.</p>
-          <a href="./Devocional.pdf" download="Devocional.pdf" class="w-full py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar PDF Normal</a>
+          <a href="./Devocional.pdf" download="Devocional.pdf" class="w-full py-3 px-4 rounded-xl bg-forest hover:brightness-90 text-paper font-sans text-sm font-semibold text-center transition-colors">Descargar PDF Normal</a>
         </section>
 
-        <section class="bg-[#F7ECE2] border-2 border-terracotta/40 rounded-2xl p-5 flex flex-col">
+        <section class="bg-card border-2 border-terracotta/40 rounded-2xl p-5 flex flex-col">
           <div class="flex items-start justify-between mb-3">
             <span class="w-10 h-10 rounded-xl bg-terracotta text-white flex items-center justify-center" aria-hidden="true">
               <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.5 5.5c2.8-.8 5-.3 8.5 1.5v13c-3.5-1.8-5.7-2.3-8.5-1.5zM20.5 5.5c-2.8-.8-5-.3-8.5 1.5v13c3.5-1.8 5.7-2.3 8.5-1.5z"/></svg>
@@ -257,22 +341,22 @@
           </div>
           <h3 class="font-serif text-xl font-bold text-forest mb-2">4 Cuadernillos Cosidos</h3>
           <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">56 páginas en Carta horizontal (11 × 8,5 pulgadas). Cada cara lleva dos páginas de media carta; al imprimir a doble cara son 28 hojas físicas, agrupadas en cuatro cuadernillos.</p>
-          <a href="./Devocional_Cuadernillo.pdf" download="Devocional_Cuadernillo.pdf" class="w-full py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar 4 Cuadernillos</a>
+          <a href="./Devocional_Cuadernillo.pdf" download="Devocional_Cuadernillo.pdf" class="w-full py-3 px-4 rounded-xl bg-terracotta hover:brightness-90 text-white font-sans text-sm font-semibold text-center transition-colors">Descargar 4 Cuadernillos</a>
         </section>
       </div>
 
-      <section class="rounded-2xl border border-[#D8CBBE] bg-[#F4ECE2] p-4 sm:p-5">
+      <section class="rounded-2xl border border-forest/15 bg-card p-4 sm:p-5">
         <h3 class="font-serif text-lg font-bold text-forest mb-4 flex items-center gap-2">
           <svg class="w-5 h-5 shrink-0 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 11v5m0-8h.01"/></svg>
           <span>Guía completa: imprimir, doblar, perforar y coser</span>
         </h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+          <article class="rounded-xl border border-forest/10 bg-paper p-4 sm:p-5">
             <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
-              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-white flex items-center justify-center font-sans text-sm">1</span>
+              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-paper flex items-center justify-center font-sans text-sm">1</span>
               Configuración de impresión
             </h4>
-            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+            <div class="print-diagram rounded-xl border border-forest/10 bg-white p-3 mb-3">
               <svg class="w-full h-auto" viewBox="0 0 360 112" role="img" aria-label="Dos caras del primer pliego en Carta horizontal, divididas al centro para doblar">
                 <text x="180" y="13" text-anchor="middle" fill="#53645C" font-size="9">CARTA · 11 × 8,5 in · horizontal · escala 100 %</text>
                 <text x="90" y="29" text-anchor="middle" fill="#A6442A" font-size="8">PDF 1 · cara A</text>
@@ -296,12 +380,12 @@
             </ul>
           </article>
 
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+          <article class="rounded-xl border border-forest/10 bg-paper p-4 sm:p-5">
             <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
-              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-white flex items-center justify-center font-sans text-sm">2</span>
+              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-paper flex items-center justify-center font-sans text-sm">2</span>
               Doblado de los 4 cuadernillos
             </h4>
-            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+            <div class="print-diagram rounded-xl border border-forest/10 bg-white p-3 mb-3">
               <svg class="w-full h-auto" viewBox="0 0 360 92" role="img" aria-label="Cuatro cuadernillos: tres de ocho hojas y uno de cuatro">
                 <g stroke="#18362B" stroke-width="1.2">
                   <rect x="18" y="7" width="104" height="13" rx="3" fill="#E8C3AC"/><path d="M25 11h90M25 15h90"/>
@@ -324,12 +408,12 @@
             </ul>
           </article>
 
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+          <article class="rounded-xl border border-forest/10 bg-paper p-4 sm:p-5">
             <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
               <span class="w-8 h-8 shrink-0 rounded-full bg-terracotta text-white flex items-center justify-center font-sans text-sm">3</span>
               Perforación del lomo · 5 puntos
             </h4>
-            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+            <div class="print-diagram rounded-xl border border-forest/10 bg-white p-3 mb-3">
               <svg class="w-full h-auto" viewBox="0 0 360 105" role="img" aria-label="Cinco perforaciones alineadas a lo largo del lomo de 21,6 centímetros">
                 <text x="180" y="13" text-anchor="middle" fill="#53645C" font-size="9">Lomo de media carta: 21,6 cm (8,5 in) · medir desde arriba</text>
                 <rect x="20" y="41" width="320" height="27" rx="5" fill="#C5D0C8" stroke="#18362B" stroke-width="1.5"/>
@@ -350,12 +434,12 @@
             </ul>
           </article>
 
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+          <article class="rounded-xl border border-forest/10 bg-paper p-4 sm:p-5">
             <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
               <span class="w-8 h-8 shrink-0 rounded-full bg-terracotta text-white flex items-center justify-center font-sans text-sm">4</span>
               Cosido unido y encolado del lomo
             </h4>
-            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+            <div class="print-diagram rounded-xl border border-forest/10 bg-white p-3 mb-3">
               <svg class="w-full h-auto" viewBox="0 0 360 104" role="img" aria-label="Cuatro cuadernillos unidos en cadena por el lomo">
                 <g stroke="#18362B" stroke-width="1.4">
                   <rect x="45" y="10" width="270" height="17" rx="4" fill="#E8C3AC"/>
@@ -379,6 +463,25 @@
           </article>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div id="tocModal" class="no-print modal-backdrop fixed inset-0 z-[60] hidden items-center justify-center backdrop-blur-sm p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="tocModalTitle" onclick="if(event.target === this) closeIndexModal()">
+    <div class="bg-paper border-2 border-forest/15 rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-hidden shadow-2xl flex flex-col">
+      <header class="flex items-start justify-between gap-4 p-5 sm:p-7 border-b border-forest/10">
+        <div>
+          <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">Índice del recorrido</span>
+          <h2 id="tocModalTitle" class="font-serif text-2xl sm:text-3xl font-bold text-forest mt-1">Contenido</h2>
+          <p class="font-sans text-xs sm:text-sm text-ink/70 mt-1">Elige un día o una sección para abrirla sin perder tu lugar de lectura.</p>
+        </div>
+        <button id="closeIndexModalBtn" onclick="closeIndexModal()" class="w-10 h-10 shrink-0 rounded-full bg-card hover:bg-peach/40 text-forest flex items-center justify-center transition-colors" aria-label="Cerrar índice">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </header>
+      <div id="tocModalContent" class="overflow-y-auto p-4 sm:p-6"></div>
+      <footer class="border-t border-forest/10 p-4 sm:px-6 flex justify-end">
+        <button onclick="closeIndexModal()" class="rounded-xl bg-forest px-4 py-2.5 text-paper font-sans text-sm font-semibold hover:brightness-90 transition-colors">Seguir leyendo</button>
+      </footer>
     </div>
   </div>
 
@@ -580,12 +683,16 @@
     const STORAGE_KEY = 'conociendo_jesus_state_v1';
     let storageWarningShown = false;
     let appState = {
-      view: 'cover', // 'cover', 'toc', 'day-1'...'day-16', 'reflection', 'closing', 'notes'
+      view: 'cover',
       completedDays: [],
       responses: {
         day1_starting_point: '',
         day5_written_response: '',
         personal_notes: ''
+      },
+      preferences: {
+        theme: 'light',
+        fontSize: 'normal'
       }
     };
 
@@ -596,19 +703,26 @@
           const parsed = JSON.parse(saved);
           if (!parsed || typeof parsed !== 'object') throw new Error('El estado guardado no es válido');
           const responses = parsed.responses && typeof parsed.responses === 'object' ? parsed.responses : {};
+          const preferences = parsed.preferences && typeof parsed.preferences === 'object' ? parsed.preferences : {};
+          const savedView = typeof parsed.view === 'string' && VIEW_ORDER.includes(parsed.view) ? parsed.view : 'cover';
           const validResponses = { ...appState.responses };
-          Object.keys(validResponses).forEach(key => {
-            if (typeof responses[key] === 'string') validResponses[key] = responses[key];
+          Object.entries(responses).forEach(([key, value]) => {
+            if (typeof value === 'string') validResponses[key] = value;
           });
           appState = {
             ...appState,
             ...parsed,
-            view: typeof parsed.view === 'string' && VIEW_ORDER.includes(parsed.view) ? parsed.view : 'cover',
+            view: savedView,
             completedDays: Array.isArray(parsed.completedDays)
               ? [...new Set(parsed.completedDays.filter(day => Number.isInteger(day) && day >= 1 && day <= 16))]
               : [],
-            responses: validResponses
+            responses: validResponses,
+            preferences: {
+              theme: preferences.theme === 'dark' ? 'dark' : 'light',
+              fontSize: ['small', 'normal', 'large'].includes(preferences.fontSize) ? preferences.fontSize : 'normal'
+            }
           };
+          if (parsed.view !== savedView) saveState();
         }
       } catch (error) {
         console.error('No se pudo cargar el progreso guardado:', error);
@@ -640,6 +754,10 @@
       }
       saveState();
       renderCurrentView(false);
+      const modal = document.getElementById('tocModal');
+      if (modal && !modal.classList.contains('hidden')) {
+        document.getElementById('tocModalContent').innerHTML = renderIndexModalContent();
+      }
     }
 
     function saveResponse(fieldId, value) {
@@ -652,7 +770,6 @@
     // ============================================================================
     const VIEW_ORDER = [
       'cover',
-      'toc',
       ...Array.from({ length: 16 }, (_, i) => `day-${i + 1}`),
       'reflection',
       'closing',
@@ -661,6 +778,10 @@
     ];
 
     function navigateTo(viewName) {
+      if (viewName === 'toc') {
+        openIndexModal();
+        return;
+      }
       appState.view = viewName;
       saveState();
       renderCurrentView(true);
@@ -685,7 +806,6 @@
       if (indicator) {
         const v = appState.view;
         if (v === 'cover') indicator.textContent = 'Portada';
-        else if (v === 'toc') indicator.textContent = 'Tabla de Contenido';
         else if (v.startsWith('day-')) indicator.textContent = `Día ${v.split('-')[1]} de 16`;
         else if (v === 'reflection') indicator.textContent = 'Para Reflexionar';
         else if (v === 'closing') indicator.textContent = 'Para Cerrar';
@@ -698,6 +818,100 @@
       const nextBtn = document.getElementById('nextBtn');
       if (prevBtn) prevBtn.disabled = idx <= 0;
       if (nextBtn) nextBtn.disabled = idx >= VIEW_ORDER.length - 1;
+    }
+
+    let indexReturnFocus = null;
+
+    function openIndexModal() {
+      const modal = document.getElementById('tocModal');
+      indexReturnFocus = document.activeElement;
+      document.getElementById('tocModalContent').innerHTML = renderIndexModalContent();
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      document.getElementById('closeIndexModalBtn').focus();
+    }
+
+    function closeIndexModal() {
+      const modal = document.getElementById('tocModal');
+      if (!modal || modal.classList.contains('hidden')) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+      if (indexReturnFocus && indexReturnFocus.isConnected) indexReturnFocus.focus();
+      indexReturnFocus = null;
+    }
+
+    function selectIndexDestination(viewName) {
+      closeIndexModal();
+      navigateTo(viewName);
+    }
+
+    function applyAppearance() {
+      const root = document.documentElement;
+      root.dataset.theme = appState.preferences.theme;
+      root.dataset.fontSize = appState.preferences.fontSize;
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) themeMeta.content = appState.preferences.theme === 'dark' ? '#131915' : '#18362B';
+      updateAppearanceControls();
+    }
+
+    function updateAppearanceControls() {
+      const isDark = appState.preferences.theme === 'dark';
+      const themeButton = document.getElementById('themeToggleBtn');
+      const themeLabel = document.getElementById('themeToggleLabel');
+      const themeIcon = document.getElementById('themeToggleIcon');
+      if (themeButton && themeLabel && themeIcon) {
+        themeButton.setAttribute('aria-pressed', String(isDark));
+        themeLabel.textContent = isDark ? 'Activar modo claro' : 'Activar modo oscuro';
+        themeIcon.innerHTML = isDark
+          ? '<circle cx="12" cy="12" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>'
+          : '<path stroke-linecap="round" stroke-linejoin="round" d="M20.5 15.3A8.5 8.5 0 018.7 3.5 8.5 8.5 0 1020.5 15.3z"/>';
+      }
+
+      document.querySelectorAll('[data-font-size-choice]').forEach(button => {
+        const selected = button.dataset.fontSizeChoice === appState.preferences.fontSize;
+        button.setAttribute('aria-pressed', String(selected));
+        button.classList.toggle('bg-forest', selected);
+        button.classList.toggle('text-paper', selected);
+        button.classList.toggle('bg-card', !selected);
+        button.classList.toggle('text-forest', !selected);
+      });
+    }
+
+    function toggleTheme() {
+      appState.preferences.theme = appState.preferences.theme === 'dark' ? 'light' : 'dark';
+      saveState();
+      applyAppearance();
+    }
+
+    function setReadingFontSize(size) {
+      if (!['small', 'normal', 'large'].includes(size)) {
+        console.error('Tamaño de letra no válido:', size);
+        return;
+      }
+      appState.preferences.fontSize = size;
+      saveState();
+      applyAppearance();
+    }
+
+    function toggleAppearancePanel() {
+      const panel = document.getElementById('appearancePanel');
+      const trigger = document.getElementById('appearanceTrigger');
+      const isOpening = panel.classList.contains('hidden');
+      panel.classList.toggle('hidden', !isOpening);
+      trigger.setAttribute('aria-expanded', String(isOpening));
+      if (isOpening) document.getElementById('themeToggleBtn').focus();
+      else trigger.focus();
+    }
+
+    function closeAppearancePanel(restoreFocus = true) {
+      const panel = document.getElementById('appearancePanel');
+      const trigger = document.getElementById('appearanceTrigger');
+      if (!panel || panel.classList.contains('hidden')) return;
+      panel.classList.add('hidden');
+      trigger.setAttribute('aria-expanded', 'false');
+      if (restoreFocus) trigger.focus();
     }
 
     // ============================================================================
@@ -716,7 +930,7 @@
           cls += 'bg-forest ring-2 ring-forest/30 scale-110';
         } else {
           // Días siguientes borde arena/melocotón
-          cls += 'border border-[#CBB5A4] bg-transparent';
+          cls += 'border border-forest/20 bg-transparent';
         }
         dotsHtml += `<span class="${cls}" title="Día ${i}"></span>`;
       }
@@ -727,9 +941,9 @@
     function renderSparklesSVG() {
       return `
         <svg class="w-16 h-16 sm:w-20 sm:h-20 shrink-0" viewBox="0 0 80 80" fill="none" aria-hidden="true">
-          <path d="M22 8 L24.2 14.8 L31 17 L24.2 19.2 L22 26 L19.8 19.2 L13 17 L19.8 14.8 Z" fill="#18362B"/>
-          <path d="M52 18 L56.2 31.8 L70 36 L56.2 40.2 L52 54 L47.8 40.2 L34 36 L47.8 31.8 Z" fill="#A6442A"/>
-          <path d="M68 54 L70.2 60.8 L77 63 L70.2 65.2 L68 72 L65.8 65.2 L59 63 L65.8 60.8 Z" fill="#18362B"/>
+          <path d="M22 8 L24.2 14.8 L31 17 L24.2 19.2 L22 26 L19.8 19.2 L13 17 L19.8 14.8 Z" fill="var(--forest)"/>
+          <path d="M52 18 L56.2 31.8 L70 36 L56.2 40.2 L52 54 L47.8 40.2 L34 36 L47.8 31.8 Z" fill="var(--terracotta)"/>
+          <path d="M68 54 L70.2 60.8 L77 63 L70.2 65.2 L68 72 L65.8 65.2 L59 63 L65.8 60.8 Z" fill="var(--forest)"/>
         </svg>
       `;
     }
@@ -770,12 +984,10 @@
 
       if (v === 'cover') {
         container.innerHTML = renderCoverView();
-      } else if (v === 'toc') {
-        container.innerHTML = renderTocView();
       } else if (v.startsWith('day-')) {
         const dayNum = parseInt(v.split('-')[1], 10);
         const dayObj = DEVOTIONAL_DATA.days.find(d => d.day === dayNum);
-        container.innerHTML = dayObj ? renderDayView(dayObj) : renderTocView();
+        container.innerHTML = dayObj ? renderDayView(dayObj) : renderCoverView();
       } else if (v === 'reflection') {
         container.innerHTML = renderReflectionView();
       } else if (v === 'closing') {
@@ -798,7 +1010,7 @@
         : 1;
 
       return `
-        <section class="bg-[#FAF6F0] border-2 border-forest/15 rounded-[2rem] p-6 sm:p-12 shadow-xl relative overflow-hidden">
+        <section class="bg-paper border-2 border-forest/15 rounded-[2rem] p-6 sm:p-12 shadow-xl relative overflow-hidden">
           <!-- Arco decorativo superior de portada -->
           <div class="max-w-md mx-auto text-center">
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-peach/45 text-forest font-sans text-xs font-bold tracking-[0.22em] uppercase mb-5">
@@ -830,19 +1042,19 @@
 
             <!-- Botones Principales de Acción -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-              <button onclick="navigateTo('day-${continueDay}')" class="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-2xl bg-forest hover:bg-[#10251D] text-[#FAF6F0] font-sans text-sm sm:text-base font-semibold shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2">
+              <button onclick="navigateTo('day-${continueDay}')" class="w-full sm:w-auto flex-1 py-3.5 px-6 rounded-2xl bg-forest hover:brightness-90 text-paper font-sans text-sm sm:text-base font-semibold shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2">
                 <span>${completedCount > 0 ? `Continuar en el Día ${continueDay}` : 'Comenzar Día 1'}</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
               </button>
 
-              <button onclick="navigateTo('toc')" class="w-full sm:w-auto py-3.5 px-6 rounded-2xl bg-card hover:bg-peach/45 text-forest border border-forest/15 font-sans text-sm sm:text-base font-semibold transition-all cursor-pointer">
+              <button onclick="openIndexModal()" class="w-full sm:w-auto py-3.5 px-6 rounded-2xl bg-card hover:bg-peach/45 text-forest border border-forest/15 font-sans text-sm sm:text-base font-semibold transition-all cursor-pointer">
                 Ver Contenido (16 Días)
               </button>
             </div>
 
             <!-- Fila Secundaria: Instalar Directamente en Celular + Imprimir 4 Cuadernillos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-forest/10">
-              <button id="coverInstallBtn" onclick="triggerDirectInstall()" class="py-3 px-4 rounded-2xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-xs sm:text-sm font-semibold shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
+              <button id="coverInstallBtn" onclick="triggerDirectInstall()" class="py-3 px-4 rounded-2xl bg-terracotta hover:brightness-90 text-white font-sans text-xs sm:text-sm font-semibold shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
                 <span id="coverInstallText">Instalar Maestro en el celular</span>
               </button>
@@ -857,24 +1069,25 @@
       `;
     }
 
-    function renderTocView() {
+    function renderIndexModalContent() {
       const daysCards = DEVOTIONAL_DATA.days.map(d => {
         const done = appState.completedDays.includes(d.day);
+        const current = appState.view === `day-${d.day}`;
         return `
-          <div class="group bg-white hover:bg-card/80 border ${done ? 'border-forest/40 bg-sage/15' : 'border-forest/12'} rounded-2xl p-4 flex items-center justify-between gap-3 transition-all shadow-sm">
-            <button onclick="navigateTo('day-${d.day}')" class="flex items-center gap-3.5 text-left flex-1 focus:outline-none cursor-pointer">
-              <span class="w-10 h-10 shrink-0 rounded-full ${d.day % 2 !== 0 ? 'bg-peach' : 'bg-sage'} text-forest font-serif font-bold text-lg flex items-center justify-center">
+          <div class="group bg-white hover:bg-card/80 border ${current ? 'border-terracotta/60 ring-1 ring-terracotta/25' : done ? 'border-forest/40 bg-sage/15' : 'border-forest/12'} rounded-2xl p-3 flex items-center justify-between gap-2 transition-all shadow-sm">
+            <button onclick="selectIndexDestination('day-${d.day}')" class="flex items-center gap-3 text-left min-w-0 flex-1 focus:outline-none cursor-pointer">
+              <span class="w-9 h-9 shrink-0 rounded-full ${d.day % 2 !== 0 ? 'bg-peach' : 'bg-sage'} text-forest font-serif font-bold text-base flex items-center justify-center">
                 ${d.day}
               </span>
-              <div>
-                <h3 class="font-serif font-bold text-sm sm:text-base text-forest group-hover:text-terracotta transition-colors leading-snug">
-                  ${d.title}
+              <div class="min-w-0">
+                <h3 class="font-serif font-bold text-sm text-forest group-hover:text-terracotta transition-colors leading-snug">
+                  ${escapeHtml(d.title)}
                 </h3>
-                <p class="font-sans text-xs text-ink/65 mt-0.5">${d.reading}</p>
+                <p class="font-sans text-xs text-ink/65 mt-0.5">${escapeHtml(d.reading)}</p>
               </div>
             </button>
 
-            <button onclick="toggleDayCompleted(${d.day})" title="${done ? 'Completado' : 'Marcar como leído'}" class="w-9 h-9 shrink-0 rounded-full border ${done ? 'bg-forest border-forest text-[#FAF6F0]' : 'border-forest/25 text-forest/30 hover:border-forest'} flex items-center justify-center transition-colors cursor-pointer">
+            <button onclick="toggleDayCompleted(${d.day})" title="${done ? 'Marcar como pendiente' : 'Marcar como leído'}" aria-label="Marcar Día ${d.day} ${done ? 'como pendiente' : 'como leído'}" aria-pressed="${done}" class="w-8 h-8 shrink-0 rounded-full border ${done ? 'bg-forest border-forest text-paper' : 'border-forest/25 text-forest/30 hover:border-forest'} flex items-center justify-center transition-colors cursor-pointer">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
             </button>
           </div>
@@ -882,42 +1095,28 @@
       }).join('');
 
       return `
-        <section class="space-y-6">
-          <div class="bg-white border border-forest/15 rounded-3xl p-6 sm:p-8 shadow-sm">
-            <div class="flex flex-wrap items-end justify-between gap-4 border-b border-forest/10 pb-5 mb-6">
-              <div>
-                <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">Índice del Recorrido</span>
-                <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest mt-1">Contenido</h1>
-                <p class="font-serif italic text-base sm:text-lg text-ink/80">16 días para conocerlo mejor</p>
-              </div>
-              <div class="bg-card px-4 py-2.5 rounded-2xl border border-forest/10 text-right">
-                <span class="block font-sans text-xs font-bold text-forest">${appState.completedDays.length} / 16 completados</span>
-                <span class="font-serif text-xs text-ink/70">Toca el círculo ✓ para marcar tu avance</span>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 gap-3">
-              ${daysCards}
-            </div>
-
-            <!-- Secciones Finales -->
-            <div class="mt-6 pt-6 border-t border-forest/10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              <button onclick="navigateTo('reflection')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
+        <section>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="font-serif text-lg font-bold text-forest">Los 16 días</h3>
+            <span class="font-sans text-xs text-ink/70">${appState.completedDays.length} de 16 completados · Toca ✓ para actualizar tu avance</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">${daysCards}</div>
+          <div class="mt-6 pt-5 border-t border-forest/10">
+            <h3 class="font-serif text-lg font-bold text-forest mb-3">Secciones finales</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <button onclick="selectIndexDestination('reflection')" class="p-3 rounded-xl bg-card hover:bg-peach/35 border border-forest/10 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Antes de terminar</span>
                 <span class="font-serif font-bold text-base text-forest">Para reflexionar</span>
               </button>
-
-              <button onclick="navigateTo('closing')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
+              <button onclick="selectIndexDestination('closing')" class="p-3 rounded-xl bg-card hover:bg-peach/35 border border-forest/10 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Para cerrar</span>
                 <span class="font-serif font-bold text-base text-forest">Cristo, el más hermoso</span>
               </button>
-
-              <button onclick="navigateTo('questionnaire')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
+              <button onclick="selectIndexDestination('questionnaire')" class="p-3 rounded-xl bg-card hover:bg-peach/35 border border-forest/10 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Para repasar</span>
                 <span class="font-serif font-bold text-base text-forest">Cuestionario</span>
               </button>
-
-              <button onclick="navigateTo('notes')" class="p-4 rounded-2xl bg-forest text-[#FAF6F0] hover:bg-[#10251D] text-left transition-colors cursor-pointer">
+              <button onclick="selectIndexDestination('notes')" class="p-3 rounded-xl bg-forest text-paper hover:brightness-90 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-peach">Cuaderno Personal</span>
                 <span class="font-serif font-bold text-base">Mis Notas</span>
               </button>
@@ -944,7 +1143,7 @@
         const isHeading = text.length <= 110 && (headingLabels.test(text) || (/[A-ZÁÉÍÓÚÜÑ]/.test(text) && text === text.toLocaleUpperCase('es')));
         const inlineHeading = text.match(/^(Oración|Mañana:|En conclusión)\s+(.+)$/i);
         if (inlineHeading) {
-          return `<h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-7 mb-3">${escapeHtml(inlineHeading[1])}</h2><p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${escapeHtml(inlineHeading[2])}</p>`;
+          return `<h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-7 mb-3">${escapeHtml(inlineHeading[1])}</h2><p class="font-serif text-base sm:text-reading leading-[1.8] text-ink mb-4">${escapeHtml(inlineHeading[2])}</p>`;
         }
         if (/^PARA SEGUIR EN LA PALABRA:/i.test(text)) {
           return `<p class="font-sans text-sm leading-relaxed text-forest mb-4"><strong class="uppercase tracking-wider">Para seguir en la Palabra:</strong> ${escapeHtml(text.replace(/^PARA SEGUIR EN LA PALABRA:\s*/i, ''))}</p>`;
@@ -953,9 +1152,9 @@
           return `<h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-7 mb-3">${safeText}</h2>`;
         }
         if (/^[«“"]/.test(text)) {
-          return `<blockquote class="my-4 pl-4 sm:pl-5 py-3 pr-4 border-l-4 border-terracotta bg-card/75 rounded-r-2xl font-serif italic text-base sm:text-[17px] leading-relaxed text-forest">${safeText}</blockquote>`;
+          return `<blockquote class="my-4 pl-4 sm:pl-5 py-3 pr-4 border-l-4 border-terracotta bg-card/75 rounded-r-2xl font-serif italic text-base sm:text-reading leading-relaxed text-forest">${safeText}</blockquote>`;
         }
-        return `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${safeText}</p>`;
+        return `<p class="font-serif text-base sm:text-reading leading-[1.8] text-ink mb-4">${safeText}</p>`;
       }).join('');
     }
 
@@ -1043,8 +1242,8 @@
           <ol class="space-y-3">
             ${questions.map((question, index) => `
               <li class="flex items-start gap-3">
-                <span class="w-7 h-7 rounded-full ${index % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-white'} font-sans text-sm font-bold flex items-center justify-center shrink-0">${index + 1}</span>
-                <span class="font-serif text-base sm:text-[17px] leading-relaxed text-ink pt-0.5">${escapeHtml(question.replace(/^\d+[.)]\s*/, ''))}</span>
+                <span class="w-7 h-7 rounded-full ${index % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-paper'} font-sans text-sm font-bold flex items-center justify-center shrink-0">${index + 1}</span>
+                <span class="font-serif text-base sm:text-reading leading-relaxed text-ink pt-0.5">${escapeHtml(question.replace(/^\d+[.)]\s*/, ''))}</span>
               </li>
             `).join('')}
           </ol>
@@ -1054,7 +1253,7 @@
       const responseHtml = (dayObj.day === 1 || dayObj.day === 16) ? `
         <div class="mt-8 bg-white border-2 border-dashed border-terracotta/50 rounded-3xl p-5 sm:p-7">
           <h2 class="font-serif text-xl font-bold text-forest mb-3">${savedResponseLabel}</h2>
-          <textarea rows="5" oninput="saveResponse('${savedResponseId}', this.value)" placeholder="Escribe aquí; se guarda automáticamente en este dispositivo." class="w-full lined-textarea bg-[#FAF6F0] border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta">${escapeHtml(appState.responses[savedResponseId] || '')}</textarea>
+          <textarea rows="5" oninput="saveResponse('${savedResponseId}', this.value)" placeholder="Escribe aquí; se guarda automáticamente en este dispositivo." class="w-full lined-textarea bg-paper border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta">${escapeHtml(appState.responses[savedResponseId] || '')}</textarea>
         </div>
       ` : '';
       const startingPoint = dayObj.day === 16 ? appState.responses.day1_starting_point || '' : '';
@@ -1071,9 +1270,9 @@
         prayerParts[0] = prayerParts[0].replace(/^Oración\s*/i, '').trim();
       }
       const prayerHtml = prayerParts.some(part => part.trim()) ? `
-        <section class="mt-7 bg-[#EEF2ED] border border-[#CDD8CF] rounded-3xl p-5 sm:p-6">
+        <section class="mt-7 bg-sage/15 border border-forest/15 rounded-3xl p-5 sm:p-6">
           <h2 class="font-serif text-xl font-bold text-forest mb-2">Oración</h2>
-          ${prayerParts.filter(part => part.trim()).map(part => `<p class="font-serif italic text-base sm:text-[17px] leading-[1.65] text-ink mb-2 last:mb-0">${escapeHtml(part.trim())}</p>`).join('')}
+          ${prayerParts.filter(part => part.trim()).map(part => `<p class="font-serif italic text-base sm:text-reading leading-[1.65] text-ink mb-2 last:mb-0">${escapeHtml(part.trim())}</p>`).join('')}
         </section>
       ` : '';
 
@@ -1101,14 +1300,14 @@
         furtherReading = furtherReading.slice(0, closingStart).trim();
       }
       const takeawayHtml = takeawayIndex >= 0 ? `
-        <section class="mt-7 bg-forest text-[#FAF6F0] rounded-3xl p-5 sm:p-7 shadow-md">
+        <section class="mt-7 bg-forest text-paper rounded-3xl p-5 sm:p-7 shadow-md">
           <h2 class="font-sans text-[11px] font-bold uppercase tracking-[0.16em] text-peach mb-2">Para llevar contigo hoy</h2>
-          <p class="font-serif text-base sm:text-[17px] font-semibold leading-relaxed mb-4">${escapeHtml(takeawayMessage)}</p>
+          <p class="font-serif text-base sm:text-reading font-semibold leading-relaxed mb-4">${escapeHtml(takeawayMessage)}</p>
           ${closingMessage ? `<p class="font-serif text-sm sm:text-base leading-relaxed mb-4">${escapeHtml(closingMessage)}</p>` : ''}
           ${furtherReading || tomorrow ? `
             <div class="pt-3 border-t border-white/20 space-y-2 text-xs sm:text-sm">
-              ${furtherReading ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Para seguir en la Palabra:</strong> <span class="text-white/90">${escapeHtml(furtherReading)}</span></p>` : ''}
-              ${tomorrow ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Mañana:</strong> <span class="text-white/90">${escapeHtml(tomorrow)}</span></p>` : ''}
+              ${furtherReading ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Para seguir en la Palabra:</strong> <span class="text-paper/90">${escapeHtml(furtherReading)}</span></p>` : ''}
+              ${tomorrow ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Mañana:</strong> <span class="text-paper/90">${escapeHtml(tomorrow)}</span></p>` : ''}
             </div>
           ` : ''}
         </section>
@@ -1120,7 +1319,7 @@
           <header class="mb-6">
             <h1 class="font-serif text-2xl sm:text-4xl font-bold text-forest leading-tight mb-3">${escapeHtml(dayObj.title)}</h1>
             <p class="font-serif italic text-base sm:text-lg text-ink/85 leading-relaxed mb-4">${escapeHtml(dayObj.subtitle)}</p>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-[#FAF6F0] font-sans text-xs sm:text-sm font-bold tracking-wide">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-paper font-sans text-xs sm:text-sm font-bold tracking-wide">
               <span class="text-peach">LECTURA:</span>
               <span>${escapeHtml(dayObj.reading)}</span>
             </div>
@@ -1133,7 +1332,7 @@
           ${prayerHtml}
           ${takeawayHtml}
           <div class="mt-8 pt-6 border-t border-forest/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:bg-[#8E3720] shadow-md'}">
+            <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:brightness-90 shadow-md'}">
               <span>${isDone ? `Día ${dayObj.day} Completado ✓` : `Marcar Día ${dayObj.day} como Leído`}</span>
             </button>
             <span class="font-sans text-[11px] font-semibold tracking-[0.16em] text-forest/60 uppercase">${escapeHtml(DEVOTIONAL_DATA.authors)}</span>
@@ -1155,13 +1354,13 @@
 
         if (sec.paragraphs) {
           sec.paragraphs.forEach(p => {
-            html += `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${p}</p>`;
+            html += `<p class="font-serif text-base sm:text-reading leading-[1.8] text-ink mb-4">${p}</p>`;
           });
         }
 
         if (sec.quote) {
           html += `
-            <blockquote class="my-5 pl-4 sm:pl-5 py-3 pr-4 border-l-4 border-terracotta bg-card/75 rounded-r-2xl font-serif italic text-base sm:text-[17px] leading-relaxed text-forest font-medium">
+            <blockquote class="my-5 pl-4 sm:pl-5 py-3 pr-4 border-l-4 border-terracotta bg-card/75 rounded-r-2xl font-serif italic text-base sm:text-reading leading-relaxed text-forest font-medium">
               ${sec.quote}
             </blockquote>
           `;
@@ -1169,7 +1368,7 @@
 
         if (sec.afterQuote) {
           sec.afterQuote.forEach(p => {
-            html += `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${p}</p>`;
+            html += `<p class="font-serif text-base sm:text-reading leading-[1.8] text-ink mb-4">${p}</p>`;
           });
         }
 
@@ -1177,7 +1376,7 @@
           html += `<ul class="space-y-3 my-4 pl-1">`;
           sec.bullets.forEach(b => {
             html += `
-              <li class="flex items-start gap-2.5 font-serif text-base sm:text-[17px] leading-[1.75] text-ink">
+              <li class="flex items-start gap-2.5 font-serif text-base sm:text-reading leading-[1.75] text-ink">
                 <span class="w-2 h-2 rounded-full bg-terracotta mt-2.5 shrink-0"></span>
                 <span><strong class="text-forest font-semibold">${b.lead}</strong> ${b.text}</span>
               </li>
@@ -1188,7 +1387,7 @@
 
         if (sec.closingParagraphs) {
           sec.closingParagraphs.forEach(p => {
-            html += `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${p}</p>`;
+            html += `<p class="font-serif text-base sm:text-reading leading-[1.8] text-ink mb-4">${p}</p>`;
           });
         }
 
@@ -1198,13 +1397,13 @@
 
       // Preguntas de Examina tu corazón
       const examinaHtml = dayObj.examina.map((q, idx) => {
-        const bgNum = idx % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-[#FAF6F0]';
+        const bgNum = idx % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-paper';
         return `
           <div class="flex items-start gap-3.5">
             <span class="w-7 h-7 rounded-full ${bgNum} font-script font-bold text-lg flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
               ${idx + 1}
             </span>
-            <p class="font-serif text-base sm:text-[17px] leading-relaxed text-ink">${q}</p>
+            <p class="font-serif text-base sm:text-reading leading-relaxed text-ink">${q}</p>
           </div>
         `;
       }).join('');
@@ -1226,7 +1425,7 @@
               rows="5"
               oninput="saveResponse('${dayObj.writingPrompt.id}', this.value)"
               placeholder="Escribe aquí tu respuesta personal (se guarda automáticamente en tu dispositivo)..."
-              class="w-full lined-textarea bg-[#FAF6F0] border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
+              class="w-full lined-textarea bg-paper border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
             >${val}</textarea>
             <span class="block font-sans text-[11px] text-forest/65 mt-2">✓ Guardado automáticamente en tu celular</span>
           </div>
@@ -1242,7 +1441,7 @@
             <span class="font-sans text-xs font-bold uppercase tracking-widest text-terracotta">Tu Punto de Partida (Día 1)</span>
             <h3 class="font-serif text-xl font-bold text-forest mt-1 mb-2">¿Recuerdas lo que escribiste el primer día?</h3>
             ${day1Text.trim()
-              ? `<div class="bg-white/90 rounded-2xl p-4 border border-forest/15 font-serif italic text-base text-forest leading-relaxed mb-4">«${day1Text.replace(/</g, '&lt;')}»</div>`
+              ? `<div class="bg-card rounded-2xl p-4 border border-forest/15 font-serif italic text-base text-forest leading-relaxed mb-4">«${day1Text.replace(/</g, '&lt;')}»</div>`
               : `<p class="font-serif italic text-sm text-ink/75 mb-4">Aún no escribiste tu punto de partida en el Día 1. Puedes escribir hoy quién es Jesús para ti después de este recorrido:</p>`
             }
             <label class="block font-sans text-xs font-bold uppercase tracking-wider text-forest mb-2">Tu respuesta hoy (Día 16):</label>
@@ -1268,7 +1467,7 @@
             <p class="font-serif italic text-base sm:text-lg text-ink/85 leading-relaxed mb-4">
               ${dayObj.subtitle}
             </p>
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-[#FAF6F0] font-sans text-xs sm:text-sm font-bold tracking-wide">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-paper font-sans text-xs sm:text-sm font-bold tracking-wide">
               <span class="text-peach">LECTURA:</span>
               <span>${dayObj.reading}</span>
             </div>
@@ -1280,7 +1479,7 @@
           </div>
 
           <!-- EXAMINA TU CORAZÓN -->
-          <div class="mt-9 bg-[#FAF6F0] border-2 border-dashed border-forest/25 rounded-3xl p-5 sm:p-7 relative">
+          <div class="mt-9 bg-paper border-2 border-dashed border-forest/25 rounded-3xl p-5 sm:p-7 relative">
             <div class="w-16 h-3 bg-forest/80 -rotate-2 mx-auto -mt-8 mb-4 rounded-sm"></div>
             <h3 class="font-serif text-2xl font-bold text-forest mb-5">
               <span class="examina-underline">Examina tu corazón</span>
@@ -1296,22 +1495,22 @@
           <!-- ORACIÓN -->
           <div class="mt-8 bg-card rounded-3xl p-5 sm:p-7 border border-forest/10">
             <h3 class="font-serif text-xl sm:text-2xl font-bold text-terracotta mb-3">Oración</h3>
-            <p class="font-serif italic text-base sm:text-[17px] leading-[1.85] text-forest">
+            <p class="font-serif italic text-base sm:text-reading leading-[1.85] text-forest">
               ${dayObj.prayer}
             </p>
           </div>
 
           <!-- PARA LLEVAR CONTIGO HOY -->
-          <div class="mt-8 bg-forest text-[#FAF6F0] rounded-3xl p-5 sm:p-7 shadow-md">
+          <div class="mt-8 bg-forest text-paper rounded-3xl p-5 sm:p-7 shadow-md">
             <span class="inline-block font-sans text-[11px] font-bold uppercase tracking-[0.2em] text-peach mb-2">Para llevar contigo hoy</span>
-            <p class="font-serif text-base sm:text-[17px] leading-relaxed whitespace-pre-line mb-5">
+            <p class="font-serif text-base sm:text-reading leading-relaxed whitespace-pre-line mb-5">
               ${dayObj.takeaway}
             </p>
 
             <div class="pt-4 border-t border-white/15 space-y-2 text-xs sm:text-sm">
               <p class="font-sans">
                 <strong class="text-peach uppercase tracking-wider">PARA SEGUIR EN LA PALABRA:</strong>
-                <span class="text-white/90 ml-1">${dayObj.furtherReading}</span>
+                <span class="text-paper/90 ml-1">${dayObj.furtherReading}</span>
               </p>
               <p class="font-serif italic text-sage">
                 <strong>Mañana:</strong> ${dayObj.tomorrow}
@@ -1321,7 +1520,7 @@
 
           <!-- Pie de página del Día: Marcar completado + Autores -->
           <div class="mt-8 pt-6 border-t border-forest/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:bg-[#8E3720] shadow-md'}">
+            <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:brightness-90 shadow-md'}">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
               <span>${isDone ? `Día ${dayObj.day} Completado ✓` : `Marcar Día ${dayObj.day} como Leído`}</span>
             </button>
@@ -1335,26 +1534,149 @@
     }
 
     function renderReflectionView() {
-      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.reflection);
+      const section = DEVOTIONAL_DATA.closingSections.reflection;
+      const [intro, ...content] = getEndingContent(section);
+      let html = '';
+
+      for (let index = 0; index < content.length; index++) {
+        let text = content[index].trim();
+        if (/^(¿Qué significa realmente|¿Cómo identificar a un)/i.test(text) || /^En conclusión$/i.test(text)) {
+          html += `
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-8 mb-3">
+              <span class="examina-underline">${escapeHtml(text)}</span>
+            </h2>
+          `;
+          continue;
+        }
+
+        if (/^1\.\s/.test(text) && content[index + 1] && /^[a-záéíóúüñ]/.test(content[index + 1].trim())) {
+          text += ` ${content[++index].trim()}`;
+        }
+        const markers = [...text.matchAll(/(?:^|\s)(\d+)\.\s+(?!Juan\b)/g)];
+        if (markers.length > 1) {
+          const items = markers.map((marker, markerIndex) => {
+            const bodyStart = marker.index + marker[0].length;
+            const nextStart = markers[markerIndex + 1]
+              ? markers[markerIndex + 1].index + markers[markerIndex + 1][0].lastIndexOf(`${markers[markerIndex + 1][1]}.`)
+              : text.length;
+            return `
+              <li class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-full ${markerIndex % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-paper'} font-sans text-sm font-bold flex items-center justify-center shrink-0">${escapeHtml(marker[1])}</span>
+                <p class="font-serif text-base sm:text-reading leading-[1.75] text-ink pt-0.5">${escapeHtml(text.slice(bodyStart, nextStart).trim())}</p>
+              </li>
+            `;
+          }).join('');
+          html += `<ol class="my-5 space-y-4">${items}</ol>`;
+          continue;
+        }
+
+        html += renderSourceContent([text]);
+      }
+
+      return renderEndingPage(section, intro, html);
     }
 
     function renderClosingView() {
-      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.closing);
+      const section = DEVOTIONAL_DATA.closingSections.closing;
+      const [intro, ...content] = getEndingContent(section);
+      const headingPattern = /^(Mira cómo (?:mira|toca|llora|restaura|perdona)|Mira su corazón y su plan|Y hoy, todavía, llama)$/i;
+      const moments = [];
+      let currentMoment = null;
+
+      const saveMoment = () => {
+        if (currentMoment) moments.push(currentMoment);
+      };
+
+      content.forEach(text => {
+        if (headingPattern.test(text.trim())) {
+          saveMoment();
+          currentMoment = { heading: text.trim(), content: [] };
+        } else if (currentMoment) {
+          currentMoment.content.push(text);
+        }
+      });
+      saveMoment();
+
+      const html = moments.map((moment, index) => `
+        <section class="relative ${index > 0 ? 'mt-5 pt-5 border-t border-forest/10' : ''}">
+          <h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mb-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full ${index % 2 === 0 ? 'bg-peach text-forest' : 'bg-sage text-forest'} flex items-center justify-center text-sm" aria-hidden="true">✦</span>
+            ${escapeHtml(moment.heading)}
+          </h2>
+          <div class="pl-0 sm:pl-11">${renderSourceContent(moment.content)}</div>
+        </section>
+      `).join('');
+
+      return renderEndingPage(section, intro, html);
     }
 
     function renderQuestionnaireView() {
-      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.questionnaire);
+      const section = DEVOTIONAL_DATA.closingSections.questionnaire;
+      const [intro, ...content] = getEndingContent(section);
+      const categoryPattern = /\(Días \d+(?:(?: a | y )\d+)?\)$/i;
+      const html = content.map(text => {
+        const questionMatch = text.match(/^(\d+)\.\s+(.+)$/);
+        if (questionMatch) {
+          const questionNumber = Number(questionMatch[1]);
+          const responseId = `questionnaire_${String(questionNumber).padStart(2, '0')}`;
+          const rows = questionMatch[2].length > 220 ? 4 : 3;
+          return `
+            <article class="questionnaire-item bg-white border border-forest/15 rounded-2xl p-4 sm:p-5 shadow-sm">
+              <div class="flex items-start gap-3">
+                <span class="w-8 h-8 rounded-full ${questionNumber % 2 === 1 ? 'bg-terracotta text-white' : 'bg-forest text-paper'} font-sans text-sm font-bold flex items-center justify-center shrink-0">${questionNumber}</span>
+                <p class="font-serif text-base sm:text-reading leading-[1.7] text-ink pt-0.5">${escapeHtml(questionMatch[2])}</p>
+              </div>
+              <label for="${responseId}" class="block font-sans text-[11px] font-bold uppercase tracking-wider text-forest mt-4 mb-1">Tu respuesta</label>
+              <textarea
+                id="${responseId}"
+                rows="${rows}"
+                aria-label="Respuesta a la pregunta ${questionNumber}"
+                oninput="saveResponse('${responseId}', this.value)"
+                placeholder="Escribe con tus propias palabras..."
+                class="questionnaire-answer w-full lined-textarea bg-paper border border-forest/20 rounded-xl px-3 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
+              >${escapeHtml(appState.responses[responseId] || '')}</textarea>
+              <span class="block font-sans text-[10px] text-forest/60 mt-1">Se guarda automáticamente en este dispositivo.</span>
+            </article>
+          `;
+        }
+        if (text === 'Antes de empezar') {
+          return `<h2 class="font-serif text-xl font-bold text-forest mt-5 mb-2">${escapeHtml(text)}</h2>`;
+        }
+        if (categoryPattern.test(text) || /^(Para reflexionar:|Cristo, el más hermoso$|Mi respuesta$)/i.test(text)) {
+          return `
+            <h2 class="questionnaire-group-heading font-serif text-lg sm:text-xl font-bold text-forest mt-8 mb-3 pb-2 border-b border-forest/15">
+              <span class="examina-underline">${escapeHtml(text)}</span>
+            </h2>
+          `;
+        }
+        return renderSourceContent([text]);
+      }).join('');
+
+      return renderEndingPage(section, intro, html, true);
     }
 
-    function renderSourceSectionView(section) {
-      const content = section.content.filter((text, index) => {
-        return !(index === 0 && text === section.kicker) && !(index === 1 && text === section.title);
-      });
+    function getEndingContent(section) {
+      const content = [...section.content];
+      const combinedTitle = `${section.kicker} ${section.title}`;
+      if (content[0] && content[0].trim() === combinedTitle) return content.slice(1);
+      if (content[0] && content[0].trim() === section.kicker && content[1] && content[1].trim() === section.title) {
+        return content.slice(2);
+      }
+      return content;
+    }
+
+    function renderEndingPage(section, intro, contentHtml, questionnaire = false) {
       return `
-        <article class="bg-white border border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
-          <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">${escapeHtml(section.kicker)}</span>
-          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest mt-1 mb-3">${escapeHtml(section.title)}</h1>
-          <div class="border-t border-forest/10 pt-2">${renderSourceContent(content)}</div>
+        <article class="bg-paper border-2 border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
+          <header class="pb-5 border-b border-forest/15">
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <span class="font-sans text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-terracotta">${escapeHtml(section.kicker)}</span>
+              <span class="font-sans text-[10px] font-semibold uppercase tracking-widest text-forest/55">Maestro · Conociendo a Jesús</span>
+            </div>
+            <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest leading-tight">${escapeHtml(section.title)}</h1>
+            ${intro ? `<p class="font-serif italic text-base sm:text-lg text-ink/80 leading-relaxed mt-3">${escapeHtml(intro)}</p>` : ''}
+          </header>
+          <div class="pt-4 ${questionnaire ? 'space-y-4' : ''}">${contentHtml}</div>
         </article>
       `;
     }
@@ -1377,7 +1699,7 @@
             rows="14"
             oninput="saveResponse('personal_notes', this.value)"
             placeholder="Escribe tus notas aquí..."
-            class="w-full lined-textarea bg-[#FAF6F0] border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
+            class="w-full lined-textarea bg-paper border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
           >${escapeHtml(notesVal)}</textarea>
         </section>
       `;
@@ -1400,8 +1722,55 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
+      applyAppearance();
       setupPWA();
       renderCurrentView(false);
+
+      document.addEventListener('click', event => {
+        const panel = document.getElementById('appearancePanel');
+        const trigger = document.getElementById('appearanceTrigger');
+        if (
+          panel &&
+          !panel.classList.contains('hidden') &&
+          !panel.contains(event.target) &&
+          !trigger.contains(event.target)
+        ) {
+          closeAppearancePanel(false);
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          closeIndexModal();
+          closeAppearancePanel(true);
+          closePrintModal();
+          return;
+        }
+
+        if (event.key !== 'Tab') return;
+        const modal = document.getElementById('tocModal');
+        if (!modal || modal.classList.contains('hidden')) return;
+        const focusable = [...modal.querySelectorAll('button:not([disabled]), a[href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+          .filter(element => element.getClientRects().length > 0);
+        if (!focusable.length) {
+          event.preventDefault();
+          document.getElementById('closeIndexModalBtn').focus();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (!modal.contains(document.activeElement)) {
+          event.preventDefault();
+          first.focus();
+        } else if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
     });
   </script>
 </body>
