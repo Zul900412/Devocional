@@ -225,13 +225,13 @@
 
   <!-- MODAL DE DESCARGAS E INSTRUCCIONES DE IMPRESIÓN -->
   <div id="printModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
-    <div class="bg-[#FAF6F0] border-2 border-forest/15 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
+    <div class="bg-[#FAF6F0] border-2 border-forest/15 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
       <button onclick="closePrintModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-card hover:bg-peach/50 text-forest flex items-center justify-center transition-colors cursor-pointer" aria-label="Cerrar">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
       <div class="border-b border-forest/10 pb-4 mb-5 pr-10">
-        <p class="font-sans text-xs font-bold uppercase tracking-widest text-terracotta mb-1">Impresión · Media carta</p>
+        <p class="font-sans text-xs font-bold uppercase tracking-widest text-terracotta mb-1">Impresión · Carta y media carta</p>
         <h2 class="font-serif text-2xl sm:text-3xl font-bold text-forest mb-2">Descargar Devocional en PDF</h2>
         <p class="font-sans text-sm text-ink/70">Imprime tu ejemplar de <strong>Maestro: Conociendo a Jesús a través de las Escrituras</strong> en casa o en litografía.</p>
       </div>
@@ -244,7 +244,7 @@
             </span>
           </div>
           <h3 class="font-serif text-xl font-bold text-forest mb-2">Modo Lectura / Estándar</h3>
-          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">Páginas secuenciales en formato media carta. Ideal para leer en pantalla, anillar o imprimir página por página.</p>
+          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">112 páginas verticales de 5,5 × 8,5 pulgadas (media carta), en orden de lectura. Ideal para leer en pantalla, anillar o imprimir página por página; no está impreso en pliegos para doblar.</p>
           <a href="./Devocional.pdf" download="Devocional.pdf" class="w-full py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar PDF Normal</a>
         </section>
 
@@ -256,7 +256,7 @@
             <span class="rounded-full bg-terracotta px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">Encuadernación</span>
           </div>
           <h3 class="font-serif text-xl font-bold text-forest mb-2">4 Cuadernillos Cosidos</h3>
-          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">Pliegos en Carta horizontal, dos páginas por cara, divididos en cuatro cuadernillos con marcas de doblez y perforación.</p>
+          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">56 páginas en Carta horizontal (11 × 8,5 pulgadas). Cada cara lleva dos páginas de media carta; al imprimir a doble cara son 28 hojas físicas, agrupadas en cuatro cuadernillos.</p>
           <a href="./Devocional_Cuadernillo.pdf" download="Devocional_Cuadernillo.pdf" class="w-full py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar 4 Cuadernillos</a>
         </section>
       </div>
@@ -264,38 +264,118 @@
       <section class="rounded-2xl border border-[#D8CBBE] bg-[#F4ECE2] p-4 sm:p-5">
         <h3 class="font-serif text-lg font-bold text-forest mb-4 flex items-center gap-2">
           <svg class="w-5 h-5 shrink-0 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 11v5m0-8h.01"/></svg>
-          <span>Instrucciones ilustradas: Cómo imprimir y coser los 4 cuadernillos</span>
+          <span>Guía completa: imprimir, doblar, perforar y coser</span>
         </h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
-            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Dos páginas enfrentadas con marca de doblez">
-              <rect x="34" y="12" width="54" height="62" rx="4" fill="white" stroke="#81543E" stroke-width="1.5"/>
-              <rect x="88" y="12" width="54" height="62" rx="4" fill="white" stroke="#81543E" stroke-width="1.5"/>
-              <path d="M88 12v62" stroke="#A6442A" stroke-width="2" stroke-dasharray="4 3"/>
-              <text x="61" y="46" text-anchor="middle" fill="#18362B" font-size="9">Pág. Izq.</text>
-              <text x="115" y="46" text-anchor="middle" fill="#18362B" font-size="9">Pág. Der.</text>
-            </svg>
-            <h4 class="font-sans text-xs font-bold text-forest mb-1">1. Imprime doble cara</h4>
-            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Papel Carta, horizontal; voltea por el borde corto.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+            <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-white flex items-center justify-center font-sans text-sm">1</span>
+              Configuración de impresión
+            </h4>
+            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+              <svg class="w-full h-auto" viewBox="0 0 360 112" role="img" aria-label="Dos caras del primer pliego en Carta horizontal, divididas al centro para doblar">
+                <text x="180" y="13" text-anchor="middle" fill="#53645C" font-size="9">CARTA · 11 × 8,5 in · horizontal · escala 100 %</text>
+                <text x="90" y="29" text-anchor="middle" fill="#A6442A" font-size="8">PDF 1 · cara A</text>
+                <rect x="10" y="34" width="160" height="55" rx="4" fill="#E8C3AC" stroke="#18362B" stroke-width="1.5"/>
+                <path d="M90 34v55" stroke="#A6442A" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <text x="50" y="65" text-anchor="middle" fill="#18362B" font-size="9">Pág. 32</text>
+                <text x="130" y="65" text-anchor="middle" fill="#18362B" font-size="9">Portada</text>
+                <text x="270" y="29" text-anchor="middle" fill="#A6442A" font-size="8">PDF 2 · cara B</text>
+                <rect x="190" y="34" width="160" height="55" rx="4" fill="#C5D0C8" stroke="#18362B" stroke-width="1.5"/>
+                <path d="M270 34v55" stroke="#A6442A" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <text x="230" y="65" text-anchor="middle" fill="#18362B" font-size="9">Pág. 2</text>
+                <text x="310" y="65" text-anchor="middle" fill="#18362B" font-size="9">Pág. 31</text>
+                <text x="180" y="104" text-anchor="middle" fill="#53645C" font-size="8">Doble por el centro; la guía punteada es solo ilustrativa, no está impresa.</text>
+              </svg>
+            </div>
+            <ul class="font-serif text-sm leading-relaxed text-ink/75 space-y-2">
+              <li><strong>Tamaño y orientación:</strong> papel Carta (11 × 8,5 pulgadas), horizontal o paisaje.</li>
+              <li><strong>Escala:</strong> 100 % o “Tamaño real”; desactiva “Ajustar” para conservar el formato media carta.</li>
+              <li><strong>Dúplex:</strong> imprime por ambas caras y elige “Voltear por el borde corto”. Haz primero una prueba de cuatro páginas y confirma que el reverso quede derecho.</li>
+              <li><strong>Sin dúplex automático:</strong> imprime las páginas impares del rango, vuelve a cargar el papel según indique tu impresora e imprime las pares. La forma de reinsertar la pila cambia según el modelo; prueba antes con las páginas 1–4.</li>
+            </ul>
           </article>
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
-            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Cuadernillo doblado con tres marcas de perforación">
-              <path d="M48 22l42 9 42-9v44l-42 9-42-9z" fill="#E8C3AC" stroke="#81543E" stroke-width="1.5"/>
-              <path d="M90 31v44" stroke="#A6442A" stroke-width="1.5" stroke-dasharray="3 2"/>
-              <circle cx="90" cy="40" r="2" fill="#18362B"/><circle cx="90" cy="53" r="2" fill="#18362B"/><circle cx="90" cy="66" r="2" fill="#18362B"/>
-            </svg>
-            <h4 class="font-sans text-xs font-bold text-forest mb-1">2. Dobla 4 cuadernillos</h4>
-            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Agrupa cada cuadernillo por separado, dóblalo y perfora los tres puntos guía.</p>
+
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+            <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-forest text-white flex items-center justify-center font-sans text-sm">2</span>
+              Doblado de los 4 cuadernillos
+            </h4>
+            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+              <svg class="w-full h-auto" viewBox="0 0 360 92" role="img" aria-label="Cuatro cuadernillos: tres de ocho hojas y uno de cuatro">
+                <g stroke="#18362B" stroke-width="1.2">
+                  <rect x="18" y="7" width="104" height="13" rx="3" fill="#E8C3AC"/><path d="M25 11h90M25 15h90"/>
+                  <rect x="18" y="27" width="104" height="13" rx="3" fill="#C5D0C8"/><path d="M25 31h90M25 35h90"/>
+                  <rect x="18" y="47" width="104" height="13" rx="3" fill="#E8C3AC"/><path d="M25 51h90M25 55h90"/>
+                  <rect x="18" y="67" width="104" height="10" rx="3" fill="#C5D0C8"/><path d="M25 72h90"/>
+                </g>
+                <g fill="#18362B" font-size="7" font-weight="bold"><text x="8" y="17">1</text><text x="8" y="37">2</text><text x="8" y="57">3</text><text x="8" y="75">4</text></g>
+                <text x="145" y="17" fill="#A6442A" font-size="8" font-weight="bold">1 · PDF 1–16</text><text x="237" y="17" fill="#18362B" font-size="8">8 hojas · págs. 1–32</text>
+                <text x="145" y="37" fill="#A6442A" font-size="8" font-weight="bold">2 · PDF 17–32</text><text x="237" y="37" fill="#18362B" font-size="8">8 hojas · págs. 33–64</text>
+                <text x="145" y="57" fill="#A6442A" font-size="8" font-weight="bold">3 · PDF 33–48</text><text x="237" y="57" fill="#18362B" font-size="8">8 hojas · págs. 65–96</text>
+                <text x="145" y="77" fill="#A6442A" font-size="8" font-weight="bold">4 · PDF 49–56</text><text x="237" y="77" fill="#18362B" font-size="8">4 hojas · págs. 97–112</text>
+              </svg>
+            </div>
+            <ul class="font-serif text-sm leading-relaxed text-ink/75 space-y-2">
+              <li>El archivo tiene <strong>56 páginas de impresión</strong>, no 56 hojas: cada dos páginas consecutivas del PDF forman el frente y el reverso de una hoja. A doble cara se usan <strong>28 hojas físicas</strong>.</li>
+              <li>Mantén separados estos rangos: los tres primeros forman cuadernillos de 8 hojas; el cuarto, de 4. Imprime y pliega cada rango por separado.</li>
+              <li>Dobla cada hoja por la mitad, justo entre las dos páginas, y encaja las hojas de su rango una dentro de otra, conservando el orden de salida.</li>
+              <li>El PDF no trae etiquetas de “Cuadernillo/Pliego” ni una guía punteada: la separación se hace con los rangos anteriores y el doblez va en el centro exacto de la hoja.</li>
+            </ul>
           </article>
-          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
-            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Lomo cosido con puntada de tres hoyos">
-              <rect x="55" y="13" width="70" height="64" rx="5" fill="#E8C3AC" stroke="#81543E" stroke-width="1.5"/>
-              <path d="M68 14v62" stroke="#18362B" stroke-width="2"/>
-              <circle cx="68" cy="28" r="2.5" fill="#A6442A"/><circle cx="68" cy="45" r="2.5" fill="#A6442A"/><circle cx="68" cy="62" r="2.5" fill="#A6442A"/>
-              <path d="M64 28c10 5 10 12 0 17s-10 12 0 17" fill="none" stroke="#A6442A" stroke-width="2"/>
-            </svg>
-            <h4 class="font-sans text-xs font-bold text-forest mb-1">3. Cose con puntada de 3 hoyos</h4>
-            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Une los cuatro cuadernillos en orden con hilo resistente y pega la portada envolvente.</p>
+
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+            <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-terracotta text-white flex items-center justify-center font-sans text-sm">3</span>
+              Perforación del lomo · 5 puntos
+            </h4>
+            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+              <svg class="w-full h-auto" viewBox="0 0 360 105" role="img" aria-label="Cinco perforaciones alineadas a lo largo del lomo de 21,6 centímetros">
+                <text x="180" y="13" text-anchor="middle" fill="#53645C" font-size="9">Lomo de media carta: 21,6 cm (8,5 in) · medir desde arriba</text>
+                <rect x="20" y="41" width="320" height="27" rx="5" fill="#C5D0C8" stroke="#18362B" stroke-width="1.5"/>
+                <path d="M20 54.5h320" stroke="#18362B" stroke-width="1.2" stroke-dasharray="4 3"/>
+                <g fill="#A6442A">
+                  <circle cx="52" cy="54.5" r="4"/><circle cx="109" cy="54.5" r="4"/><circle cx="180" cy="54.5" r="4"/><circle cx="250" cy="54.5" r="4"/><circle cx="308" cy="54.5" r="4"/>
+                </g>
+                <g fill="#18362B" font-size="8" text-anchor="middle">
+                  <text x="52" y="34">1,5 cm</text><text x="109" y="34">6 cm</text><text x="180" y="34">10,8 cm</text><text x="250" y="34">15,5 cm</text><text x="308" y="34">20 cm</text>
+                </g>
+                <text x="180" y="86" text-anchor="middle" fill="#53645C" font-size="8">Doblez / lomo · 5 agujeros alineados</text>
+              </svg>
+            </div>
+            <ul class="font-serif text-sm leading-relaxed text-ink/75 space-y-2">
+              <li>El lomo plegado mide 8,5 pulgadas (21,6 cm) de alto. Marca, desde el extremo superior, a <strong>1,5; 6; 10,8; 15,5 y 20 cm</strong>.</li>
+              <li>Alinea los pliegues y usa una plantilla de cartón para trasladar las cinco marcas a las cuatro firmas. Así los agujeros coinciden al coser.</li>
+              <li>Perfora cada cuadernillo por separado con punzón o lezna sobre una base protectora; no intentes atravesar las 28 hojas juntas. Sujeta el paquete con pinzas para que no se mueva.</li>
+            </ul>
+          </article>
+
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-4 sm:p-5">
+            <h4 class="font-serif text-lg font-bold text-forest mb-3 flex items-center gap-3">
+              <span class="w-8 h-8 shrink-0 rounded-full bg-terracotta text-white flex items-center justify-center font-sans text-sm">4</span>
+              Cosido unido y encolado del lomo
+            </h4>
+            <div class="rounded-xl border border-forest/10 bg-white p-3 mb-3">
+              <svg class="w-full h-auto" viewBox="0 0 360 104" role="img" aria-label="Cuatro cuadernillos unidos en cadena por el lomo">
+                <g stroke="#18362B" stroke-width="1.4">
+                  <rect x="45" y="10" width="270" height="17" rx="4" fill="#E8C3AC"/>
+                  <rect x="45" y="34" width="270" height="17" rx="4" fill="#C5D0C8"/>
+                  <rect x="45" y="58" width="270" height="17" rx="4" fill="#E8C3AC"/>
+                  <rect x="45" y="82" width="270" height="17" rx="4" fill="#C5D0C8"/>
+                </g>
+                <g fill="#18362B" font-size="8">
+                  <text x="54" y="21">Cuadernillo 1</text><text x="54" y="45">Cuadernillo 2</text><text x="54" y="69">Cuadernillo 3</text><text x="54" y="93">Cuadernillo 4</text>
+                </g>
+                <path d="M235 18h56q14 0 14 8t-14 8h-56M235 42h56q14 0 14 8t-14 8h-56M235 66h56q14 0 14 8t-14 8h-56M235 90h56" fill="none" stroke="#A6442A" stroke-width="2.5"/>
+                <circle cx="291" cy="26" r="3" fill="#A6442A"/><circle cx="291" cy="50" r="3" fill="#A6442A"/><circle cx="291" cy="74" r="3" fill="#A6442A"/>
+              </svg>
+            </div>
+            <ul class="font-serif text-sm leading-relaxed text-ink/75 space-y-2">
+              <li><strong>Primer cuadernillo:</strong> con aguja e hilo resistente, entra por el agujero 1 desde fuera hacia dentro; deja unos 8 cm de cola. Sale por el 2, entra por el 3, sale por el 4 y entra por el 5.</li>
+              <li><strong>Unión:</strong> coloca el segundo cuadernillo sobre el primero y cose en sentido contrario, enlazando el hilo con la puntada anterior en los extremos para formar la cadeneta. Repite con los cuadernillos 3 y 4.</li>
+              <li>Mantén el hilo firme, sin apretar tanto que rasgue el papel. Al terminar, ata la cola inicial y remata con un nudo seguro.</li>
+              <li><strong>Encolado:</strong> aplica una capa fina de cola blanca PVA solo sobre el lomo cosido y deja secar el bloque bajo peso aproximadamente 2 horas.</li>
+            </ul>
           </article>
         </div>
       </div>
