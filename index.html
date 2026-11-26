@@ -498,6 +498,7 @@
     // ============================================================================
     let deferredPrompt = null;
     let isInstalled = false;
+    let installStatusResolved = false;
 
     function createPwaIconDataUrl(size) {
       const canvas = document.createElement('canvas');
@@ -568,11 +569,38 @@
         });
       }
 
-      // Detectar si ya corre en modo standalone (ya instalada)
       if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
         isInstalled = true;
+        installStatusResolved = true;
         updateInstallButtonsUI();
+        return;
       }
+
+      if (typeof navigator.getInstalledRelatedApps !== 'function') {
+        installStatusResolved = true;
+        updateInstallButtonsUI();
+        return;
+      }
+
+      navigator.getInstalledRelatedApps()
+        .then(installedApps => {
+          const manifestUrl = new URL('./manifest.webmanifest', document.baseURI).href;
+          const appId = new URL('./index.html', document.baseURI).href;
+          const foundInstalledApp = installedApps.some(app =>
+            app.platform === 'webapp' && (app.url === manifestUrl || app.id === appId)
+          );
+          if (foundInstalledApp) {
+            isInstalled = true;
+            deferredPrompt = null;
+          }
+        })
+        .catch(error => {
+          console.error('No se pudo comprobar si Maestro ya está instalada:', error);
+        })
+        .finally(() => {
+          installStatusResolved = true;
+          updateInstallButtonsUI();
+        });
     }
 
     // Capturar el evento nativo de instalación automática
@@ -585,6 +613,7 @@
     window.addEventListener('appinstalled', () => {
       isInstalled = true;
       deferredPrompt = null;
+      installStatusResolved = true;
       updateInstallButtonsUI();
       showToast('¡Aplicación instalada en tu dispositivo! ✓');
     });
@@ -594,7 +623,7 @@
       const headerTxt = document.getElementById('headerInstallText');
       const coverBtn = document.getElementById('coverInstallBtn');
       const coverTxt = document.getElementById('coverInstallText');
-      const shouldShowInstall = !isInstalled;
+      const shouldShowInstall = installStatusResolved && !isInstalled;
 
       [headerBtn, coverBtn].forEach(button => {
         if (!button) return;
@@ -626,6 +655,7 @@
         const { outcome } = await installEvent.userChoice;
         if (outcome === 'accepted') {
           isInstalled = true;
+          installStatusResolved = true;
           updateInstallButtonsUI();
         } else {
           showToast('Instalación cancelada');

@@ -2,12 +2,20 @@
   "name": "Maestro — Devocional: Conociendo a Jesús",
   "short_name": "Maestro",
   "description": "Devocional de 16 días para conocer a Jesús a través de las Escrituras.",
+  "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FAF6F0",
   "theme_color": "#18362B",
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "./manifest.webmanifest",
+      "id": "https://zul900412.github.io/Devocional/index.html"
+    }
+  ],
   "icons": [
     {
       "src": "./icon-rounded-192.png",
