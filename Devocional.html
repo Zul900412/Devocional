@@ -164,11 +164,11 @@
           <svg id="installIcon" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
           </svg>
-          <span id="headerInstallText">Instalar App</span>
+          <span id="headerInstallText" class="hidden sm:inline">Instalar Maestro</span>
         </button>
 
         <!-- Botón Imprimir / Descargar PDF Cuadernillo -->
-        <button onclick="openPrintModal()" title="Descargar PDF Normal o 4 Cuadernillos" class="flex items-center gap-1.5 bg-forest/10 hover:bg-forest/20 text-forest font-sans text-xs sm:text-sm font-semibold px-2.5 sm:px-3 py-2 rounded-full transition-colors cursor-pointer">
+        <button onclick="openPrintModal()" title="Descargar o abrir el PDF oficial" class="flex items-center gap-1.5 bg-forest/10 hover:bg-forest/20 text-forest font-sans text-xs sm:text-sm font-semibold px-2.5 sm:px-3 py-2 rounded-full transition-colors cursor-pointer">
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
           </svg>
@@ -223,7 +223,7 @@
     </div>
   </nav>
 
-  <!-- MODAL DE DESCARGA E IMPRESIÓN EN CASA (NORMAL Y EN 4 CUADERNILLOS COSIDOS) -->
+  <!-- MODAL DE DESCARGA DEL PDF OFICIAL -->
   <div id="printModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
     <div class="bg-[#FAF6F0] border-2 border-forest/15 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
       <!-- Botón Cerrar Modal -->
@@ -231,133 +231,15 @@
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
-      <!-- Encabezado del Modal -->
       <div class="flex items-center gap-2 text-terracotta font-sans text-xs font-bold uppercase tracking-widest mb-1">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-        <span>Edición Imprimible en Casa</span>
+        <span>PDF actualizado</span>
       </div>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-forest mb-2">Descarga tu Devocional para Imprimir</h2>
-      <p class="font-serif text-sm sm:text-base text-ink/85 mb-6">
-        Elige el formato que prefieras: lectura secuencial hoja por hoja o la edición artesanal impuesta en <strong>4 cuadernillos</strong> listos para doblar y coser en casa.
-      </p>
-
-      <!-- Tarjetas de Descarga PDF -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-7">
-        <!-- Opción 1: Impresión Normal -->
-        <div class="bg-white border border-forest/15 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
-          <div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sage/35 text-forest font-sans text-xs font-bold mb-3">
-              <span>Formato 1 · Lectura Secuencial</span>
-            </div>
-            <h3 class="font-serif text-xl font-bold text-forest mb-2">PDF Impresión Normal</h3>
-            <p class="font-serif text-sm text-ink/80 leading-relaxed mb-4">
-              Páginas ordenadas secuencialmente (1 a la final) en formato Media Carta. Ideal para imprimir en casa, anillar, encarpetar o leer en tablet/computador.
-            </p>
-          </div>
-          <button id="btnDownloadNormal" onclick="generatePDF('normal')" class="w-full py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-[#FAF6F0] font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
-            <span>Descargar PDF Normal</span>
-          </button>
-        </div>
-
-        <!-- Opción 2: Impresión en 4 Cuadernillos Cosidos -->
-        <div class="bg-[#F3ECE1] border-2 border-terracotta/40 rounded-2xl p-5 flex flex-col justify-between shadow-sm relative">
-          <div>
-            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-terracotta text-white font-sans text-xs font-bold mb-3">
-              <span>Formato 2 · Encuadernación Artesanal</span>
-            </div>
-            <h3 class="font-serif text-xl font-bold text-forest mb-2">PDF 4 Cuadernillos (Cosido)</h3>
-            <p class="font-serif text-sm text-ink/85 leading-relaxed mb-4">
-              Pliegos impuestos en hoja <strong>Carta Horizontal</strong> (2 páginas por cara, anverso y reverso) divididos en <strong>4 fascículos equilibrados</strong> con marcas de doblez y cosido. Incluye hoja inicial con guía de impresión y encuadernación.
-            </p>
-          </div>
-          <button id="btnDownloadBooklet" onclick="generatePDF('booklet')" class="w-full py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-            <span>Descargar PDF 4 Cuadernillos</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Barra de progreso de generación PDF -->
-      <div id="pdfProgressBox" class="hidden mb-6 bg-white border border-forest/20 rounded-2xl p-4">
-        <div class="flex items-center justify-between font-sans text-xs font-bold text-forest mb-2">
-          <span id="pdfProgressLabel">Maquetando páginas editoriales...</span>
-          <span id="pdfProgressPct">0%</span>
-        </div>
-        <div class="w-full h-2.5 bg-card rounded-full overflow-hidden">
-          <div id="pdfProgressBar" class="h-full bg-terracotta transition-all duration-200" style="width: 0%"></div>
-        </div>
-      </div>
-
-      <!-- GUÍA VISUAL DE IMPRESIÓN Y COSIDO EN 4 CUADERNILLOS -->
-      <div class="bg-white border border-forest/15 rounded-2xl p-5 sm:p-6">
-        <h4 class="font-serif text-lg sm:text-xl font-bold text-forest mb-3 flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full bg-peach text-forest font-sans text-xs font-bold flex items-center justify-center">✦</span>
-          <span>Instrucciones de Impresión y Cosido (4 Cuadernillos)</span>
-        </h4>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-serif text-ink/90 mb-5">
-          <div class="bg-paper rounded-xl p-4 border border-forest/10">
-            <p class="font-sans text-xs font-bold uppercase tracking-wider text-terracotta mb-1.5">1. Configuración de Impresora</p>
-            <ul class="space-y-1.5 text-xs sm:text-sm">
-              <li>• <strong>Papel:</strong> Tamaño Carta (Letter 8.5" × 11") o A4.</li>
-              <li>• <strong>Orientación:</strong> Horizontal (Landscape).</li>
-              <li>• <strong>Escala:</strong> Tamaño real / 100% (no ajustar márgenes).</li>
-              <li>• <strong>Doble cara:</strong> Imprimir a dos caras volteando por el <strong>borde corto</strong> (<em>Flip on short edge</em>).</li>
-            </ul>
-          </div>
-
-          <div class="bg-paper rounded-xl p-4 border border-forest/10">
-            <p class="font-sans text-xs font-bold uppercase tracking-wider text-terracotta mb-1.5">2. Organización en 4 Cuadernillos</p>
-            <ul class="space-y-1.5 text-xs sm:text-sm">
-              <li>• <strong>Cuadernillo 1:</strong> Portada, Índice y Días 1 al 3.</li>
-              <li>• <strong>Cuadernillo 2:</strong> Días 4 al 8.</li>
-              <li>• <strong>Cuadernillo 3:</strong> Días 9 al 13.</li>
-              <li>• <strong>Cuadernillo 4:</strong> Días 14 al 16, Reflexión, Notas y Contraportada.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Diagrama SVG ilustrativo de doblado y cosido de los 4 cuadernillos -->
-        <div class="bg-paper rounded-xl p-4 border border-forest/10">
-          <p class="font-sans text-xs font-bold uppercase tracking-wider text-forest mb-3 text-center">3. Esquema de Doblado, Perforación y Cosido Artesanal</p>
-          <svg viewBox="0 0 680 185" class="w-full h-auto max-h-48 mx-auto" role="img" aria-label="Diagrama de doblado y cosido en 4 cuadernillos">
-            <!-- Paso A: Doblar cada fascículo -->
-            <g transform="translate(15, 15)">
-              <rect x="0" y="10" width="180" height="115" rx="6" fill="#FAF6F0" stroke="#18362B" stroke-width="2"/>
-              <line x1="90" y1="10" x2="90" y2="125" stroke="#A6442A" stroke-width="2" stroke-dasharray="5,4"/>
-              <path d="M 65 55 Q 90 35 115 55" fill="none" stroke="#A6442A" stroke-width="2" marker-end="url(#arrow)"/>
-              <text x="90" y="145" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#18362B">A. Dobla cada grupo</text>
-              <text x="90" y="160" text-anchor="middle" font-family="Lora, serif" font-size="10" fill="#2A2927">Forma 4 cuadernillos por separado</text>
-            </g>
-
-            <!-- Paso B: Apilar 4 cuadernillos y perforar 5 puntos -->
-            <g transform="translate(240, 15)">
-              <!-- 4 lomos apilados -->
-              <rect x="25" y="18" width="140" height="16" rx="4" fill="#E8C3AC" stroke="#18362B" stroke-width="1.5"/>
-              <rect x="25" y="38" width="140" height="16" rx="4" fill="#B8C7B9" stroke="#18362B" stroke-width="1.5"/>
-              <rect x="25" y="58" width="140" height="16" rx="4" fill="#E8C3AC" stroke="#18362B" stroke-width="1.5"/>
-              <rect x="25" y="78" width="140" height="16" rx="4" fill="#B8C7B9" stroke="#18362B" stroke-width="1.5"/>
-              <!-- 5 estaciones de perforación -->
-              <circle cx="45" cy="26" r="2.5" fill="#A6442A"/><circle cx="70" cy="26" r="2.5" fill="#A6442A"/><circle cx="95" cy="26" r="2.5" fill="#A6442A"/><circle cx="120" cy="26" r="2.5" fill="#A6442A"/><circle cx="145" cy="26" r="2.5" fill="#A6442A"/>
-              <circle cx="45" cy="46" r="2.5" fill="#A6442A"/><circle cx="70" cy="46" r="2.5" fill="#A6442A"/><circle cx="95" cy="46" r="2.5" fill="#A6442A"/><circle cx="120" cy="46" r="2.5" fill="#A6442A"/><circle cx="145" cy="46" r="2.5" fill="#A6442A"/>
-              <circle cx="45" cy="66" r="2.5" fill="#A6442A"/><circle cx="70" cy="66" r="2.5" fill="#A6442A"/><circle cx="95" cy="66" r="2.5" fill="#A6442A"/><circle cx="120" cy="66" r="2.5" fill="#A6442A"/><circle cx="145" cy="66" r="2.5" fill="#A6442A"/>
-              <circle cx="45" cy="86" r="2.5" fill="#A6442A"/><circle cx="70" cy="86" r="2.5" fill="#A6442A"/><circle cx="95" cy="86" r="2.5" fill="#A6442A"/><circle cx="120" cy="86" r="2.5" fill="#A6442A"/><circle cx="145" cy="86" r="2.5" fill="#A6442A"/>
-              <text x="95" y="145" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#18362B">B. Apila y perfora 5 puntos</text>
-              <text x="95" y="160" text-anchor="middle" font-family="Lora, serif" font-size="10" fill="#2A2927">Usa las marcas del pliego central</text>
-            </g>
-
-            <!-- Paso C: Cosido en cadeneta / francés -->
-            <g transform="translate(465, 15)">
-              <rect x="25" y="18" width="140" height="76" rx="6" fill="#18362B"/>
-              <!-- Hilo uniendo los 4 cuadernillos -->
-              <path d="M 45 26 L 70 26 L 95 26 L 120 26 L 145 26 L 145 46 L 120 46 L 95 46 L 70 46 L 45 46 L 45 66 L 70 66 L 95 66 L 120 66 L 145 66 L 145 86 L 120 86 L 95 86 L 70 86 L 45 86" fill="none" stroke="#E8C3AC" stroke-width="2.2" stroke-linejoin="round"/>
-              <path d="M 70 26 C 62 36, 62 36, 70 46 M 120 46 C 128 56, 128 56, 120 66 M 70 66 C 62 76, 62 76, 70 86" fill="none" stroke="#A6442A" stroke-width="2.2"/>
-              <text x="95" y="145" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#18362B">C. Cose los 4 cuadernillos</text>
-              <text x="95" y="160" text-anchor="middle" font-family="Lora, serif" font-size="10" fill="#2A2927">Puntada de cadeneta y pega cubierta</text>
-            </g>
-          </svg>
-        </div>
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-forest mb-2">Edición oficial del devocional</h2>
+      <p class="font-serif text-sm sm:text-base text-ink/85 mb-6">Descarga o abre el PDF original de 112 páginas, que conserva el diseño completo para leer e imprimir.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <a href="./Devocional.pdf" download="Maestro_Devocional.pdf" class="py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-[#FAF6F0] font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all">Descargar edición actual</a>
+        <a href="./Devocional.pdf" target="_blank" rel="noopener" class="py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all">Abrir para leer o imprimir</a>
       </div>
     </div>
   </div>
@@ -367,1159 +249,7 @@
     // ============================================================================
     // 1. BASE DE DATOS ÍNTEGRA DEL DEVOCIONAL (100 PÁGINAS DEL PDF)
     // ============================================================================
-    const DEVOTIONAL_DATA = {
-      title: "Conociendo a Jesús a través de las Escrituras",
-      subtitle: "16 días · Un viaje emocionante",
-      authors: "Zulma Fuertes y Sebastián Aponte",
-      days: [
-        {
-          day: 1,
-          title: "ANTES DE TODAS LAS COSAS, ÉL YA ERA",
-          subtitle: "Jesucristo no comenzó a existir en Belén. Él es eterno.",
-          reading: "Juan 1:1-3; 17:5",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Antes de empezar, piensa en alguien a quien ames de verdad. Piensa en todo lo que sabes de esa persona: su voz, lo que la hace reír, lo que le duele, lo que más le importa. Amar a alguien es querer conocerlo así. Estos días tienen un solo propósito: que empieces a conocer a Jesús de esa manera, tal como Él se ha revelado. Y es solo el comienzo: conocerlo es un viaje que toma tiempo, de anhelo y de estudio de su Palabra.",
-                "Cuando piensas en Jesús, ¿qué imagen aparece primero en tu mente? Quizá el niño en el pesebre, el maestro que hablaba a las multitudes o el que sanaba enfermos. Todas esas imágenes son reales y hermosas.",
-                "Hoy queremos invitarte a hacerte una pregunta que casi nunca nos hacemos: ¿quién era Jesús antes de nacer en Belén? Antes de que María lo sostuviera en sus brazos. Antes de que existiera Abraham. Antes de que se formaran los cielos y la tierra.",
-                "Quédate con nosotros estos días. Puede que descubras que Jesús es más grande, más hermoso y más cercano de lo que habías imaginado."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "Abre tu Biblia en Juan 1:1-3 y lee despacio."
-              ],
-              quote: "«En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios. Este era en el principio con Dios. Todas las cosas por él fueron hechas, y sin él nada de lo que ha sido hecho, fue hecho».",
-              afterQuote: [
-                "Juan no abre su Evangelio con un pesebre, un milagro o un sermón. Nos lleva al principio, y lo hace con las mismas palabras con que comienza Génesis 1:1. Mientras Génesis cuenta cuándo empezó la creación, Juan nos presenta a alguien que ya existía cuando ese principio llegó. El texto no dice que el Verbo comenzó a existir. Dice que ya era.",
-                "En tres versículos hay tres verdades que van de la mano:"
-              ],
-              bullets: [
-                { lead: "El Verbo era en el principio:", text: "su existencia no tiene origen en la creación." },
-                { lead: "El Verbo era con Dios:", text: "Juan lo distingue de aquel con quien estaba. Aquí aparece la distinción personal entre el Padre y el Hijo." },
-                { lead: "El Verbo era Dios:", text: "Juan afirma su plena divinidad. No es una criatura, ni un ángel exaltado, ni un hombre con poderes especiales: es Dios mismo." }
-              ],
-              closingParagraphs: [
-                "Y el versículo 3 añade que todas las cosas fueron hechas por medio de Él. Quien hizo la creación no forma parte de ella: es su Creador."
-              ]
-            },
-            {
-              heading: "Escucha su voz",
-              paragraphs: [
-                "La noche antes de la cruz, Jesús oró así:"
-              ],
-              quote: "«Ahora pues, Padre, glorifícame tú al lado tuyo, con aquella gloria que tuve contigo antes que el mundo fuese». (Juan 17:5)",
-              afterQuote: [
-                "Fíjate: no habla de una gloria que consiguió con sus milagros, sino de una gloria que ya tenía junto al Padre, antes que el mundo existiera. Belén no fue su comienzo: fue su entrada en nuestra historia."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Jesús es mucho más grande que alguien que simplemente «aparece» en nuestra vida para resolver problemas. Él no adquirió su identidad cuando comenzó a hacer milagros ni cuando las multitudes lo siguieron. La resurrección lo declaró Hijo de Dios con poder (Romanos 1:4); no lo hizo Hijo de Dios. Ya era quien es.",
-                "Su identidad no depende de que alguien crea en Él, lo adore o reciba un milagro. No necesita nuestra validación para ser Dios, ni nuestras necesidades para tener un propósito. Es eterno y Creador: no es un recurso espiritual, sino el Señor de todo lo creado.",
-                "Y aquí está lo más hermoso. El Hijo eterno, el que estaba con el Padre antes de que existiera el mundo y por medio de quien todo fue hecho, no necesitaba nada de nosotros. Aun así, vino. Se cansó, lloró, fue rechazado y cargó con nuestros pecados en una cruz. Lo hizo porque nos amó. Quien se acercó así a nosotros es digno de que lo conozcamos de verdad."
-              ]
-            }
-          ],
-          examina: [
-            "¿De dónde viene lo que sé de Jesús: de lo que dice la Biblia o, sobre todo, de lo que he escuchado de otras personas?",
-            "¿Qué ha ocupado más espacio en mi fe: lo que Jesús hace por mí o quién es Él?",
-            "¿Me animo a revisar con calma las ideas que he tenido durante años, si las Escrituras me muestran algo distinto?"
-          ],
-          writingPrompt: {
-            id: "day1_starting_point",
-            title: "Tu punto de partida",
-            instruction: "Antes de cerrar, haz algo sencillo. En las líneas de abajo, con tus propias palabras, escribe: ¿quién es Jesús para ti hoy? No lo corrijas ni lo adornes. Guárdalo bien. El último día volveremos a estas líneas, y verás cuánto puede crecer lo que sabes de Él cuando lo buscas en su Palabra."
-          },
-          prayer: "Señor Jesús, antes de que el mundo existiera, tú ya eras. Quiero conocerte tal como te has revelado en tu Palabra. Gracias porque, siendo tan grande, te acercaste a mí. Perdóname si alguna vez te busqué solo por lo que puedes darme y no por quién eres. Enséñame a reconocerte como el Hijo eterno, Dios verdadero, Creador y Señor. Amén.",
-          takeaway: "Belén no fue el comienzo de Jesús. Fue el momento en que el Hijo eterno entró en nuestra historia humana.",
-          furtherReading: "Colosenses 1:15-17; Hebreos 1:1-3; Miqueas 5:2.",
-          tomorrow: "Día 2. Antes de Abraham, YO SOY. Veremos por qué una sola frase suya hizo que tomaran piedras para matarlo."
-        },
-        {
-          day: 2,
-          title: "ANTES DE ABRAHAM, YO SOY",
-          subtitle: "Jesús no dijo solamente que existía antes de Abraham. Se identificó con una expresión que revela su identidad divina.",
-          reading: "Juan 8:48-59",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Imagina que alguien te pregunta: ¿quién es Jesús? Probablemente responderías que es el Hijo de Dios, el Salvador, el Mesías.",
-                "Ahora piensa en esto: algunas de sus palabras escandalizaron tanto a quienes las oyeron que tomaron piedras para matarlo. No lo rechazaron por enseñar cosas nuevas, sino por lo que sus palabras revelaban sobre quién decía ser."
-              ]
-            },
-            {
-              heading: "Entra en la escena",
-              paragraphs: [
-                "En Juan 8, Jesús habla en Jerusalén con un grupo de judíos que se apoyaban en Abraham como su padre. Para ellos, ese vínculo era el fundamento de su identidad religiosa. Con amor y con firmeza, Jesús les muestra que una cosa es tener a Abraham como antepasado y otra vivir según la fe de Abraham.",
-                "Y aquí hay algo que también nos toca a nosotros, a ti y a quienes escribimos estas páginas. Muchas veces nos parecemos a ellos: vivimos según la fe del «Abraham» de nuestro tiempo, un pastor, un líder, alguien de renombre, y no tanto según lo que el Señor nos muestra por medio de su Palabra. Aprender de quienes nos enseñan es un regalo; lo hermoso es que Jesús nos invita a conocerlo también a Él directamente.",
-                "Entonces afirma que Abraham se alegró de ver su día. Sus interlocutores responden con incredulidad: ¿tú, que no tienes cincuenta años, has visto a Abraham? Y Jesús contesta:"
-              ],
-              quote: "«De cierto, de cierto os digo: Antes que Abraham fuese, yo soy». (Juan 8:58)",
-              afterQuote: [
-                "Observa el verbo. No dijo «yo era». Dijo «yo soy». Abraham nació, vivió y murió; Jesús habla de sí mismo como aquel cuya existencia no está sujeta al tiempo.",
-                "Y mira la reacción: tomaron piedras para arrojárselas (Juan 8:59). Nadie lanza piedras por una frase cualquiera. Según la Ley, esa era la pena para la blasfemia (Levítico 24:16). Entendieron que Jesús se estaba poniendo en un lugar que solo Dios ocupa.",
-                "A veces nosotros también reaccionamos así, sin darnos cuenta. Cuando alguien nos comparte con cariño lo que dice la Biblia y eso es distinto de lo que hemos creído, es natural sentir que algo se mueve por dentro, y a veces nos cerramos. Hasta podemos etiquetar a esa persona porque «quiere meterse con la religión». Pero Jesús vino precisamente a abrirnos otro camino: derribó la religiosidad que ocupaba su lugar para darse a conocer a sí mismo como el único y verdadero Salvador."
-              ]
-            },
-            {
-              heading: "Descubre quién es Él",
-              paragraphs: [
-                "Abre Éxodo 3:13-15. Moisés le pregunta a Dios cuál es su nombre, y Dios responde: «YO SOY EL QUE SOY». Cuando Jesús dice «yo soy», esa revelación resuena de fondo.",
-                "Una precisión importante: Juan 8:58 no es una reproducción literal de la fórmula hebrea de Éxodo. Su fuerza está en el conjunto del Evangelio. A lo largo de Juan, Jesús usa «Yo soy» acompañado de una imagen: el pan de vida, la luz del mundo, el buen pastor. Aquí, en cambio, lo usa solo, como afirmación absoluta de su existencia. Y cuando lo hace en el huerto, ante quienes venían a arrestarlo, «volvieron atrás y cayeron a tierra» (Juan 18:5-6).",
-                "De aquí salen tres verdades:"
-              ],
-              bullets: [
-                { lead: "Su existencia no tiene comienzo:", text: "no es parte de la creación, es anterior a ella." },
-                { lead: "Su identidad no depende de los seres humanos:", text: "la incredulidad de sus oyentes no cambió quién era Él." },
-                { lead: "Su relación con el Padre es única,", text: "y no se puede separar de todo lo que dice en ese capítulo sobre su procedencia y su autoridad." }
-              ]
-            },
-            {
-              heading: "Un rasgo de su carácter",
-              paragraphs: [
-                "Mira algo hermoso de cómo es Jesús. Sabía que lo que iba a decir no les caería bien, y aun así lo dijo. No hablaba para agradar ni para conservar seguidores; hablaba para mostrar quién era Él y quién era el Padre. «Ahora procuráis matarme a mí, hombre que os he hablado la verdad, la cual he oído de Dios» (Juan 8:40). Los amaba demasiado como para ofrecerles algo menos que la verdad."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Un Jesús que fuera solo un profeta importante, un maestro iluminado o un hombre ungido con poder suena admirable, pero no es el verdadero Jesús. Quienes lo escucharon entendieron lo que a veces a nosotros nos cuesta aceptar: Jesús no se presentó como alguien que se parece a Dios. Se presentó con identidad divina. Y qué regalo es saber que fue Dios mismo, y no un simple mensajero, quien se acercó a nosotros."
-              ]
-            }
-          ],
-          examina: [
-            "¿Estoy seguro de que mi fe en Jesús no descansa en la fe de otra persona, un pastor, un líder o alguien de renombre, sino que la he venido construyendo con la verdad de su Palabra?",
-            "Si Jesús no respondiera de la manera que espero, ¿seguiría reconociéndolo como Señor?",
-            "¿Cuánto espacio le doy a mis expectativas para definir quién es Jesús, y cuánto a las Escrituras?",
-            "En las predicaciones que he escuchado, ¿se habló más de lo que Jesús puede hacer o de quién es Él?",
-            "¿Qué pasaría si empiezo a conocer más y más a Jesús y descubro que no se parece tanto a lo que otros me han contado de Él? ¿Me molestaría, o abriría mi mente y mi corazón para conocerlo tal como Él se presenta?"
-          ],
-          prayer: "Señor Jesús, quiero conocerte como verdaderamente eres. Ayúdame a no acomodar tu identidad a mis expectativas ni a acercarme a ti solo por lo que puedo recibir. Tú eres el Hijo eterno, anterior a todas las cosas, digno de toda honra y adoración. Que tu Palabra transforme mi manera de verte y de vivir. Amén.",
-          takeaway: "Jesús no necesita que nosotros le demos una identidad. Él nos ha revelado quién es.\n\n¿A ti te gustaría que las personas te conocieran por quién eres o por lo que ellos piensan que eres? Seguro que por quién eres. Eso mismo desea Jesús: que lo conozcamos tal como es Él, sin cambiar ninguna de sus enseñanzas ni de sus características.",
-          furtherReading: "Éxodo 3:13-15; Juan 8:24, 28; Juan 18:4-6; Filipenses 2:5-11; Hebreos 1:8-12.",
-          tomorrow: "Día 3. El Verbo se hizo carne."
-        },
-        {
-          day: 3,
-          title: "EL VERBO SE HIZO CARNE",
-          subtitle: "El Hijo eterno no se disfrazó de hombre: asumió nuestra humanidad.",
-          reading: "Juan 1:14-18; Hebreos 2:14-18",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Hemos contemplado al Verbo eterno, el que existía antes de todas las cosas, y al que dijo de sí mismo: «Yo soy». Ahora Juan nos lleva a una verdad que, por muy escuchada que sea, nunca deberíamos considerar ordinaria:"
-              ],
-              quote: "«Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad». (Juan 1:14)",
-              afterQuote: [
-                "Aquel por quien fueron hechas todas las cosas entró en su propia creación."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "«Fue hecho carne». No apareció como un hombre ni adoptó temporalmente una apariencia humana. Nació en circunstancias humildes, envuelto en pañales y acostado en un pesebre (Lucas 2:1-20). El que no tiene principio conoció el crecimiento. El que alimenta a toda criatura necesitó ser alimentado. El que sostiene todas las cosas conoció el cansancio de los caminos de Galilea.",
-                "«Habitó entre nosotros». La palabra griega es eskēnōsen: «puso su tienda», «acampó». Evoca el tabernáculo, donde la gloria de Dios llenaba el lugar de su presencia en medio del pueblo (Éxodo 25:8; 40:34-38). Juan dice que esa gloria ahora se ha visto en una persona. La gloria de Dios no se manifestó solo en fenómenos extraordinarios: la vimos en Jesucristo, en su carácter, sus palabras, sus obras y, finalmente, en su entrega. No hay una revelación mayor que esperar.",
-                "Dos naturalezas, una persona. Jesús no dejó de ser Dios al hacerse hombre. No es mitad Dios y mitad hombre, ni un hombre con una presencia divina, ni Dios disfrazado. Es una sola persona, el Hijo eterno, con dos naturalezas, divina y humana, completas, sin confundirse ni separarse. Y es el Hijo quien se hizo hombre, no el Padre ni el Espíritu Santo."
-              ]
-            },
-            {
-              heading: "Descubre por qué era indispensable",
-              paragraphs: [
-                "Lee Hebreos 2:14-18. El autor explica que los hijos participan de carne y sangre, y que Jesús participó también de lo mismo, para destruir por medio de su muerte al que tenía el imperio de la muerte y liberar a quienes vivían esclavizados por el temor a morir.",
-                "Su humanidad no fue una apariencia:"
-              ],
-              bullets: [
-                { lead: "Tuvo hambre", text: "(Mateo 4:2)." },
-                { lead: "Sintió cansancio", text: "(Juan 4:6)." },
-                { lead: "Lloró ante la tumba de Lázaro", text: "(Juan 11:35)." },
-                { lead: "Experimentó angustia ante el sufrimiento que se acercaba", text: "(Mateo 26:38)." },
-                { lead: "Fue tentado en todo, pero sin pecado", text: "(Hebreos 4:15)." }
-              ],
-              closingParagraphs: [
-                "Su cuerpo fue real, su sufrimiento fue real y su muerte fue real. Pero asumió nuestra humanidad sin participar de nuestra condición pecaminosa. Por eso podía representarnos y ofrecerse como sacrificio perfecto."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "No necesitábamos solamente a alguien que entendiera nuestro dolor. Necesitábamos un Salvador capaz de rescatarnos del pecado y de la muerte. La encarnación ciertamente revela cuánto nos ama Dios, pero si la reducimos a una demostración de afecto, perdemos su propósito: es parte del gran plan de redención que culmina en la cruz y la resurrección.",
-                "Jesús no vino solo a acercarse a nuestra humanidad. Vino a redimirla."
-              ]
-            }
-          ],
-          examina: [
-            "¿He considerado de verdad lo que significa que el Hijo eterno asumiera una humanidad real?",
-            "¿Mi relación con Jesús gira principalmente alrededor de lo que espero recibir de Él?",
-            "¿Estoy buscando manifestaciones de la gloria de Dios, olvidando que ya fue contemplada en Cristo?"
-          ],
-          prayer: "Señor Jesús, gracias porque el Hijo eterno asumió nuestra humanidad, vino a este mundo y se entregó para rescatarnos del pecado. Enséñame a contemplar tu gloria, a escuchar tus palabras y a reconocer tu señorío sobre mi vida. Que mi fe no esté fundamentada en lo que espero recibir, sino en quién eres y en la obra perfecta que realizaste por nosotros. Amén.",
-          takeaway: "El Dios eterno no dejó de ser Dios cuando se hizo hombre. En Jesucristo, el Hijo asumió nuestra humanidad para cumplir la obra de nuestra redención.",
-          furtherReading: "Filipenses 2:5-8; Hebreos 4:14-16; 1 Juan 4:2-3; Éxodo 40:34-38.",
-          tomorrow: "Día 4. El Cordero de Dios."
-        },
-        {
-          day: 4,
-          title: "EL CORDERO DE DIOS",
-          subtitle: "Jesús no vino a mejorar nuestra existencia terrenal. Vino a quitar nuestro pecado.",
-          reading: "Juan 1:29-34; Isaías 53:4-7",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "¿Por qué Juan el Bautista no presentó a Jesús como el gran sanador, el hacedor de milagros o el rey que vendría a conquistar imperios? Cuando lo vio acercarse, dijo:"
-              ],
-              quote: "«He aquí el Cordero de Dios, que quita el pecado del mundo». (Juan 1:29)",
-              afterQuote: [
-                "No habló de los beneficios que las personas recibirían. Señaló una misión. Y para entender esa palabra, «Cordero», hay que mirar atrás."
-              ]
-            },
-            {
-              heading: "Entra en la escena",
-              paragraphs: [
-                "Juan predicaba el arrepentimiento junto al Jordán. Algunos se preguntaban si él era el Cristo, pero él tenía clara su misión: dar testimonio del Mesías. Y cuando vio a Jesús, no dijo «he aquí el hombre que cumplirá todos tus sueños» ni «he aquí quien hará que nunca vuelvas a sufrir». Dijo: «He aquí el Cordero de Dios».",
-                "Esa expresión nos conduce al corazón del Evangelio: el problema más profundo de la humanidad no es solamente el sufrimiento, la escasez o la enfermedad. Es el pecado y nuestra separación de Dios."
-              ]
-            },
-            {
-              heading: "Mira hacia atrás: tres imágenes",
-              bullets: [
-                { lead: "Abraham e Isaac (Génesis 22:1-14).", text: "Isaac pregunta dónde está el cordero, y Abraham responde: «Dios se proveerá de cordero para el holocausto, hijo mío». Dios provee un carnero en lugar de Isaac. No debemos forzar cada detalle como una equivalencia exacta con Jesús, pero el relato prepara al lector para una provisión que viene de Dios." },
-                { lead: "La Pascua (Éxodo 12).", text: "Cada familia debía sacrificar un cordero sin defecto y poner su sangre en los postes de la puerta. Cuando llegó el juicio, las casas señaladas por la sangre fueron preservadas. Pero esos sacrificios no eran la solución definitiva al pecado (Hebreos 10:4)." },
-                { lead: "El Siervo sufriente (Isaías 53:4-7).", text: "Un inocente que sufre por los pecados de otros y es llevado como cordero al matadero: «Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados» (53:5)." }
-              ],
-              closingParagraphs: [
-                "Cuando Juan señala a Jesús, todas esas líneas convergen."
-              ]
-            },
-            {
-              heading: "Descubre quién es Él",
-              paragraphs: [
-                "«El Cordero de Dios». El que pertenece a Dios y que Dios ha provisto. La salvación no nació de una iniciativa humana para alcanzar a Dios. No podíamos resolver el problema del pecado con buenas obras, esfuerzos religiosos o méritos personales.",
-                "«Que quita el pecado del mundo». Jesús no vino a hacer que nos sintiéramos mejor con nosotros mismos. Vino a tratar con el pecado, que no es solo un error o un mal hábito, sino rebelión contra Dios. Y «del mundo» nos muestra que su obra no se limita a una nación: el Evangelio llama a personas de todos los pueblos a arrepentirse y creer. Eso no significa que todos sean automáticamente salvos.",
-                "Una entrega voluntaria. Jesús dijo: «Yo soy el buen pastor; el buen pastor su vida da por las ovejas» (Juan 10:11), y explicó que nadie le quita la vida: la entrega por sí mismo (10:17-18). No fue una víctima indefensa. Sabía hacia dónde iba y no retrocedió. Pedro lo resume: no cometió pecado y llevó nuestros pecados en su cuerpo sobre el madero (1 Pedro 2:22-25).",
-                "La cruz revela a la vez la gravedad del pecado y la grandeza del amor de Dios. Si el pecado fuera un asunto superficial, no habría hecho falta una obra tan grande. Y si Dios no nos amara, no habría provisto al Salvador. Dios no ignoró el pecado para salvarnos: en Cristo manifestó su justicia y su gracia (Romanos 3:23-26).",
-                "Esa obra tiene un nombre muy tierno: reconciliación. Sin Cristo, la Biblia dice que éramos enemigos de Dios (Romanos 5:10). No porque Él dejara de amarnos, sino porque nuestro pecado nos puso en el lado opuesto. Y es aquí donde brilla su gracia: Dios mismo, en Cristo, vino a esta tierra a reconciliarnos consigo (2 Corintios 5:19), porque no quiere que sigamos siendo sus enemigos. La cruz es el amor de Dios yendo a buscarnos.",
-                "Algo más para pensar con calma: es posible decir «creo en Jesús» y, sin darnos cuenta, seguir siendo enemigos de Dios, si todavía no hemos llegado a conocerlo por quién es Él realmente. Jesús mismo dijo que no todo el que le dice «Señor, Señor» entrará en el reino de los cielos (Mateo 7:21). Por eso este viaje: conocerlo de verdad es el camino de la reconciliación, y Él nos lo ofrece con los brazos abiertos.",
-                "El Cordero que reina. En Apocalipsis 5, Juan oye que ha vencido el León de la tribu de Judá. Pero cuando mira, ve a un Cordero como inmolado. El León anunciado aparece como Cordero sacrificado, y ese Cordero es digno de toda adoración. La cruz no fue el final: el Cordero vive y reina."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Hay una diferencia enorme entre buscar a Jesús para que resuelva tus problemas y acudir a Él reconociendo que necesitas ser salvado de tu pecado. Puedes pedirle sanidad, provisión y dirección. Pero ninguna de esas cosas debe ocupar el lugar de lo que hizo en la cruz.",
-                "Por eso no podemos hablar de la cruz como si fuera una muestra de cuánto Dios desea concedernos nuestros proyectos personales. La cruz es el acontecimiento central de nuestra reconciliación con Dios."
-              ]
-            }
-          ],
-          examina: [
-            "¿He comprendido que mi mayor necesidad no era una vida más cómoda, sino reconciliarme con Dios?",
-            "¿Veo el pecado como Dios lo presenta, o he terminado justificando lo que Él llama pecado?",
-            "¿Lo reconozco como mi Salvador y también como mi Señor?",
-            "Cuando digo «creo en Jesús», ¿he decidido conocerlo por quién es Él realmente?"
-          ],
-          prayer: "Señor Jesús, hoy quiero contemplarte como el Cordero de Dios. Reconozco que mi problema más profundo no era lo que me faltaba ni lo que me dolía, sino mi pecado. Gracias porque te entregaste voluntariamente y llevaste sobre ti el castigo que yo merecía. Enséñame a no trivializar el pecado y a vivir en gratitud por la salvación que recibo por gracia. Amén.",
-          takeaway: "Jesús no vino simplemente a mejorar nuestra vida terrenal. Vino a resolver nuestra necesidad más profunda. El Cordero fue provisto por Dios, se entregó por los pecadores y hoy vive y reina.",
-          furtherReading: "Génesis 22:1-14; Éxodo 12:1-14; Juan 10:11-18; Romanos 5:6-11; 2 Corintios 5:18-21; 1 Pedro 2:22-25; Mateo 7:21-23; Apocalipsis 5:1-14.",
-          tomorrow: "Día 5. ¿Quién dices que soy yo?"
-        },
-        {
-          day: 5,
-          title: "¿QUIÉN DICES QUE SOY YO?",
-          subtitle: "No basta con saber lo que otros dicen de Jesús. Llega el momento de responder personalmente.",
-          reading: "Mateo 16:13-28",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "En estos días hemos recorrido algunas de las declaraciones más grandes de las Escrituras sobre Jesús: es eterno, es Dios, Dios hecho hombre y el Cordero de Dios. Pero puedes saber muchas cosas acerca de Jesús y todavía no haber comprendido quién es Él.",
-                "Hoy la pregunta no se responde con información prestada. ¿Cómo sabes que Jesús es quien dices que es? ¿Porque lo escuchaste en una predicación? ¿Porque así te enseñaron desde pequeño? ¿Porque viviste algo que consideraste sobrenatural? ¿O porque has conocido lo que las Escrituras revelan acerca de Él?"
-              ]
-            },
-            {
-              heading: "Entra en la escena",
-              paragraphs: [
-                "Jesús está con sus discípulos en la región de Cesarea de Filipo y les pregunta: «¿Quién dicen los hombres que es el Hijo del Hombre?». Ellos mencionan las opiniones que circulaban: Juan el Bautista, Elías, Jeremías o alguno de los profetas. Eran opiniones respetuosas, incluso admirables; compararlo con un gran profeta parecía un reconocimiento de su grandeza. Pero ninguna expresaba quién era Él.",
-                "Entonces Jesús cambia la pregunta:"
-              ],
-              quote: "«Y vosotros, ¿quién decís que soy yo?». (Mateo 16:15)",
-              afterQuote: [
-                "No es una encuesta de opinión. No pregunta qué dice la multitud ni cuál es la interpretación más popular. Pregunta qué reconocen ellos. Pedro responde: «Tú eres el Cristo, el Hijo del Dios viviente». Y Jesús le contesta:",
-                "«Bienaventurado eres, Simón, hijo de Jonás, porque no te lo reveló carne ni sangre, sino mi Padre que está en los cielos». (Mateo 16:17)",
-                "La verdad sobre Cristo no es una conclusión que fabricamos con nuestra inteligencia: Dios es quien se da a conocer. Eso no anula la responsabilidad de estudiar y examinar las Escrituras (lo veremos en el Día 10). Significa que no podemos atribuirnos el descubrimiento de Cristo."
-              ]
-            },
-            {
-              heading: "Una confesión correcta, una expectativa equivocada",
-              paragraphs: [
-                "Lo que sigue es sorprendente. Jesús comienza a explicarles que debe ir a Jerusalén, padecer, morir y resucitar al tercer día. Pedro lo toma aparte y lo reprende: «Señor, ten compasión de ti; en ninguna manera esto te acontezca». Y Jesús responde con firmeza:"
-              ],
-              quote: "«¡Quítate de delante de mí, Satanás!; me eres tropiezo, porque no pones la mira en las cosas de Dios, sino en las de los hombres». (Mateo 16:23)",
-              afterQuote: [
-                "El mismo Pedro que acababa de acertar rechaza a un Cristo que sufre. Quería un Mesías, pero no el camino de la cruz. Aquí hay una advertencia: podemos usar palabras bíblicamente correctas acerca de Jesús y, aun así, tener expectativas equivocadas sobre lo que vino a hacer. Podemos confesar que es el Mesías e intentar conducirlo por el camino que nos conviene.",
-                "Por eso Mateo 16:13-20 debe leerse junto con 16:21-28. Separar la confesión de Pedro del anuncio de la cruz nos llevaría a celebrar al Mesías sin comprender qué clase de Mesías revela la Escritura. Y enseguida Jesús añade:",
-                "«Si alguno quiere venir en pos de mí, niéguese a sí mismo, y tome su cruz, y sígame». (Mateo 16:24)",
-                "No promete una vida sin renuncias. Negarse a sí mismo no es despreciar la propia vida ni buscar sufrimiento: es renunciar a vivir bajo el gobierno del yo y reconocer que Cristo tiene autoridad sobre nosotros."
-              ]
-            },
-            {
-              heading: "Las palabras que no queremos editar",
-              paragraphs: [
-                "Es fácil aferrarnos a lo que Jesús dijo que nos consuela y pasar de largo lo que nos confronta. Pero el mismo Jesús que es nuestro Pastor dijo: «Arrepentíos, porque el reino de los cielos se ha acercado» (Mateo 4:17). Y también: «Si me amáis, guardad mis mandamientos» (Juan 14:15). Y también: «No todo el que me dice: Señor, Señor, entrará en el reino de los cielos» (Mateo 7:21).",
-                "No podemos separar al Jesús que consuela del Jesús que confronta, ni aceptar sus promesas y descartar sus mandamientos. El verdadero Jesús no necesita ser editado para resultar atractivo.",
-                "Cuando muchos discípulos lo abandonaron por una enseñanza difícil, Jesús preguntó a los doce si también querían irse, y Pedro respondió:"
-              ],
-              quote: "«Señor, ¿a quién iremos? Tú tienes palabras de vida eterna». (Juan 6:68)",
-              afterQuote: [
-                "Permanecer con Jesús no depende de que todas sus palabras nos resulten cómodas."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Un Jesús hecho a pedazos: solo un maestro de amor, solo un proveedor, solo milagros sin cruz, un Señor de labios sin obediencia. Es relativamente sencillo llamarlo Señor cuando las cosas salen como esperábamos. Pero ¿quién es Jesús cuando una oración no recibe la respuesta que querías, o cuando su Palabra te pide renunciar a algo que deseas? Puedes llorar, preguntar y pedirle que intervenga. Pero Él no cambia de identidad según las respuestas que recibimos."
-              ]
-            }
-          ],
-          examina: [
-            "¿Quién es Jesús para mí, más allá de las frases que aprendí en la iglesia?",
-            "¿Acepto su identidad pero me cuesta aceptar su misión y sus enseñanzas?",
-            "¿He querido un Jesús que me bendiga, pero no uno que gobierne mi vida?",
-            "¿Mi fe está fundamentada en quién es Él o en lo que espero que haga por mí?"
-          ],
-          writingPrompt: {
-            id: "day5_written_response",
-            title: "Responde por escrito",
-            instruction: "Lee Juan 1:1-18, Mateo 16:13-28 y Colosenses 1:15-20. Después escribe con tus propias palabras una respuesta a esta pregunta: ¿quién es Jesucristo según las Escrituras y qué significa para mí reconocerlo como Señor? No escribas solo lo que Jesús puede hacer. Escribe quién es, qué hizo y qué reclama de quienes le siguen. Que esa respuesta sea el punto de partida para lo que sigue."
-          },
-          prayer: "Señor Jesús, hoy quiero responder a tu pregunta con una fe fundamentada en tu Palabra. Tú eres el Cristo, el Hijo del Dios viviente, el Verbo eterno, el Cordero que entregó su vida por nuestros pecados y el Rey cuyo dominio jamás terminará. No quiero conocerte a medias ni aceptar solo las palabras que me agradan. Enséñame a recibirte tal como el Padre te ha revelado. Amén.",
-          takeaway: "Jesús no es quien nosotros necesitamos que sea. Es quien Dios ha revelado que es. Y conocerlo de verdad implica recibirlo como Salvador y rendirnos a Él como Señor.\n\nDel «quién» a su llamado: Hasta aquí hemos contemplado quién es Jesús: su eternidad, su divinidad, su encarnación, su misión y su señorío. Pero conocerlo también significa escuchar lo que nos dice y a dónde nos llama. En los próximos días vamos a escucharlo hablar de lo que cuesta seguirlo, del dinero, de las emociones y de la oración, y a aprender a examinar lo que otros enseñan en su nombre.",
-          furtherReading: "Marcos 8:27-38; Juan 6:66-69; Juan 20:30-31; Filipenses 2:5-11; Hebreos 1:1-4.",
-          tomorrow: "Día 6. Su llamado incluye la cruz."
-        },
-        {
-          day: 6,
-          title: "SU LLAMADO INCLUYE LA CRUZ",
-          subtitle: "Jesús nunca prometió a sus seguidores una vida sin dificultad. Les prometió su presencia, su paz y su victoria final.",
-          reading: "Lucas 9:23-26; Lucas 14:25-33; Juan 16:33; Hechos 14:21-22",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Imagina un mensaje cristiano en el que nunca se mencione el sufrimiento, la renuncia, el costo de seguir a Cristo ni la persecución. Un mensaje que solo hable de victoria, favor, salud, éxito y alegría. Sonaría atractivo. Llenaría auditorios. Pero ¿sería el mensaje de Jesús?",
-                "Hoy escuchamos a Jesús hablar con total claridad sobre lo que implica seguirlo, y lo hace sin ofrecer descuentos."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "Lucas 9 nos coloca en un momento clave: los discípulos acaban de reconocer a Jesús como el Cristo (Día 5), y Él les anuncia que tendrá que sufrir, ser rechazado y morir. Entonces añade, hablando a todos:"
-              ],
-              quote: "«Si alguno quiere venir en pos de mí, niéguese a sí mismo, tome su cruz cada día, y sígame». (Lucas 9:23)",
-              afterQuote: [
-                "Para quienes lo escuchaban, la cruz no era un símbolo religioso ni una joya. Era un instrumento de ejecución romano. Quien cargaba una cruz iba camino a morir, y todos lo sabían. Jesús usa esta imagen para decir que seguirlo implica rendirle el control de la propia vida: lo que quiero, lo que planeo, lo que defiendo, lo que poseo.",
-                "Y en Lucas 14, cuando grandes multitudes iban con Él, se volvió y les dijo: «Y el que no lleva su cruz y viene en pos de mí, no puede ser mi discípulo» (14:27). Luego los invita a calcular el costo, como quien va a construir una torre o a emprender una guerra. Jesús no esconde la letra pequeña. Quiere seguidores que sepan a qué se comprometen."
-              ]
-            },
-            {
-              heading: "Lo que Jesús sí prometió",
-              paragraphs: [
-                "Jesús no prometió que seguirlo evitaría el dolor. Prometió algo distinto y más profundo:"
-              ],
-              quote: "«Estas cosas os he hablado para que en mí tengáis paz. En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo». (Juan 16:33)",
-              afterQuote: [
-                "Mira la combinación: aflicción y paz, dificultad y victoria. La paz no está en la ausencia del problema, sino en Él. La victoria no consiste en que nada nos toque, sino en que Él ya venció. Los apóstoles lo entendieron bien. Después de ser apedreado y dejado por muerto, Pablo regresó a las mismas ciudades a fortalecer a los discípulos y les advirtió: «es necesario que a través de muchas tribulaciones entremos en el reino de Dios» (Hechos 14:22).",
-                "Y escribió a Timoteo: «Y también todos los que quieren vivir piadosamente en Cristo Jesús padecerán persecución» (2 Timoteo 3:12). A los filipenses les dijo que haber sido llamados no solo implica creer en Cristo, sino también padecer por Él (Filipenses 1:29)."
-              ]
-            },
-            {
-              heading: "Pero ¿todo sufrimiento es persecución?",
-              paragraphs: [
-                "No. Y conviene ser precisos para no caer en un extremo ni en otro. Los discípulos una vez le preguntaron a Jesús sobre un hombre ciego de nacimiento: ¿quién pecó, él o sus padres? Jesús respondió: «No es que pecó éste, ni sus padres, sino para que las obras de Dios se manifiesten en él» (Juan 9:3). Enfermedad, pérdida o dolor no son prueba automática de pecado ni de falta de fe.",
-                "Tampoco debemos buscar el sufrimiento como si fuera un mérito, ni tolerar el abuso diciendo que es «nuestra cruz». Jesús consuela a los que sufren (Mateo 5:4) y el Dios de toda consolación nos consuela para que podamos consolar a otros (2 Corintios 1:3-4). Tomar la cruz significa seguir a Cristo hasta donde Él nos lleve, aun cuando cueste incomprensión, renuncia, rechazo o sacrificio."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Hay mensajes que dicen que Dios quiere que siempre estés bien, que el dolor es señal de que algo falló en tu fe, y que quien sigue a Cristo debería vivir libre de problemas. Pero Jesús dijo: «En el mundo tendréis aflicción». Un evangelio sin cruz no puede consolar a quien perdió un hijo, a quien lleva años enfermo o a quien es perseguido por su fe. Les dice que su fe es débil cuando Jesús les dice que no están solos.",
-                "Y hay una pregunta incómoda: ¿seguimos a Jesús por lo que Él es o por las ventajas que esperamos? Jesús mismo preguntó: «¿Qué aprovechará al hombre si ganare todo el mundo, y perdiere su alma?» (Marcos 8:36)."
-              ]
-            }
-          ],
-          examina: [
-            "¿He aceptado un mensaje cristiano que nunca me habla de renuncia, arrepentimiento o sacrificio?",
-            "Cuando atravieso un momento difícil, ¿pienso de inmediato que Dios está enojado conmigo o que me falta fe?",
-            "¿Hay algo que no estaría dispuesto a soltar si Jesús me lo pidiera?",
-            "¿Soy compasivo con quien sufre, o le digo con facilidad que le falta fe?"
-          ],
-          prayer: "Señor Jesús, gracias porque no me engañaste. Me dijiste la verdad: seguirte cuesta, y en este mundo habrá aflicción. Pero también me prometiste tu paz y tu victoria. Perdóname por haber querido una fe sin cruz. Dame valor para seguirte, aunque sea difícil, y misericordia para acompañar a quienes sufren sin juzgarlos. Que mi confianza esté en ti y no en que mi vida sea fácil. Amén.",
-          takeaway: "Seguir a Jesús no es una garantía de comodidad, sino una invitación a caminar con Él. En el camino habrá dificultad, pero también su paz, su consuelo y su victoria final. Un evangelio sin cruz puede ser popular, pero no es el de Cristo.\n\n«En el mundo tendréis aflicción; pero confiad, yo he vencido al mundo». (Juan 16:33)",
-          furtherReading: "Lucas 9:23-26; Lucas 14:25-33; Hechos 14:21-22; 2 Timoteo 3:10-12; 1 Pedro 4:12-14.",
-          tomorrow: "Día 7. Jesús y las riquezas. Escucharemos lo que dijo sobre el dinero, la avaricia y la verdadera abundancia, y veremos por qué nadie puede servir a dos señores."
-        },
-        {
-          day: 7,
-          title: "JESÚS Y LAS RIQUEZAS: NADIE PUEDE SERVIR A DOS SEÑORES",
-          subtitle: "Jesús no condenó el trabajo ni la provisión, pero fue implacable con el corazón que confía en el dinero.",
-          reading: "Mateo 6:19-34; Lucas 12:13-21; 2 Corintios 8:9; 1 Timoteo 6:6-10",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Pocos temas generan tanta confusión en ciertos ambientes cristianos como el dinero. Hay quien afirma que la riqueza es la señal de la bendición de Dios, que la pobreza es una maldición que hay que reprender, y que dar dinero a la iglesia es la forma de «activar» la provisión divina. Otros se van al extremo contrario y piensan que tener algo es pecado.",
-                "Antes de elegir un bando, miremos qué dijo Jesús. Porque habló del dinero con más frecuencia y con más claridad de lo que solemos recordar."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "En Lucas 12, alguien le pide a Jesús que intervenga en una herencia. Jesús se niega a ser juez de esa disputa y lanza una advertencia:"
-              ],
-              quote: "«Mirad, y guardaos de toda avaricia; porque la vida del hombre no consiste en la abundancia de los bienes que posee». (Lucas 12:15)",
-              afterQuote: [
-                "Luego cuenta la parábola de un hombre rico cuyas tierras produjeron mucho. Su plan era construir graneros más grandes, guardar todo y descansar. El texto no dice que fuera un criminal ni que su cosecha fuera injusta. Dice que hablaba consigo mismo, y que en toda su conversación solo aparecen «yo» y «mis». Dios le dice:",
-                "«Necio, esta noche vienen a pedir tu alma; y lo que has provisto, ¿de quién será?». (Lucas 12:20)",
-                "Y Jesús concluye: «Así es el que hace para sí tesoro, y no es rico para con Dios» (12:21). El problema no era tener una buena cosecha. Era vivir como si la vida dependiera de ella.",
-                "En el Sermón del Monte, Jesús es todavía más directo:",
-                "«Ninguno puede servir a dos señores; porque o aborrecerá al uno y amará al otro, o estimará al uno y menospreciará al otro. No podéis servir a Dios y a las riquezas». (Mateo 6:24)",
-                "Jesús no dice que no podamos tener dinero. Dice que el dinero no puede ser el señor. Y enseguida nos recuerda que el Padre conoce nuestras necesidades: «Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas» (Mateo 6:33). Mira el orden: primero el reino, y las cosas necesarias después. Lo que Jesús promete aquí es cuidado y provisión, no acumulación."
-              ]
-            },
-            {
-              heading: "¿Cómo vivió Jesús?",
-              paragraphs: [
-                "Su propia vida es una respuesta. Jesús dijo: «Las zorras tienen guaridas, y las aves de los cielos nidos; mas el Hijo del Hombre no tiene dónde recostar su cabeza» (Mateo 8:20). Nació en un pesebre, fue conocido como el hijo del carpintero y dependió de la generosidad de otras personas para su ministerio (Lucas 8:1-3). Murió desnudo en una cruz y fue sepultado en una tumba prestada. Si la riqueza fuera la señal de la bendición de Dios, Jesús habría sido el hombre menos bendecido de la tierra."
-              ]
-            },
-            {
-              heading: "¿Y 2 Corintios 8:9?",
-              paragraphs: [
-                "Este versículo suele citarse para enseñar que Cristo se hizo pobre para que nosotros seamos ricos materialmente: «Porque ya conocéis la gracia de nuestro Señor Jesucristo, que por amor a vosotros se hizo pobre siendo rico, para que vosotros con su pobreza fueseis enriquecidos». Pero lee el contexto. Pablo está pidiendo a los corintios que participen en una ofrenda para ayudar a los cristianos necesitados de Jerusalén. Usa el ejemplo de Cristo para llamarlos a la generosidad, no a la acumulación. La riqueza de la que habla es la de la gracia y la salvación. Y el mismo Pablo se describe como «pobres, mas enriqueciendo a muchos; como no teniendo nada, mas poseyéndolo todo» (2 Corintios 6:10).",
-                "Algo parecido ocurre con 3 Juan 2, donde Juan desea a Gayo que sea «prosperado en todas las cosas» y tenga salud. Es un saludo común en las cartas de la época, no una promesa doctrinal de riqueza para todo creyente."
-              ]
-            },
-            {
-              heading: "Dos iglesias, dos sorpresas",
-              paragraphs: [
-                "En el libro de Apocalipsis, Jesús habla a dos iglesias de manera sorprendente. A la iglesia de Esmirna le dice: «Yo conozco tus obras, y tu tribulación, y tu pobreza (pero tú eres rico)» (2:9). Era pobre materialmente, pero rica a sus ojos. A la iglesia de Laodicea, en cambio, que se consideraba próspera, le dice: «Porque tú dices: Yo soy rico, y me he enriquecido, y de ninguna cosa tengo necesidad; y no sabes que tú eres un desventurado, miserable, pobre, ciego y desnudo» (3:17). Jesús no mide la riqueza como nosotros."
-              ]
-            },
-            {
-              heading: "Una advertencia equilibrada",
-              paragraphs: [
-                "No afirmamos que tener bienes sea pecado. Abraham, Job y José de Arimatea fueron personas con recursos, y la Biblia valora el trabajo (Efesios 4:28; 2 Tesalonicenses 3:10) y la provisión para la familia (1 Timoteo 5:8). Pero Pablo dice a Timoteo: «Pero gran ganancia es la piedad acompañada de contentamiento» (1 Timoteo 6:6) y advierte: «Porque raíz de todos los males es el amor al dinero, el cual codiciando algunos, se extraviaron de la fe, y fueron traspasados de muchos dolores» (6:10). La pregunta no es cuánto tienes, sino qué lugar ocupa en tu corazón, y si lo usas para servir a otros: «Más bienaventurado es dar que recibir» (Hechos 20:35)."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Si te han enseñado que dar dinero es una semilla que obligará a Dios a devolverte más, o que tu pobreza refleja poca fe, vale la pena mirar a Jesús y preguntarse: ¿dónde enseñó eso? Jesús dijo que prestemos «no esperando de ello nada» (Lucas 6:35). La generosidad cristiana nace de la gratitud y del amor al prójimo, no de un cálculo de retorno. Y el Señor que dijo «el que quiera ser el primero, será siervo de todos» no mide su favor por nuestros saldos."
-              ]
-            }
-          ],
-          examina: [
-            "¿Qué lugar ocupa el dinero en mis decisiones, en mis preocupaciones y en mi tiempo?",
-            "¿Doy esperando algo a cambio, o doy por amor a Dios y a mis hermanos?",
-            "¿He pensado que mi bienestar material es la medida de la aprobación de Dios?",
-            "¿A quién en necesidad podría ayudar esta semana con lo que ya tengo?"
-          ],
-          prayer: "Señor Jesús, tú eres rico y te hiciste pobre por mí. Perdóname por las veces que he confiado más en lo que tengo, o en lo que quiero tener, que en ti. Líbrame de la avaricia y del miedo a la escasez. Enséñame a trabajar con honestidad, a estar contento con lo que me das y a ser generoso sin esperar recompensa. Que mi tesoro esté en ti. Amén.",
-          takeaway: "El problema no es el dinero, sino el señorío. Jesús no te pide que desprecies el trabajo ni la provisión, pero sí que no pongas tu confianza en las riquezas. Quien tiene a Cristo tiene el mayor tesoro, aun con poco.\n\n«Ninguno puede servir a dos señores... No podéis servir a Dios y a las riquezas». (Mateo 6:24)",
-          furtherReading: "Mateo 6:19-34; Lucas 12:13-34; Lucas 16:19-31; 1 Timoteo 6:6-19; Hebreos 13:5.",
-          tomorrow: "Día 8. Jesús y las emociones. Veremos cómo se emocionó Jesús, y por qué su verdad no depende de lo que sentimos."
-        },
-        {
-          day: 8,
-          title: "JESÚS Y LAS EMOCIONES: SU VERDAD NO DEPENDE DE LO QUE SIENTO",
-          subtitle: "Jesús sintió profundamente, pero jamás permitió que sus emociones ocuparan el lugar de la voluntad del Padre.",
-          reading: "Juan 11:33-36; Mateo 26:36-39; Marcos 3:1-5; Juan 6:60-69",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "¿Cuántas veces has medido tu relación con Dios por lo que sentiste en una reunión? Una música que te conmovió, un mensaje que te hizo llorar, una oración que te dejó con paz. Y cuando esa emoción desaparece, ¿has pensado que Dios se alejó, o que algo está mal contigo?",
-                "Muchos hemos aprendido a valorar lo espiritual por lo que sentimos. Hoy miraremos a Jesús, que sintió con una profundidad que pocos hemos alcanzado, para descubrir cuál es el lugar de las emociones en la fe."
-              ]
-            },
-            {
-              heading: "Jesús sintió",
-              paragraphs: [
-                "Lo primero es afirmar algo importante: Jesús no fue una persona fría. Lloró ante la tumba de su amigo Lázaro (Juan 11:35, uno de los versículos más breves de la Biblia: «Jesús lloró»). Sintió compasión por las multitudes. Se enojó ante la dureza de corazón de quienes preferían las reglas a las personas: «mirándolos alrededor con enojo, entristecido por la dureza de sus corazones» (Marcos 3:5). Y en el huerto confesó: «Mi alma está muy triste, hasta la muerte» (Mateo 26:38).",
-                "Hebreos 4:15 dice que tenemos un sumo sacerdote que puede compadecerse de nuestras debilidades. Las emociones no son un defecto de la fe ni algo que deba esconderse. Dios nos creó con ellas, y Jesús las vivió plenamente."
-              ]
-            },
-            {
-              heading: "Pero no se dejó gobernar por ellas",
-              paragraphs: [
-                "En el huerto, con el alma angustiada, Jesús no tomó decisiones según su ánimo. Dijo: «no se haga mi voluntad, sino la tuya» (Lucas 22:42). Su dolor fue real, pero su obediencia no dependió de cómo se sentía.",
-                "Mira también Juan 6. Jesús enseñó cosas difíciles y muchos discípulos se escandalizaron: «Desde entonces muchos de sus discípulos volvieron atrás, y ya no andaban con él» (6:66). Jesús no corrió tras ellos con un mensaje más agradable. Se volvió a los doce y preguntó: «¿Queréis acaso iros también vosotros?». Pedro respondió: «Señor, ¿a quién iremos? Tú tienes palabras de vida eterna» (6:67-68). Pedro no dice «me siento bien contigo». Dice que Jesús tiene las palabras de vida."
-              ]
-            },
-            {
-              heading: "El corazón no es una brújula confiable",
-              paragraphs: [
-                "La Biblia es realista sobre nuestro mundo interior. Jeremías 17:9 dice: «Engañoso es el corazón más que todas las cosas, y perverso; ¿quién lo conocerá?». Y Proverbios 28:26: «El que confía en su propio corazón es necio; mas el que camina en sabiduría será librado». Esto no significa que sentir sea malo, sino que sentir no basta para saber qué es verdad. Una emoción intensa puede acompañar tanto a la verdad como al error. Hay personas profundamente emocionadas con enseñanzas falsas.",
-                "Los discípulos de Emaús lo vivieron en el orden correcto. Cuando reconocieron a Jesús, dijeron: «¿No ardía nuestro corazón en nosotros, mientras nos hablaba en el camino, y cuando nos abría las Escrituras?» (Lucas 24:32). Su corazón ardió, pero porque Jesús les abría la Palabra. La emoción siguió a la verdad. No la sustituyó.",
-                "Por eso Jesús dijo que los verdaderos adoradores «en espíritu y en verdad es necesario que adoren» (Juan 4:24). Espíritu y verdad. No una cosa sin la otra."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Vivimos rodeados de mensajes que prometen sentirnos bien: pensamiento positivo, frases motivacionales, técnicas para «declarar» o «atraer» lo que queremos, reuniones diseñadas para provocar una experiencia. Algunas observaciones sobre la mente humana pueden ser útiles, y buscar ayuda de un consejero, un médico o un psicólogo cuando sufres ansiedad, depresión o trauma no es falta de fe. Pero cuando una técnica, una experiencia o una emoción ocupa el lugar de Cristo, hemos cambiado de fundamento.",
-                "Jesús dijo: «La paz os dejo, mi paz os doy; yo no la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo» (Juan 14:27). Su paz no depende del ambiente ni del ánimo. Es la paz de saber que Él está con nosotros. Y el consuelo del salmista en medio del abatimiento no fue ignorar su emoción, sino hablarle con verdad: «¿Por qué te abates, oh alma mía, y por qué te turbas dentro de mí? Espera en Dios» (Salmo 42:5).",
-                "Pablo lo resume: «Por nada estéis afanosos, sino sean conocidas vuestras peticiones delante de Dios en toda oración y ruego, con acción de gracias. Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestros pensamientos en Cristo Jesús» (Filipenses 4:6-7). Y: «transformaos por medio de la renovación de vuestro entendimiento» (Romanos 12:2). El cambio verdadero pasa por la mente renovada con la Palabra, no solo por un momento de intensidad."
-              ]
-            }
-          ],
-          examina: [
-            "¿Mido mi cercanía con Dios por lo que siento o por lo que Él ha dicho en su Palabra?",
-            "Cuando no siento nada en la oración o en la iglesia, ¿qué pienso de Dios y de mí?",
-            "¿He seguido enseñanzas porque me hicieron sentir bien, sin comprobarlas en la Biblia?",
-            "Si estoy sufriendo emocionalmente, ¿a quién puedo pedir ayuda sin pensar que esto me hace menos creyente?"
-          ],
-          prayer: "Señor Jesús, gracias porque tú entiendes lo que siento. Tú lloraste, te angustiaste y te compadeciste. Enséñame a no despreciar mis emociones ni a obedecerlas ciegamente. Quiero que tu Palabra sea mi fundamento y no mis estados de ánimo. Dame tu paz, esa que no depende de las circunstancias, y ayúdame a confiar en ti cuando no siento nada. Amén.",
-          takeaway: "Tus emociones son un regalo de Dios, pero no son tu brújula. Jesús sintió plenamente y obedeció plenamente. Que tu fe descanse en quién es Él y en lo que ha dicho, no en cómo amaneciste hoy.\n\n«Señor, ¿a quién iremos? Tú tienes palabras de vida eterna». (Juan 6:68)",
-          furtherReading: "Juan 11:33-36; Lucas 24:13-35; Proverbios 3:5-6; Salmo 42; Filipenses 4:4-9.",
-          tomorrow: "Día 9. Él nos enseñó a orar. Veremos por qué la oración que Jesús enseñó no es una fórmula para conseguir lo que queremos."
-        },
-        {
-          day: 9,
-          title: "ÉL NOS ENSEÑÓ A ORAR",
-          subtitle: "La oración de Jesús no es un mecanismo para conseguir lo que queremos: es una relación con un Padre que sabe lo que necesitamos.",
-          reading: "Mateo 6:5-13; Mateo 7:7-11; Santiago 4:1-3; 2 Corintios 12:7-10",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Hoy se habla mucho de «declarar», «decretar» y «reclamar» lo que queremos: sanidad, dinero, un trabajo, un cónyuge. A veces se enseña que si tienes suficiente fe y las palabras correctas, Dios tiene que responder. Y quien no recibe lo que pidió termina pensando que no tuvo suficiente fe o que hizo algo mal.",
-                "¿Es así como Jesús enseñó a orar? Los discípulos le pidieron: «Señor, enséñanos a orar» (Lucas 11:1). Su respuesta es la mejor guía que tenemos."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "En Mateo 6, Jesús comienza con lo que la oración no es. No es una actuación para impresionar a otros (6:5), ni una cadena de palabras mecánicas:"
-              ],
-              quote: "«Y orando, no uséis vanas repeticiones, como los gentiles, que piensan que por su palabrería serán oídos. No os hagáis, pues, semejantes a ellos; porque vuestro Padre sabe de qué cosas tenéis necesidad, antes que vosotros le pidáis». (Mateo 6:7-8)",
-              afterQuote: [
-                "Esto quita de la oración la idea de que el éxito depende de la técnica, la cantidad de palabras o la fuerza con que hablemos. Dios no necesita ser convencido. Es un Padre que conoce lo que necesitamos.",
-                "Y entonces enseña el modelo:",
-                "«Padre nuestro que estás en los cielos, santificado sea tu nombre. Venga tu reino. Hágase tu voluntad, como en el cielo, así también en la tierra. El pan nuestro de cada día, dánoslo hoy». (Mateo 6:9-11)",
-                "Fíjate en el orden. Primero, el Padre: su nombre, su reino, su voluntad. Después, nuestras necesidades: pan para hoy, perdón, protección. El centro de la oración no es lo que yo quiero que Dios haga, sino que se haga lo que Dios quiere. Y la petición material es modesta: el pan de cada día, no una despensa acumulada."
-              ]
-            },
-            {
-              heading: "Pide, y se te dará",
-              paragraphs: [
-                "¿Significa esto que no debemos pedir? Al contrario. Jesús dice: «Pedid, y se os dará; buscad, y hallaréis; llamad, y se os abrirá» (Mateo 7:7). Dios es un Padre que da cosas buenas a sus hijos (7:11). Podemos pedir con confianza, con detalle y con perseverancia. Hebreos 4:16 nos invita a acercarnos «confiadamente al trono de la gracia». Pero la oración es la petición de un hijo, no la orden de un cliente.",
-                "Santiago advierte: «Pedís, y no recibís, porque pedís mal, para gastar en vuestros deleites» (4:3). Y Juan escribe: «Y esta es la confianza que tenemos en él, que si pedimos alguna cosa conforme a su voluntad, él nos oye» (1 Juan 5:14). Cuando Jesús dice «en mi nombre» (Juan 14:13-14), no está ofreciendo una frase mágica para añadir al final, sino orar de acuerdo con su carácter y su voluntad."
-              ]
-            },
-            {
-              heading: "Cuando la respuesta no es la que esperamos",
-              paragraphs: [
-                "Pablo oró tres veces para que le quitaran lo que llamó un «aguijón en la carne». La respuesta de Jesús fue:"
-              ],
-              quote: "«Bástate mi gracia; porque mi poder se perfecciona en la debilidad». (2 Corintios 12:9)",
-              afterQuote: [
-                "El apóstol Pablo no fue sanado de lo que pedía. Y no por falta de fe. Tampoco Timoteo, a quien Pablo recomienda un remedio para sus frecuentes dolencias del estómago (1 Timoteo 5:23). Epafrodito estuvo enfermo y cerca de la muerte, hasta que Dios tuvo misericordia (Filipenses 2:26-27). Y el mismo Jesús oró en Getsemaní sin que la copa pasara.",
-                "Esto no significa que Dios no sane. Sí lo hace, y la Biblia nos invita a orar por los enfermos (Santiago 5:14-16). Significa que Dios no está obligado a responder como esperamos, y que una oración no respondida no es prueba de que nos falta fe. A quien sufre, no le añadamos la culpa."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Una oración que trata a Dios como un proveedor que debe responder si usamos las palabras correctas convierte al Padre en un instrumento. Jesús nos enseñó lo contrario: venir con confianza de hijos, pedir con humildad y aceptar que su sabiduría es mayor que la nuestra. Y a veces la respuesta es un «no», un «espera» o un «te basta mi gracia». En todos los casos, es la respuesta de un Padre bueno."
-              ]
-            }
-          ],
-          examina: [
-            "Cuando oro, ¿me interesa más que Dios haga lo que yo quiero o que se haga su voluntad?",
-            "¿He pensado que una oración no respondida significa que me falta fe?",
-            "¿Dedico más tiempo a pedir o a estar con el Padre, escuchar su Palabra y agradecerle?",
-            "¿Por quién he orado esta semana sin esperar nada a cambio?"
-          ],
-          prayer: "Padre, gracias porque me invitas a venir como hijo. Perdóname por las veces que he querido usar la oración para obtener lo que deseo, o por haber juzgado a quien no recibió lo que pidió. Enséñame a pedir con confianza y a confiar con humildad. Que tu nombre sea santificado, que venga tu reino y que se haga tu voluntad en mi vida. Y dame hoy el pan que necesito. Amén.",
-          takeaway: "La oración no es un truco para que Dios haga lo que quieres, sino la voz de un hijo que habla con su Padre. Puedes pedir con total libertad, y puedes descansar en que Él sabe lo que necesitas, incluso cuando la respuesta no es la que esperabas.\n\n«Bástate mi gracia; porque mi poder se perfecciona en la debilidad». (2 Corintios 12:9)",
-          furtherReading: "Mateo 6:5-15; Lucas 11:1-13; Santiago 5:13-16; Hebreos 4:14-16; 1 Juan 5:14-15.",
-          tomorrow: "Día 10. Por sus frutos los conoceréis. Escucharemos las advertencias de Jesús sobre los falsos maestros y aprenderemos a examinar lo que oímos con la Biblia en la mano."
-        },
-        {
-          day: 10,
-          title: "POR SUS FRUTOS LOS CONOCERÉIS",
-          subtitle: "Jesús advirtió que no todo el que habla en su nombre le pertenece. Por eso nos pide examinar lo que oímos.",
-          reading: "Mateo 7:15-23; 2 Pedro 2:1-3; Hechos 17:10-12; 2 Timoteo 4:1-5",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Es muy probable que quien te habló de Jesús por primera vez lo hiciera con buena intención. Y es posible que lo que te enseñaron incluyera cosas verdaderas junto con otras que nunca has comprobado. ¿Cuántas de las enseñanzas que recibiste has contrastado tú mismo con la Biblia?",
-                "Hoy escucharemos una advertencia que Jesús hizo a sus discípulos. No para que vivamos con sospecha, sino para que vivamos con discernimiento."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "Al final del Sermón del Monte, Jesús dice:"
-              ],
-              quote: "«Guardaos de los falsos profetas, que vienen a vosotros con vestidos de ovejas, pero por dentro son lobos rapaces. Por sus frutos los conoceréis». (Mateo 7:15-16)",
-              afterQuote: [
-                "Fíjate en la palabra «vestidos de ovejas». Los falsos maestros no se presentan como enemigos. Se ven como creyentes, hablan el lenguaje cristiano, citan la Biblia y mencionan a Jesús. Por eso Jesús no nos manda a juzgar por la apariencia, sino por los frutos: la doctrina que enseñan, el carácter que muestran y el rumbo que producen.",
-                "Y entonces dice algo que debería hacernos pensar con seriedad:",
-                "«No todo el que me dice: Señor, Señor, entrará en el reino de los cielos, sino el que hace la voluntad de mi Padre que está en los cielos. Muchos me dirán en aquel día: Señor, Señor, ¿no profetizamos en tu nombre, y en tu nombre echamos fuera demonios, y en tu nombre hicimos muchos milagros? Y entonces les declararé: Nunca os conocí; apartaos de mí, hacedores de maldad». (Mateo 7:21-23)",
-                "Esto significa que mencionar a Jesús, llenar un auditorio o mostrar resultados espectaculares no es prueba de pertenecerle. Lo que importa es hacer la voluntad del Padre y ser conocido por Él."
-              ]
-            },
-            {
-              heading: "¿Cómo examinar lo que escuchamos?",
-              paragraphs: [
-                "La Biblia nos da criterios. Podemos hacernos tres preguntas:"
-              ],
-              bullets: [
-                { lead: "¿Qué dice sobre Cristo y su evangelio?", text: "Pablo advierte contra «otro evangelio» (Gálatas 1:6-9). Si el mensaje no habla del pecado, de la cruz, del arrepentimiento y de la fe en Jesús, o los reduce a un accesorio, hay un problema. Jesús no puede ser un medio para llegar a otra cosa." },
-                { lead: "¿Qué fruto produce?", text: "«El fruto del Espíritu es amor, gozo, paz, paciencia, benignidad, bondad, fe, mansedumbre, templanza» (Gálatas 5:22-23). El carácter importa más que el carisma, la fama o los resultados." },
-                { lead: "¿Qué motivaciones se ven?", text: "Pedro dice de los falsos maestros: «por avaricia harán mercadería de vosotros con palabras fingidas» (2 Pedro 2:3). Y a los pastores les recuerda que deben apacentar la grey «no por ganancia deshonesta, sino con ánimo pronto» (1 Pedro 5:2). Podemos preguntarnos si el mensaje beneficia sobre todo a quien lo da." }
-              ]
-            },
-            {
-              heading: "Los de Berea",
-              paragraphs: [
-                "Los de Berea «recibieron la palabra con toda solicitud, escudriñando cada día las Escrituras para ver si estas cosas eran así» (Hechos 17:11). Lo notable es que estaban examinando las palabras del apóstol Pablo, y Lucas los llama nobles por eso. Si Pablo aceptaba ser examinado, ningún maestro actual debería sentirse ofendido cuando alguien abre su Biblia y compara.",
-                "Pablo advierte también a Timoteo: «Porque vendrá tiempo cuando no soportarán la sana doctrina, sino que teniendo comezón de oír, se amontonarán maestros conforme a sus propias concupiscencias, y apartarán de la verdad el oído, y se volverán a las fábulas» (2 Timoteo 4:3-4). El problema no es solo que existan maestros que dicen lo que la gente quiere oír, sino que haya oyentes que los buscan."
-              ]
-            },
-            {
-              heading: "Una aclaración necesaria",
-              paragraphs: [
-                "No decimos que todo pastor o iglesia que habla de bendición sea falso. Dios da buenas dádivas (Santiago 1:17) y hay muchos siervos fieles en iglesias de todos los tamaños. Tampoco se trata de convertirnos en cazadores de herejes, desconfiando de todos. Se trata de ser como los de Berea: amar la verdad, comprobarla y estar dispuestos a ser corregidos, incluso en lo que más hemos creído. Y de tratar con mansedumbre y amor a quienes piensan distinto."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Tal vez la pregunta más difícil es esta: ¿qué pasaría si descubro que algo que me enseñaron durante años no está en la Biblia? Podemos sentir enojo, vergüenza o miedo. Pero Jesús dijo: «conoceréis la verdad, y la verdad os hará libres» (Juan 8:32). La verdad no nos quita nada que valga la pena conservar. Y el Jesús de las Escrituras es mejor que cualquier versión que hayamos recibido."
-              ]
-            }
-          ],
-          examina: [
-            "¿Cuántas de las cosas que creo sobre Jesús he comprobado por mí mismo en la Biblia?",
-            "¿Busco maestros que me confronten con la verdad o que me hagan sentir bien?",
-            "Si descubriera que algo que me enseñaron no está en la Escritura, ¿estaría dispuesto a cambiar?",
-            "¿Estoy examinando a otros con orgullo, o con el deseo de amar la verdad y a las personas?"
-          ],
-          prayer: "Señor Jesús, tú eres la verdad. Dame un corazón dispuesto a escuchar tu Palabra aunque contradiga lo que he creído hasta ahora. Líbrame de la credulidad y también del orgullo. Ayúdame a examinar todo a la luz de las Escrituras con humildad y amor. Y que lo que llame verdad, lo viva. Amén.",
-          takeaway: "No creas algo solo porque lo dice alguien con influencia, y no lo rechaces solo porque no te gusta. Examina todo con la Biblia abierta, pidiendo al Espíritu que te dé entendimiento. Jesús no teme tus preguntas.\n\n«Por sus frutos los conoceréis». (Mateo 7:16)",
-          furtherReading: "Mateo 7:15-23; Gálatas 1:6-9; 1 Juan 4:1-6; 2 Timoteo 3:14-17; Hechos 17:10-12.",
-          tomorrow: "Día 11. Amaos unos a otros. Veremos qué dijo Jesús sobre el amor entre sus discípulos y por qué no hay fe cristiana sin comunidad."
-        },
-        {
-          day: 11,
-          title: "AMAOS UNOS A OTROS",
-          subtitle: "Jesús dijo que el mundo conocería a sus discípulos por el amor que se tuvieran entre sí.",
-          reading: "Juan 13:34-35; Mateo 12:46-50; Lucas 10:25-37; 1 Juan 3:16-18",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "¿Cuántas personas de tu iglesia conoces por su nombre? ¿A cuántas has visitado en su casa? ¿Quién te llamaría si tuvieras una necesidad urgente? Para muchos, la iglesia es un lugar al que se asiste, se canta, se escucha un mensaje y se regresa a casa. Se ora por la familia, por el trabajo y por las propias metas. Pero ¿quién ora por el hermano que está al lado?",
-                "Jesús no concibió la vida cristiana como una experiencia individual. Hoy escuchamos lo que dijo sobre cómo debemos tratarnos."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "La noche en que fue traicionado, después de lavar los pies de sus discípulos, Jesús les dio un mandamiento:"
-              ],
-              quote: "«Un mandamiento nuevo os doy: Que os améis unos a otros; como yo os he amado, que también os améis unos a otros. En esto conocerán todos que sois mis discípulos, si tuviereis amor los unos con los otros». (Juan 13:34-35)",
-              afterQuote: [
-                "Fíjate en la medida: «como yo os he amado». No como nos resulte cómodo, ni solo con quienes nos caen bien. Jesús amó con entrega, con humildad y con sacrificio. Y fíjate en el resultado: el mundo conocerá que somos suyos no por nuestras reuniones ni por nuestras bendiciones, sino por nuestro amor mutuo."
-              ]
-            },
-            {
-              heading: "¿Quién es mi familia?",
-              paragraphs: [
-                "Mateo 12 relata que la madre y los hermanos de Jesús lo buscaban mientras enseñaba. Alguien se lo dijo, y Jesús respondió con una pregunta:"
-              ],
-              quote: "«¿Quién es mi madre, y quiénes son mis hermanos? Y extendiendo su mano hacia sus discípulos, dijo: He aquí mi madre y mis hermanos. Porque todo aquel que hace la voluntad de mi Padre que está en los cielos, ése es mi hermano, y hermana, y madre». (Mateo 12:48-50)",
-              afterQuote: [
-                "Jesús no despreciaba a su familia. Desde la cruz se preocupó por su madre (Juan 19:26-27). Pero deja claro que el vínculo con Él crea una familia nueva, más amplia que la sangre. Quien pertenece a Cristo tiene hermanos y hermanas. Y la Biblia no considera esta relación como opcional.",
-                "Esto también corrige un error común: pensar que mi responsabilidad termina con mi propia familia. Pablo enseña que quien no provee para los suyos ha negado la fe (1 Timoteo 5:8), y eso es importante. Pero Gálatas 6:10 lo amplía: «hagamos bien a todos, y mayormente a los de la familia de la fe». La familia de sangre no es el límite de nuestro amor."
-              ]
-            },
-            {
-              heading: "El que se detuvo en el camino",
-              paragraphs: [
-                "Un experto en la ley le preguntó a Jesús: «¿Y quién es mi prójimo?» (Lucas 10:29). Jesús respondió con la parábola del buen samaritano. Un hombre fue asaltado y dejado medio muerto. Pasaron un sacerdote y un levita, ambos personas religiosas, y siguieron de largo. Un samaritano, a quien los judíos despreciaban, se detuvo, lo curó, lo llevó a una posada y pagó por su cuidado. Y Jesús preguntó: ¿quién fue el prójimo? Y concluyó: «Ve, y haz tú lo mismo» (10:37).",
-                "Los religiosos tenían sus razones: ocupaciones, riesgos, prioridades. Pero el amor de Jesús se detiene ante la necesidad."
-              ]
-            },
-            {
-              heading: "Amor con hechos",
-              paragraphs: [
-                "Juan, el discípulo que escuchó a Jesús decir el mandamiento nuevo, lo explica así décadas después:"
-              ],
-              quote: "«Pero el que tuviere bienes de este mundo, y viere a su hermano tener necesidad, y cierra contra él su corazón, ¿cómo mora el amor de Dios en él? Hijitos míos, no amemos de palabra ni de lengua, sino de hecho y en verdad». (1 Juan 3:17-18)",
-              afterQuote: [
-                "Santiago es igual de claro: si alguien tiene necesidad de ropa y alimento y nosotros le decimos «Id en paz, calentaos y saciaos» sin darle lo necesario, «¿de qué aprovecha?» (Santiago 2:15-16). Y la iglesia primitiva lo vivió: «la multitud de los que habían creído era de un corazón y un alma... Así que no había entre ellos ningún necesitado» (Hechos 4:32, 34). No se trata de copiar un modelo económico, sino de ver el corazón: nadie decía que lo suyo era solo suyo.",
-                "Pablo resume: «Nada hagáis por contienda o por vanagloria; antes bien con humildad, estimando cada uno a los demás como superiores a él mismo; no mirando cada uno por lo suyo propio, sino cada cual también por lo de los otros» (Filipenses 2:3-4)."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Una fe centrada en mis bendiciones, mi familia, mi ministerio y mi crecimiento puede parecer espiritual, pero es incompleta. Jesús habló de dar, de servir y de cargar con los demás: «Sobrellevad los unos las cargas de los otros, y cumplid así la ley de Cristo» (Gálatas 6:2). Y Juan es tajante: «Si alguno dice: Yo amo a Dios, y aborrece a su hermano, es mentiroso» (1 Juan 4:20). No podemos amar al Dios que no vemos mientras ignoramos al hermano que sí vemos."
-              ]
-            },
-            {
-              heading: "Dar un paso concreto",
-              bullets: [
-                { lead: "Conoce:", text: "aprende el nombre y la historia de alguien en tu iglesia con quien nunca hayas hablado." },
-                { lead: "Visita o llama:", text: "a una persona enferma, mayor o sola." },
-                { lead: "Comparte:", text: "algo de lo que tienes con alguien que lo necesite, sin buscar reconocimiento." },
-                { lead: "Reconcilia:", text: "si tienes algo pendiente con un hermano, ve primero a hablar con él (Mateo 5:23-24)." },
-                { lead: "Ora:", text: "por alguien de tu congregación, nombrándolo, sin pedir nada para ti." }
-              ]
-            }
-          ],
-          examina: [
-            "¿Mis oraciones y mis preocupaciones giran casi siempre en torno a mí y a mi familia?",
-            "¿Conozco las necesidades de los hermanos de mi iglesia, o solo las veo de lejos?",
-            "¿Hay alguien con quien tengo una ofensa que no he tratado de resolver?",
-            "¿Qué cosa concreta puedo dar o hacer esta semana por un hermano en necesidad?"
-          ],
-          prayer: "Señor Jesús, perdóname por mi egoísmo. Perdóname por las veces que he pasado de largo ante la necesidad de otros, por pensar solo en lo mío y por dejar que mi amor se quede en palabras. Dame un corazón como el tuyo. Enséñame a amar a mis hermanos como tú me has amado, con hechos y en verdad. Amén.",
-          takeaway: "El amor entre los discípulos no es un detalle: es la señal por la que el mundo reconoce a Jesús. Tu fe no fue hecha para vivirse sola. Busca hoy una manera concreta de amar a un hermano o hermana.\n\n«En esto conocerán todos que sois mis discípulos, si tuviereis amor los unos con los otros». (Juan 13:35)",
-          furtherReading: "Juan 13:34-35; Lucas 10:25-37; 1 Juan 3:16-18; 1 Juan 4:7-21; Hechos 4:32-35; Filipenses 2:1-4.",
-          tomorrow: "Día 12. Él vive. Contemplaremos la resurrección de Jesús y descubriremos por qué nuestra esperanza no termina en esta vida."
-        },
-        {
-          day: 12,
-          title: "ÉL VIVE",
-          subtitle: "La resurrección de Jesús es el fundamento de nuestra fe y la razón de una esperanza que no termina en esta vida.",
-          reading: "Mateo 28:1-10; Juan 20:24-29; 1 Corintios 15:1-8, 12-20",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Hemos hablado de muchas cosas: de quién es Jesús, de cómo vivió, de lo que enseñó. Pero si hay un acontecimiento sin el cual todo lo demás se derrumba, es este: Jesús, que murió en una cruz, salió vivo de la tumba.",
-                "Hoy no vamos a hablar de lo que la resurrección nos da en esta vida, sino de algo más grande: lo que significa que Cristo venció a la muerte."
-              ]
-            },
-            {
-              heading: "Entra en la escena",
-              paragraphs: [
-                "Al amanecer del primer día de la semana, unas mujeres llegan a la tumba con especias para ungir el cuerpo. Pero una voz les dice:"
-              ],
-              quote: "«No temáis vosotras; porque yo sé que buscáis a Jesús, el que fue crucificado. No está aquí, pues ha resucitado, como dijo». (Mateo 28:5-6)",
-              afterQuote: [
-                "«Como dijo»: Jesús lo había anunciado. Y no se trata de una experiencia espiritual ni de una idea. Es un acontecimiento: el cuerpo que fue sepultado ya no estaba. Los evangelios cuentan que Jesús se apareció a muchas personas, comió con ellas y les mostró sus heridas.",
-                "Tomás, que había dicho que no creería si no veía, recibió esta invitación: «Pon aquí tu dedo, y mira mis manos; y acerca tu mano, y métela en mi costado; y no seas incrédulo, sino creyente» (Juan 20:27). Tomás respondió con la confesión más alta del Evangelio de Juan: «¡Señor mío, y Dios mío!». Y Jesús añadió:",
-                "«Bienaventurados los que no vieron, y creyeron» (20:28-29). Esa bienaventuranza incluye a quienes hoy creemos sin haberlo visto."
-              ]
-            },
-            {
-              heading: "Si Cristo no resucitó",
-              paragraphs: [
-                "Pablo, escribiendo a los corintios, resume el evangelio: «Que Cristo murió por nuestros pecados, conforme a las Escrituras; y que fue sepultado, y que resucitó al tercer día, conforme a las Escrituras» (1 Corintios 15:3-4). Y enseguida enumera a los testigos: Pedro, los doce, más de quinientos hermanos a la vez, Jacobo, todos los apóstoles y finalmente él mismo.",
-                "Luego dice algo que podemos leer con calma:"
-              ],
-              quote: "«Y si Cristo no resucitó, vuestra fe es vana; aún estáis en vuestros pecados... Si en esta vida solamente esperamos en Cristo, somos los más dignos de conmiseración de todos los hombres». (1 Corintios 15:17, 19)",
-              afterQuote: [
-                "Presta atención a la segunda frase. Pablo dice que si nuestra esperanza en Cristo se limita a esta vida, sería lamentable. Lo opuesto a lo que escuchamos a veces: que Jesús vino para darnos nuestra mejor vida ahora. Pablo no niega que Cristo cambie nuestra vida presente, pero afirma que su victoria es mayor: venció la muerte, y por eso nuestra esperanza llega más lejos que cualquier bendición temporal."
-              ]
-            },
-            {
-              heading: "La resurrección y nuestra vida",
-              paragraphs: [
-                "Jesús dijo a Marta: «Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá. Y todo aquel que vive y cree en mí, no morirá eternamente» (Juan 11:25-26). Eso significa que la muerte no tiene la última palabra. Sea que perdamos la salud, un ser querido o los bienes, Cristo vive, y quienes están en Él vivirán.",
-                "Esta esperanza cambia cómo enfrentamos el sufrimiento. Pablo dijo: «Pues tengo por cierto que las aflicciones del tiempo presente no son comparables con la gloria venidera que en nosotros ha de manifestarse» (Romanos 8:18). Y cambia cómo vivimos: «Por tanto, hermanos míos amados, estad firmes y constantes, creciendo en la obra del Señor siempre, sabiendo que vuestro trabajo en el Señor no es en vano» (1 Corintios 15:58).",
-                "También explica el valor de los apóstoles. Amenazados y azotados por predicar la resurrección, «salieron de la presencia del concilio, gozosos de haber sido tenidos por dignos de padecer afrenta por causa del Nombre» (Hechos 5:41). Nadie sufre así por una idea que sabe falsa."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Si tu fe ha estado puesta principalmente en lo que Jesús puede hacer por ti hoy, la resurrección te invita a mirar más lejos. Jesús no es solo ayuda para esta vida. Es el Señor que murió por nuestros pecados y resucitó para darnos vida eterna. Esa esperanza sostiene incluso cuando todo lo demás falla."
-              ]
-            }
-          ],
-          examina: [
-            "¿Mi esperanza en Jesús se limita a lo que Él puede darme en esta vida?",
-            "¿Vivo como alguien que cree de verdad que Cristo resucitó y que yo también resucitaré?",
-            "¿Cómo cambia mi manera de enfrentar el sufrimiento la esperanza de la resurrección?",
-            "¿Hay algo que estoy dejando de hacer por miedo, cuando sé que mi trabajo en el Señor no es en vano?"
-          ],
-          prayer: "Señor Jesús, resucitado y vivo, gracias porque venciste a la muerte y porque en ti mi esperanza no termina en esta vida. Perdóname por haber puesto mi mirada solo en lo temporal. Fortalece mi fe cuando dude, como fortaleciste a Tomás. Ayúdame a vivir hoy con la certeza de que tú vives y de que yo viviré contigo. Amén.",
-          takeaway: "Jesús no es un recuerdo ni una inspiración: está vivo. Su resurrección es la prueba de que su obra en la cruz fue suficiente y la garantía de que quienes creen en Él vivirán. Esa es la esperanza que sostiene a la iglesia en toda circunstancia.\n\n«Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá». (Juan 11:25)",
-          furtherReading: "Mateo 28:1-10; Juan 20:19-31; 1 Corintios 15:1-20; Romanos 6:4-11; 1 Pedro 1:3-5.",
-          tomorrow: "Día 13. La gran comisión. Escucharemos las últimas instrucciones de Jesús a sus discípulos y descubriremos que nos llamó, no solo a mostrar, sino a hablar."
-        },
-        {
-          day: 13,
-          title: "LA GRAN COMISIÓN: ID Y HABLAD",
-          subtitle: "Jesús no nos dejó la tarea de exhibir lo que ha hecho por nosotros. Nos dejó la tarea de anunciarlo a Él.",
-          reading: "Mateo 28:16-20; Lucas 24:44-49; Romanos 10:13-17; Marcos 5:18-20",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "En muchos lugares, «dar testimonio» significa contar lo que Dios hizo en mi vida: la casa que recibí, la sanidad que experimenté, el negocio que prosperó. Y creemos que con eso cumplimos el propósito de la vida cristiana: que otros vean lo que Dios ha hecho por mí.",
-                "Pero ¿es eso lo que Jesús nos mandó hacer? Escuchemos las últimas palabras que dijo a sus discípulos antes de subir al cielo."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "En un monte de Galilea, Jesús se acerca a sus discípulos, algunos de los cuales todavía dudaban, y dice:"
-              ],
-              quote: "«Toda potestad me es dada en el cielo y en la tierra. Por tanto, id, y haced discípulos a todas las naciones, bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo; enseñándoles que guarden todas las cosas que os he mandado; y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo». (Mateo 28:18-20)",
-              afterQuote: [
-                "Observa los verbos: id, haced discípulos, bautizad, enseñad. Todo parte de su autoridad («toda potestad me es dada») y concluye con su compañía («yo estoy con vosotros»). No dice: «Vivid una vida tan bendecida que otros quieran lo que tenéis». Dice: id y hablad. Haced discípulos, esto es, personas que le siguen y obedecen todo lo que Él mandó.",
-                "Marcos lo recoge así: «Id por todo el mundo y predicad el evangelio a toda criatura» (16:15). Y Lucas precisa el contenido: «así fue necesario que el Cristo padeciese, y resucitase de los muertos al tercer día; y que se predicase en su nombre el arrepentimiento y el perdón de pecados en todas las naciones» (24:46-47). El mensaje es Cristo, su cruz, su resurrección, el arrepentimiento y el perdón."
-              ]
-            },
-            {
-              heading: "La fe viene por el oír",
-              paragraphs: [
-                "Pablo explica por qué esto es esencial:"
-              ],
-              quote: "«Porque todo aquel que invocare el nombre del Señor, será salvo. ¿Cómo, pues, invocarán a aquel en quien no han creído? ¿Y cómo creerán en aquel de quien no han oído? ¿Y cómo oirán sin haber quien les predique?». (Romanos 10:13-14)",
-              afterQuote: [
-                "Y concluye: «Así que la fe es por el oír, y el oír, por la palabra de Dios» (10:17). Nadie se salva solo viendo que a otra persona le va bien. Se salva al oír el evangelio. Por eso Pablo dice: «nosotros predicamos a Cristo crucificado» (1 Corintios 1:23), y que se propuso no saber otra cosa entre ellos «sino a Jesucristo, y a éste crucificado» (2:2). Y por eso no se avergonzaba del evangelio, «porque es poder de Dios para salvación a todo aquel que cree» (Romanos 1:16)."
-              ]
-            },
-            {
-              heading: "¿Y mi testimonio personal?",
-              paragraphs: [
-                "Tu testimonio importa, y la Biblia lo valora. Cuando Jesús sanó al hombre de Gadara, le dijo: «Vete a tu casa, a los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo, y cómo ha tenido misericordia de ti» (Marcos 5:19). Y el hombre se fue y empezó a publicar lo que Jesús había hecho con él. Pero fíjate en dos detalles: Jesús le encomendó que hablara del Señor y de su misericordia, y el relato se centra en Jesús, no en las comodidades del hombre.",
-                "Pablo también contó su historia (Hechos 22 y 26), pero cada vez la dirigió a Cristo: a quién encontró, qué le dijo y qué debía hacer. Un testimonio que habla de lo que recibí sin llegar a quién es Jesús, qué hizo en la cruz y cómo responder, se queda corto. Un buen testimonio abre la puerta, pero el evangelio debe pasar por ella."
-              ]
-            },
-            {
-              heading: "Una tarea para todos",
-              paragraphs: [
-                "La comisión no se limita a pastores o misioneros. Después de la persecución en Jerusalén, «los que fueron esparcidos iban por todas partes anunciando el evangelio» (Hechos 8:4). Eran creyentes comunes. Pedro lo pide a todos: «estad siempre preparados para presentar defensa con mansedumbre y reverencia ante todo el que os demande razón de la esperanza que hay en vosotros» (1 Pedro 3:15). Y Pablo describe nuestro papel: «somos embajadores en nombre de Cristo, como si Dios rogase por medio de nosotros; os rogamos en nombre de Cristo: Reconciliaos con Dios» (2 Corintios 5:20).",
-                "Esto implica hablar. Con mansedumbre y respeto, con amor y con claridad, pero hablar. Una vida ejemplar acompaña al mensaje, pero no lo reemplaza."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Si hemos entendido que la misión de la iglesia es mostrar bendiciones, llenar templos o construir una imagen exitosa, la Gran Comisión nos ubica de nuevo: no estamos llamados a exhibir, sino a anunciar. Y lo que anunciamos no es una promesa de prosperidad, sino a un Salvador que murió y resucitó, y que llama a todos al arrepentimiento y a la fe."
-              ]
-            }
-          ],
-          examina: [
-            "Cuando hablo de Jesús, ¿hablo de lo que Él hizo en la cruz o solo de lo que me ha dado?",
-            "¿Cuándo fue la última vez que le hablé a alguien del evangelio con claridad?",
-            "¿Qué miedo o excusa me detiene? ¿Se lo he presentado al Señor?",
-            "¿A qué persona de mi familia, trabajo o vecindario podría hablarle de Jesús esta semana?"
-          ],
-          prayer: "Señor Jesús, gracias porque alguien me habló de ti. Perdóname por mi silencio y por haber pensado que bastaba con mostrar mi vida sin abrir la boca. Dame valor, amor y claridad para anunciar tu evangelio. Pon en mi corazón a las personas que necesitan oírlo y ayúdame a hablar con mansedumbre y verdad. Gracias porque prometiste estar conmigo todos los días. Amén.",
-          takeaway: "Jesús te ha llamado a hablar de Él. No hace falta ser experto; basta ser fiel. Habla del Cristo que murió por pecadores, resucitó y llama a todos a volverse a Dios. La fe viene por el oír, y alguien necesita oírlo de ti.\n\n«Id, y haced discípulos a todas las naciones... y he aquí yo estoy con vosotros todos los días, hasta el fin del mundo». (Mateo 28:19-20)",
-          furtherReading: "Mateo 28:16-20; Lucas 24:44-49; Hechos 1:8; Romanos 10:9-17; 2 Corintios 5:17-21; 1 Pedro 3:15.",
-          tomorrow: "Día 14. Él vuelve. Miraremos la promesa del regreso de Jesús y lo que significa vivir esperándolo."
-        },
-        {
-          day: 14,
-          title: "ÉL VUELVE",
-          subtitle: "El mismo Jesús que subió al cielo regresará, y nuestra manera de vivir hoy se entiende a la luz de ese día.",
-          reading: "Hechos 1:9-11; Juan 14:1-3; Mateo 25:31-46; 2 Pedro 3:8-10",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Muchos hablan de Jesús como si su historia hubiera terminado: nació, enseñó, murió, resucitó y ahora nos ayuda desde el cielo. Pero la Biblia dice que su historia aún no termina. Jesús volverá, y no como vino la primera vez.",
-                "¿Cómo cambia tu vida saber que un día verás a Jesús cara a cara?"
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "Después de resucitar, Jesús fue tomado al cielo mientras sus discípulos lo miraban. Dos ángeles les dijeron:"
-              ],
-              quote: "«Varones galileos, ¿por qué estáis mirando al cielo? Este mismo Jesús, que ha sido tomado de vosotros al cielo, así vendrá como le habéis visto ir al cielo». (Hechos 1:11)",
-              afterQuote: [
-                "«Este mismo Jesús». No otro, ni un símbolo. El Jesús de los Evangelios, con sus heridas, volverá de manera visible. Y Él mismo lo prometió la noche antes de la cruz:",
-                "«No se turbe vuestro corazón; creéis en Dios, creed también en mí. En la casa de mi Padre muchas moradas hay... voy, pues, a preparar lugar para vosotros. Y si me fuere y os preparare lugar, vendré otra vez, y os tomaré a mí mismo, para que donde yo estoy, vosotros también estéis». (Juan 14:1-3)",
-                "Esa es la esperanza del creyente: no solo recibir ayuda de Jesús, sino estar con Él. Pablo la llama «la esperanza bienaventurada y la manifestación gloriosa de nuestro gran Dios y Salvador Jesucristo» (Tito 2:13). Y el libro de Apocalipsis termina con una oración: «Ciertamente vengo en breve. Amén; sí, ven, Señor Jesús» (22:20).",
-                "Un día no habrá más dolor: «Enjugará Dios toda lágrima de los ojos de ellos; y ya no habrá muerte, ni habrá más llanto, ni clamor, ni dolor» (Apocalipsis 21:4)."
-              ]
-            },
-            {
-              heading: "Vendrá como Rey y como Juez",
-              paragraphs: [
-                "Pero la Biblia añade algo que no siempre nos gusta escuchar. Jesús no solo volverá a consolar; volverá a juzgar. En Mateo 25, describe el momento en que el Hijo del Hombre se sentará en su trono y separará a las naciones. Y el criterio que menciona es sorprendente:"
-              ],
-              quote: "«De cierto os digo que en cuanto lo hicisteis a uno de estos mis hermanos más pequeños, a mí lo hicisteis». (Mateo 25:40)",
-              afterQuote: [
-                "Y a los que no lo hicieron: «en cuanto no lo hicisteis a uno de estos más pequeños, tampoco a mí lo hicisteis» (25:45). Jesús ve cómo tratamos al hambriento, al forastero, al enfermo y al preso. Tiene presente lo que hacemos o dejamos de hacer por los más pequeños (Día 11). Y Pablo recuerda que todos comparecerán «ante el tribunal de Cristo, para que cada uno reciba según lo que haya hecho mientras estaba en el cuerpo, sea bueno o sea malo» (2 Corintios 5:10).",
-                "Esto no contradice la gracia. Somos salvos por gracia mediante la fe (Efesios 2:8-9). Pero la fe verdadera produce una vida que mira a los demás, y Cristo la reconocerá."
-              ]
-            },
-            {
-              heading: "¿Por qué tarda?",
-              paragraphs: [
-                "Jesús dijo que nadie sabe el día ni la hora (Mateo 24:36). No debemos especular fechas ni asustar con predicciones. Pedro explica por qué la espera continúa: «El Señor no retarda su promesa, según algunos la tienen por tardanza, sino que es paciente para con nosotros, no queriendo que ninguno perezca, sino que todos procedan al arrepentimiento» (2 Pedro 3:9). La demora no es indiferencia, es paciencia. Y es también una razón para cumplir la tarea de ayer: hablar de Cristo a quien aún no lo conoce."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Cuando ponemos todas las esperanzas en lo que Dios hará por nosotros ahora, la venida de Cristo parece un detalle remoto. Pero el Nuevo Testamento la presenta como el horizonte que ordena toda la vida cristiana: vivir con integridad, servir a los demás, perseverar en el sufrimiento y anunciar el evangelio, porque el Rey viene. Y viene a poner todo en orden: a corregir injusticias, a consolar a los que lloran y a hacer nuevas todas las cosas."
-              ]
-            }
-          ],
-          examina: [
-            "¿Pienso con frecuencia en el regreso de Cristo? ¿Con alegría, con indiferencia o con temor?",
-            "Si Jesús volviera hoy, ¿qué me gustaría haber hecho de otra manera?",
-            "¿Cómo estoy tratando a los «más pequeños» que Jesús dice que son suyos?",
-            "¿Hay personas cercanas a mí que no conocen a Cristo y a quienes debería hablar mientras hay tiempo?"
-          ],
-          prayer: "Señor Jesús, creo que volverás. Ayúdame a vivir con esa esperanza y con la seriedad de quien sabe que dará cuenta. Perdóname por haber vivido como si este mundo fuera todo. Enséñame a servir a los más pequeños, a perseverar en medio del dolor y a hablar de ti mientras hay tiempo. Y mientras llega ese día, mantén mi corazón fiel. Ven, Señor Jesús. Amén.",
-          takeaway: "Jesús vuelve. Esa verdad nos consuela y nos desafía a la vez: nos consuela porque Él lo hará todo nuevo, y nos desafía porque nuestra vida actual importa. Vive hoy como quien espera al Rey.\n\n«He aquí yo vengo pronto, y mi galardón conmigo, para recompensar a cada uno según sea su obra». (Apocalipsis 22:12)",
-          furtherReading: "Hechos 1:9-11; Juan 14:1-3; Mateo 25:31-46; Tito 2:11-14; Apocalipsis 21:1-5; 22:12-21.",
-          tomorrow: "Día 15. Reverencia al Hijo de Dios. Veremos cómo lo trataron quienes lo conocieron y cómo desea el Padre que honremos a su Hijo."
-        },
-        {
-          day: 15,
-          title: "REVERENCIA AL HIJO DE DIOS",
-          subtitle: "Conocerlo de verdad nos lleva a tratarlo como Él es: el Hijo amado del Padre, el Señor y el Rey.",
-          reading: "Juan 5:22-23; Filipenses 2:5-11; Hebreos 12:25-29; Apocalipsis 1:12-18",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Piensa en cómo nos comportamos según a quién tenemos delante. Con un amigo muy cercano hay confianza, risas y palabras sin filtro. Ante un rey, aun el más amable, hay respeto y asombro. Jesús es las dos cosas a la vez: el amigo que da la vida por los suyos y el Rey ante quien toda rodilla se doblará. Cuando solo vemos una de las dos, terminamos tratándolo de una manera que no corresponde a quién es Él.",
-                "Hoy no vamos a hablar de formas, de vestimentas ni de rituales. Vamos a hablar de lo que hay en el corazón cuando nos acercamos a Jesús. Lo hacemos con cariño, y también incluyéndonos, porque a todos nos hace falta."
-              ]
-            },
-            {
-              heading: "Entra en el texto",
-              paragraphs: [
-                "El Padre tiene un deseo claro respecto a su Hijo. Jesús lo expresó así:"
-              ],
-              quote: "«Porque el Padre a nadie juzga, sino que todo el juicio dio al Hijo, para que todos honren al Hijo como honran al Padre. El que no honra al Hijo, no honra al Padre que le envió». (Juan 5:22-23)",
-              afterQuote: [
-                "Fíjate en lo que dice: el Padre quiere que honremos al Hijo como lo honramos a Él. No como a alguien menos, ni como a un igual nuestro. Y la voz del Padre se oyó con la misma insistencia en el monte de la transfiguración: «Este es mi Hijo amado, en quien tengo complacencia; a él oíd» (Mateo 17:5). Honrar al Hijo es una manera de honrar al Padre, y despreciarlo, aun sin querer, es afectar la manera en que honramos al Padre.",
-                "Y Dios mismo lo ha exaltado: «Dios también le exaltó hasta lo sumo, y le dio un nombre que es sobre todo nombre, para que en el nombre de Jesús se doble toda rodilla de los que están en los cielos, y en la tierra, y debajo de la tierra; y toda lengua confiese que Jesucristo es el Señor, para gloria de Dios Padre» (Filipenses 2:9-11)."
-              ]
-            },
-            {
-              heading: "Cómo lo trataron quienes lo conocieron",
-              paragraphs: [
-                "Los discípulos convivieron con Jesús. Comieron con Él, caminaron con Él, lo vieron cansado y lo vieron dormir. Y aun así, mientras más lo conocían, más se les agrandaba su figura:"
-              ],
-              bullets: [
-                { lead: "Pedro,", text: "después de ver su poder, cayó a sus rodillas y dijo: «Apártate de mí, Señor, porque soy hombre pecador» (Lucas 5:8)." },
-                { lead: "Los que estaban en la barca,", text: "al ver calmarse la tormenta, «vinieron y le adoraron, diciendo: Verdaderamente eres Hijo de Dios» (Mateo 14:33)." },
-                { lead: "Un centurión,", text: "hombre de autoridad, dijo: «Señor, no soy digno de que entres bajo mi techo» (Mateo 8:8)." },
-                { lead: "Tomás,", text: "ante el Resucitado, solo pudo exclamar: «¡Señor mío, y Dios mío!» (Juan 20:28)." }
-              ],
-              closingParagraphs: [
-                "Mira especialmente a Juan, «el discípulo a quien Jesús amaba», el que se recostaba sobre su pecho en la cena (Juan 13:23). Años después, al verlo glorificado, escribió: «Cuando le vi, caí como muerto a sus pies» (Apocalipsis 1:17). Y Jesús puso su mano sobre él y le dijo: «No temas». Aquí está lo hermoso: la intimidad más profunda y la reverencia más profunda convivían en el mismo corazón. Ninguno de ellos lo trató como a un colega. Lo llamaron Señor y Maestro, y Jesús lo confirmó: «Vosotros me llamáis Maestro, y Señor; y decís bien, porque lo soy» (Juan 13:13)."
-              ]
-            },
-            {
-              heading: "Lo que a veces olvidamos",
-              paragraphs: [
-                "Hoy, en muchos lugares, la cercanía con Jesús se ha entendido como si fuera igualdad. Se le habla como a un compañero al que se le dan instrucciones, se le menciona con un tono demasiado ligero o se le trata como un recurso para conseguir lo que queremos. A veces la adoración se mide solo por lo que sentimos, y se busca más la emoción del momento que a la Persona que la merece. No lo decimos para señalar a nadie; lo decimos porque todos podemos caer en eso sin darnos cuenta, y porque Dios mismo dice en su Palabra: «Este pueblo de labios me honra; mas su corazón está lejos de mí» (Mateo 15:8).",
-                "Jesús hizo una pregunta que sigue siendo vigente: «¿Por qué me llamáis, Señor, Señor, y no hacéis lo que yo digo?» (Lucas 6:46). Para Jesús, llamarlo Señor no es una expresión de cariño; es reconocer quién manda en nuestra vida."
-              ]
-            },
-            {
-              heading: "Lo profundo de todo esto",
-              paragraphs: [
-                "Reverenciar a Jesús no es legalismo. No consiste en cierta ropa, en cierto tono de voz, en ciertas posturas ni en un silencio obligado. Los fariseos tenían todas las formas y estaban lejos de Dios. La reverencia verdadera nace de saber quién es Él: el Creador, el Cordero, el Juez y el Rey. Y desde ahí se expresa de maneras muy distintas: en una oración con asombro, en un canto sincero, en obediencia, en cómo hablamos de Él y en cómo usamos su nombre.",
-                "Tampoco se opone a la confianza. La misma Biblia que dice «acerquémonos, pues, confiadamente al trono de la gracia» (Hebreos 4:16) nos dice también: «Sirvamos a Dios agradándole con temor y reverencia; porque nuestro Dios es fuego consumidor» (Hebreos 12:28-29). Nos acercamos con confianza, pero no porque seamos iguales a Él, sino porque Él abrió el camino con su sangre. Esa gracia no nos da licencia para tratarlo a la ligera; nos da motivos para adorarlo con más gratitud.",
-                "Y la reverencia más grande es la obediencia. Jesús dijo: «Vosotros sois mis amigos, si hacéis lo que yo os mando» (Juan 15:14). Es un honor ser sus amigos, y es un honor que se cuida obedeciéndole.",
-                "Un día, todos lo verán tal como es. El cielo ya lo está diciendo: «El Cordero que fue inmolado es digno de tomar el poder, las riquezas, la sabiduría, la fortaleza, la honra, la gloria y la alabanza» (Apocalipsis 5:12). Reverenciarlo hoy es empezar a vivir como quien ya sabe cómo termina la historia."
-              ]
-            }
-          ],
-          examina: [
-            "Cuando oro, ¿me dirijo a Jesús como a un Rey a quien escucho, o como a alguien que debe cumplir lo que le pido?",
-            "¿Lo busco por quién es Él, o por lo que me da y por lo que me hace sentir?",
-            "¿Mi manera de hablar de Jesús y de usar su nombre refleja que es mi Señor?",
-            "¿Hay algo que Jesús dijo con claridad en su Palabra y que he ido dejando para después, mientras le digo «Señor, Señor»?",
-            "¿Me cuesta guardar silencio y asombrarme ante Él, o necesito siempre emoción y ruido para sentir que estoy con Dios?"
-          ],
-          prayer: "Señor Jesús, perdónanos por las veces que te hemos tratado a la ligera. Perdóname por buscarte más por lo que me das que por quien eres. Gracias porque, siendo el Rey de reyes, me recibes con ternura. Enséñame a acercarme con confianza y con asombro, con gratitud y con temor reverente. Que mis palabras, mis canciones y mi obediencia te honren, y que al honrarte a ti honre también al Padre que te envió. Digno eres, Señor. Amén.",
-          takeaway: "Jesús es nuestro amigo, pero también es nuestro Señor y Rey. Acércate a Él con la confianza de un hijo y con la reverencia de quien sabe quién es. Honrarlo a Él es lo que el Padre más desea.\n\n«Digno es el Cordero que fue inmolado de recibir el poder, las riquezas, la sabiduría, la fortaleza, la honra, la gloria y la alabanza». (Apocalipsis 5:12)",
-          furtherReading: "Salmo 2:10-12; Juan 5:22-23; Filipenses 2:5-11; Hebreos 1:1-6; 4:14-16; 12:25-29; Apocalipsis 1:12-18; 5:6-14.",
-          tomorrow: "Día 16. Conocerle a Él. Llegaremos al final de este recorrido con una invitación: dejar a un lado el Jesús que otros inventaron y conocer al verdadero."
-        },
-        {
-          day: 16,
-          title: "CONOCERLE A ÉL",
-          subtitle: "El propósito de todo este recorrido no es saber más sobre Jesús, sino conocerlo y seguirlo.",
-          reading: "Filipenses 3:7-14; Juan 17:1-3; Marcos 1:14-15; Mateo 11:28-30",
-          sections: [
-            {
-              heading: "Detente un momento",
-              paragraphs: [
-                "Hemos recorrido quince días junto a Jesús. Hemos visto que existía antes de todas las cosas, que es Dios, que se hizo carne y que es el Cordero que quita el pecado. Hemos escuchado lo que dijo sobre seguirlo con la cruz, el dinero, las emociones, la oración, los maestros que nos guían y el amor entre hermanos. Hemos visto que resucitó, que nos envió a hablar de Él y que volverá, y que merece nuestra reverencia.",
-                "Y es posible que hayas descubierto que el Jesús que conocías era distinto del que aparece en la Biblia. No eres el único. Hoy queremos hacerte una última pregunta, la más importante: ¿conoces a Jesús?"
-              ]
-            },
-            {
-              heading: "Más que información",
-              paragraphs: [
-                "Jesús oró así a su Padre:"
-              ],
-              quote: "«Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado». (Juan 17:3)",
-              afterQuote: [
-                "La vida eterna no se define como creer ciertos datos, asistir a una iglesia ni sentir algo especial. Es conocer a Dios y a Jesucristo, y conocerlos es una relación. Recuerda lo que Jesús dijo al final del Sermón del Monte: muchos le dirán «Señor, Señor», y Él responderá: «Nunca os conocí» (Mateo 7:23). Lo decisivo no es solo si yo conozco información sobre Jesús, sino si Él me conoce a mí, es decir, si le pertenezco.",
-                "Pablo, que había sido fariseo, tenía mucho de lo que se podía enorgullecer. Pero escribió:",
-                "«Pero cuantas cosas eran para mí ganancia, las he estimado como pérdida por amor de Cristo. Y ciertamente, aun estimo todas las cosas como pérdida por la excelencia del conocimiento de Cristo Jesús, mi Señor... a fin de conocerle, y el poder de su resurrección, y la participación de sus padecimientos». (Filipenses 3:7-8, 10)",
-                "Para Pablo, Cristo valía más que todo lo que tenía. No como un medio para obtener cosas, sino como el mayor tesoro. Eso es lo que significa conocerlo de verdad.",
-                "Y aquí hay algo que no podemos perder de vista. Jesús no es un personaje más de nuestra historia; nosotros somos parte de la suya. Pablo escribe:",
-                "«Porque en él fueron creadas todas las cosas, las que hay en los cielos y las que hay en la tierra, visibles e invisibles; sean tronos, sean dominios, sean principados, sean potestades; todo fue creado por medio de él y para él». (Colosenses 1:16)",
-                "Todo se trata de Cristo y es para Cristo, incluidos tú y nosotros. Por eso no nos ponemos a su nivel ni le disputamos el centro, ni usamos su nombre como un medio para que nuestros deseos, nuestras palabras o nuestro éxito sean lo más importante. La fe, la iglesia y la oración existen para su gloria, no para la nuestra. En todo, Él debe tener el primer lugar (Colosenses 1:18)."
-              ]
-            },
-            {
-              heading: "La invitación",
-              paragraphs: [
-                "Jesús comenzó su ministerio con un llamado:"
-              ],
-              quote: "«El tiempo se ha cumplido, y el reino de Dios se ha acercado; arrepentíos, y creed en el evangelio». (Marcos 1:15)",
-              afterQuote: [
-                "Arrepentíos: reconocer que hemos vivido a nuestra manera, apartarnos del pecado y volvernos a Dios. Creed: confiar en que Jesús, el Hijo de Dios, murió en nuestro lugar y resucitó. Pablo lo expresa así: «que si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo» (Romanos 10:9). Y Jesús mismo dijo: «Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por mí» (Juan 14:6).",
-                "Ahora bien, confesar que Jesús es el Señor no es repetir una frase ni declararlo con mucha convicción. No puedo confesar de verdad a alguien a quien no conozco: su carácter, sus enseñanzas, su sabiduría, lo que le agrada y lo que no. Y tampoco puedo creer en Él si lo busco fuera de su Palabra, o si uso esa Palabra a medias, la adorno o la transformo para que diga lo que me conviene. Al Jesús verdadero solo lo encontramos en las Escrituras, completas y tal como fueron dadas. Por eso, confesarlo y creerle de corazón es inseparable de conocerlo allí.",
-                "Y a quienes están cansados, Jesús les dice:",
-                "«Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas. Porque mi yugo es fácil, y ligera mi carga». (Mateo 11:28-30)",
-                "No es una invitación a mejorar tu vida, ni a conseguir bendiciones, sino a Él. Quizá lleves años en la iglesia y nunca te hayas arrepentido de verdad, ni hayas puesto tu fe solo en Cristo. Quizá siempre has creído, pero ahora ves cosas que debes dejar. En ambos casos, la invitación es la misma. Aun a una iglesia que se creía rica y se había alejado, Jesús le dijo: «He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo» (Apocalipsis 3:20)."
-              ]
-            },
-            {
-              heading: "Lo que le agrada a Dios",
-              paragraphs: [
-                "Conocer a Jesús también es aprender qué le agrada a Dios y qué no, y eso no lo decidimos nosotros: lo dice su Palabra. Hoy entran a muchas iglesias prácticas como manifestar, decretar y declarar, como si nuestras palabras o nuestra mente tuvieran poder para crear la realidad que queremos. Son ideas que vienen de fuera de la Biblia. No las vemos allí como algo que Dios apruebe, y es muy probable que no le agraden.",
-                "Dios ya le había advertido esto a Israel. No se trataba de despreciar a las personas, sino de no copiar las costumbres de los pueblos que no lo conocían:"
-              ],
-              quote: "«No haréis como hacen en la tierra de Egipto, en la cual morasteis; ni haréis como hacen en la tierra de Canaán, a la cual yo os conduzco, ni andaréis en sus estatutos». (Levítico 18:3)",
-              afterQuote: [
-                "Y cuando Israel estuvo tentado a imitar la manera en que otros servían a sus dioses, Dios fue claro: «Cuidarás de hacer todo lo que yo te mando; no añadirás a ello, ni de ello quitarás» (Deuteronomio 12:32). Pablo advierte lo mismo a la iglesia: «Mirad que nadie os engañe por medio de filosofías y huecas sutilezas, según las tradiciones de los hombres, conforme a los rudimentos del mundo, y no según Cristo» (Colosenses 2:8).",
-                "Cuando traemos a la iglesia prácticas de afuera, terminamos metiendo en la mente y en el corazón cosas que a Dios no le agradan, aunque les pongamos nombres cristianos. Jesús nos enseñó a orar así: «Hágase tu voluntad, como en el cielo, así también en la tierra» (Mateo 6:10). No se trata de declarar lo que yo quiero, sino de someterme a lo que Él quiere. Por eso, pídele que te muestre qué le agrada y qué no, y examina todo a la luz de su Palabra."
-              ]
-            },
-            {
-              heading: "Lo que sigue",
-              paragraphs: [
-                "Conocer a Jesús es el comienzo de un camino. Algunos pasos que puedes dar:"
-              ],
-              bullets: [
-                { lead: "Lee los Evangelios:", text: "puedes empezar con Juan. Léelo despacio, con preguntas, como quien conoce a una persona. Empieza a hacer exégesis: esforzarte por entender lo que el autor realmente quiso decir, y no lo que yo quiero interpretar o tomar de allí. Pregunta quién escribe, a quién y qué dice el texto, antes de preguntar qué significa para ti. Y pídele sabiduría al Espíritu Santo: es Él quien te revela la verdad a través de su Palabra (Juan 16:13-14). Recuerda también que todo lo que existe se trata de Cristo y es para Cristo (Colosenses 1:16): no lo lees para encontrarte a ti en el texto, sino para encontrarlo a Él." },
-                { lead: "Habla con Dios:", text: "no necesitas fórmulas, técnicas ni prácticas que no encuentras en la Biblia. Orar es tomar un tiempo para reconocer quién es Dios y quién eres tú, y pedirle lo que necesitas, sabiendo que Él puede responder que sí o que no, y quedando tranquilo con su respuesta. Pídele también que te enseñe lo que a Él le agrada y lo que no le agrada." },
-                { lead: "Examina lo que escuchas:", text: "analiza los mensajes que recibes en la iglesia a la luz de la Palabra, como los de Berea, que «examinaban cada día las Escrituras para ver si estas cosas eran así» (Hechos 17:11). Pregunta si lo que se enseña es lo que la Biblia realmente dice, o si hay enseñanzas que ni siquiera están en ella." },
-                { lead: "Camina con hermanos:", text: "no vivas la fe solo. Reunirse a comer o a compartir actividades es bueno, pero busca también hermanos con quienes puedas abrir la Biblia, estudiarla y hablar de ella, animándose y corrigiéndose con amor." },
-                { lead: "Habla de Él:", text: "antes de compartirlo, entrénate: aprende bien qué es el evangelio. Luego cuéntaselo a alguien como lo que es, una buena noticia: las personas necesitan reconciliarse con Dios, y la única forma es por medio de Cristo y de su obra." },
-                { lead: "Sigue examinando:", text: "continúa con la Biblia abierta (Día 10). Jesús no teme tus preguntas." }
-              ]
-            }
-          ],
-          examina: [
-            "Cuando digo que Jesús es mi Señor, ¿hablo del Jesús que presenta la Biblia, con su carácter y sus enseñanzas, o de uno que construí a mi manera?",
-            "¿Mi fe y mi vida de iglesia giran en torno a Cristo, o en torno a mí y a lo que espero recibir?",
-            "¿Conozco a Jesús por su Palabra completa, o por frases sueltas que otros me han repetido?",
-            "Cuando leo la Biblia, ¿busco entender lo que el autor quiso decir o le hago decir lo que yo quiero oír?",
-            "¿Cuándo fue la última vez que comparé con la Biblia lo que me enseñaron y las prácticas que sigo, para ver si de verdad están allí y le agradan a Dios?",
-            "Con los hermanos con quienes me reúno, ¿abrimos la Biblia o solo compartimos otras actividades?",
-            "¿Entiendo bien el evangelio como para explicárselo a alguien? ¿Qué paso concreto voy a dar esta semana para conocer mejor a Jesús?"
-          ],
-          showDay1Comparison: true,
-          prayer: "Señor Jesús, quiero conocerte tal como eres. Reconozco que he pecado y que no puedo salvarme a mí mismo. Creo que eres el Hijo de Dios, que moriste en mi lugar y resucitaste. Perdóname por haberte buscado por lo que me das y no por quién eres. Líbrame de los falsos Jesús que he construido o que me enseñaron. Quiero seguirte, obedecerte y amarte a ti por encima de todo. Sé mi Señor y mi Salvador. Amén.",
-          takeaway: "Jesús no es un instrumento para alcanzar tus metas, sino el Señor que te llama a seguirlo. Es el Cordero, el Rey y el Salvador. Y conocerlo a Él, más que cualquier bendición, es la vida eterna.\n\n«Y esta es la vida eterna: que te conozcan a ti, el único Dios verdadero, y a Jesucristo, a quien has enviado». (Juan 17:3)\n\nEste recorrido termina aquí, pero conocer a Jesús es un camino de toda la vida. Que el Señor te dé hambre de su Palabra, amor por sus hijos y valor para anunciar su nombre. «Gracia y paz a vosotros, de parte de Dios nuestro Padre y del Señor Jesucristo» (Gálatas 1:3).",
-          furtherReading: "Filipenses 3:7-14; Juan 1; Marcos 1; Romanos 10:9-13; Mateo 11:28-30; Apocalipsis 3:20; Hechos 17:11; Colosenses 1:15-18.",
-          tomorrow: "Sección Final: Antes de terminar — Para reflexionar."
-        }
-      ],
-      closingSections: {
-        reflection: {
-          kicker: "Antes de terminar",
-          title: "Para reflexionar",
-          intro: "Antes de cerrar este viaje, detengámonos en lo que significa realmente creer.",
-          blocks: [
-            {
-              subtitle: "¿Qué significa realmente «creer» y ser hijo de Dios?",
-              paragraphs: [
-                "En 1 Juan, ser hijo de Dios no es recitar una frase correcta ni aceptar un dato con la mente. Cuando el apóstol dice que «todo aquel que cree que Jesús es el Cristo, es nacido de Dios» (1 Juan 5:1), habla de una fe viva que nace de un corazón transformado por Dios, y que siempre se demuestra de tres formas inseparables:"
-              ],
-              numbered: [
-                { lead: "Doctrina verdadera (creer con la mente y con el corazón).", text: "Reconocer quién es Jesús realmente, conocerlo a través de su Palabra y querer hacer lo que Él nos dijo que hiciéramos." },
-                { lead: "Amor genuino (sentir y actuar como Dios).", text: "Quien ha nacido de Dios tiene la naturaleza de Dios; por eso ama a los demás creyentes de forma real, no solo de palabra (1 Juan 4:7, 20; 5:1)." },
-                { lead: "Obediencia práctica (vivir bajo su Palabra).", text: "La fe verdadera produce el deseo y la capacidad de guardar los mandamientos de Dios sin verlos como una carga pesada (1 Juan 5:2-3)." }
-              ],
-              closing: [
-                "Decir «creo en Jesús» sin amar ni obedecer es solo una opinión religiosa, y no garantiza que realmente creamos. Lo mismo ocurre si decimos que creemos en Jesús pero no dedicamos tiempo a conocerlo en su Palabra. ¿Cómo podríamos creer en alguien a quien verdaderamente no conocemos? ¿Y cómo podríamos conocerlo si no es a través de las Escrituras? Decir «creo en Jesús» es una frase; no es, por sí sola, la fe que salva.",
-                "Para Juan, el nuevo nacimiento es la raíz, y las tres señales juntas (creer, amar y obedecer) son el fruto que demuestra que esa raíz está viva. Si falta el fruto del amor y de la obediencia, la confesión verbal está vacía, sin importar cuántas prácticas religiosas haga la persona."
-              ]
-            },
-            {
-              subtitle: "¿Cómo identificar a un «falso Cristo» moldeado por emociones o revelaciones humanas? (1 Juan 4:1-6)",
-              paragraphs: [
-                "En los días de Juan, el peligro no era solo negar el nombre de Jesús, sino inventar un Jesús a la medida humana, cambiando su naturaleza y su mensaje. Esto ocurre cuando las emociones, las experiencias místicas o las supuestas «nuevas revelaciones» de personas o movimientos pasan a tener más autoridad que la Escritura. Así nos protege 1 Juan:"
-              ],
-              numbered: [
-                { lead: "No todo espíritu viene de Dios (1 Juan 4:1).", text: "Juan nos pide no creer ciegamente en cualquier experiencia espiritual, profecía o emoción intensa. Tener «sentimientos fuertes» o ver fenómenos llamativos no prueba que algo venga de Dios; todo debe examinarse a la luz de la Biblia." },
-                { lead: "El Cristo verdadero está definido por la Escritura, no por experiencias nuevas de las personas (1 Juan 4:2-3).", text: "Hoy muchos se están dejando mover por revelaciones humanas, sueños y visiones, y eso no es lo que la Biblia dice. Hay además un peligro serio en algunas iglesias: se toman pasajes de la Biblia para respaldar mensajes de personas, y ya no se enseña a Cristo. Es posible saber mucho de emociones, de psicología, de finanzas y de éxito, y muy poco de Jesús. Así como los falsos maestros del primer siglo modificaron a Cristo según su filosofía, hoy se crea un «falso Cristo» cuando se le reduce a un genio que cumple deseos materiales, a un coach psicológico, a un ser puramente emocional o a un líder que da «nuevas revelaciones» que contradicen la Palabra escrita. Si el «Jesús» que se predica no coincide con el carácter, la cruz, la verdad y la santidad del Jesús bíblico, es un ídolo con nombre cristiano." },
-                { lead: "El criterio de verdad es la palabra dada a los apóstoles (1 Juan 4:6).", text: "Juan dice: «El que conoce a Dios, nos oye [a los apóstoles]; el que no es de Dios, no nos oye». Esto se resume en que la Biblia está completa: si algo no está en la Biblia, no debería practicarse. El Espíritu Santo nunca se contradice a sí mismo, y jamás dará una «revelación» o una experiencia emocional que pase por encima de lo que ya dejó escrito en la Biblia por medio de los apóstoles." }
-              ],
-              conclusionHeading: "En conclusión",
-              closing: [
-                "No basta con usar el nombre «Jesús», ni con sentir emociones fuertes en una reunión o a través de música cristiana emotiva. La fe verdadera descansa en el Jesús verdadero, el que se revela en las Escrituras, cuya obra nos lleva al arrepentimiento, a la santidad y a amar su Palabra por encima de cualquier experiencia subjetiva."
-              ]
-            }
-          ]
-        },
-        closing: {
-          kicker: "Para cerrar",
-          title: "Cristo, el más hermoso",
-          intro: "Todo lo que hemos recorrido se resume en Alguien. Mírenlo una vez más.",
-          aspects: [
-            {
-              heading: "Mira cómo mira",
-              text: "Un joven rico se le acercó, y los evangelios nos dicen algo que conmueve: «Entonces Jesús, mirándole, le amó» (Marcos 10:21). Antes de pedirle nada, lo amó. Así mira Jesús: no desde arriba, no con prisa. Ve a la persona completa, con sus riquezas, sus miedos y sus apegos, y la ama."
-            },
-            {
-              heading: "Mira cómo toca",
-              text: "Un leproso, a quien nadie se atrevía a tocar, se arrodilló ante Él. «Y Jesús, teniendo misericordia de él, extendió la mano y le tocó, y le dijo: Quiero; sé limpio» (Marcos 1:41). Pudo haberlo sanado con una palabra, pero se acercó. Él no le teme a nuestra suciedad ni a nuestra vergüenza."
-            },
-            {
-              heading: "Mira cómo llora",
-              text: "Ante la tumba de su amigo Lázaro, el que sabía que iba a resucitarlo se detuvo y lloró. «Jesús lloró» (Juan 11:35). Es el versículo más corto de la Biblia y uno de los más tiernos. Nuestro Salvador no es indiferente al dolor: lo carga con nosotros."
-            },
-            {
-              heading: "Mira cómo restaura",
-              text: "Pedro lo negó tres veces. Y la noche de esa caída, «vuelto el Señor, miró a Pedro» (Lucas 22:61), sin una palabra de reproche. Después de la resurrección lo esperó junto al mar, con fuego encendido y pan en las brasas: «Venid, comed» (Juan 21:12). Jesús no se queda con nuestros fracasos; nos ayuda a seguir el camino."
-            },
-            {
-              heading: "Mira cómo perdona",
-              text: "A una mujer sorprendida en pecado, rodeada de piedras, le dijo: «Ni yo te condeno; vete, y no peques más» (Juan 8:11). Y clavado en la cruz, mientras lo burlaban, oró por quienes lo clavaban: «Padre, perdónalos, porque no saben lo que hacen» (Lucas 23:34). Su verdad nunca se separa de su ternura, y su ternura nunca nos deja como estábamos."
-            },
-            {
-              heading: "Mira su corazón y su plan",
-              text: "Esta es su esencia: «el Hijo del Hombre vino a buscar y a salvar lo que se había perdido» (Lucas 19:10). Los amó «hasta el fin» (Juan 13:1), y lo demostró con una toalla en la cintura, lavando los pies de quienes lo abandonarían. Y su intención final es la más conmovedora de todas: «Padre, aquellos que me has dado, quiero que donde yo estoy, ellos también estén conmigo» (Juan 17:24). Quiere estar con nosotros. Por eso se va a preparar lugar, y por eso volverá por los suyos (Juan 14:2-3)."
-            },
-            {
-              heading: "Y hoy, todavía, llama",
-              quote: "«He aquí, yo estoy a la puerta y llamo; si alguno oye mi voz y abre la puerta, entraré a él, y cenaré con él, y él conmigo.» (Apocalipsis 3:20)",
-              text: "Este es el Jesús que quisimos que conocieras en estos quince días: manso y humilde de corazón (Mateo 11:29), justo y tierno, santo y cercano, Señor y Amigo. No cerramos aquí, porque conocerlo toma toda una vida. Abre su Palabra mañana, y pasado mañana, y todos los días que Él te dé. Cada vez encontrarás más de Él. Y cada vez, será más hermoso de lo que imaginabas."
-            }
-          ]
-        }
-      }
-    };
-    Object.assign(DEVOTIONAL_DATA, window.MAESTRO_CONTENT);
+    const DEVOTIONAL_DATA = window.MAESTRO_CONTENT;
     DEVOTIONAL_DATA.closingSections = DEVOTIONAL_DATA.ending;
 
     // ============================================================================
@@ -1590,7 +320,7 @@
     }
 
     function setupPWA() {
-      if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+      if ('serviceWorker' in navigator && window.isSecureContext) {
         navigator.serviceWorker.register('./service-worker.js').catch(error => {
           console.error('No se pudo registrar el modo sin conexión:', error);
           showToast('No se pudo preparar el acceso sin conexión');
@@ -1669,7 +399,7 @@
 
     function shareDevotional() {
       const shareData = {
-        title: 'Conociendo a Jesús a través de las Escrituras (16 Días)',
+        title: 'Maestro — Conociendo a Jesús',
         text: 'Te comparto este devocional profundo de 16 días por Zulma Fuertes y Sebastián Aponte para conocer al Señor Jesús a través de las Escrituras:',
         url: window.location.href
       };
@@ -1711,6 +441,7 @@
     // 3. ESTADO DE LECTURA Y REFLEXIONES GUARDADAS EN LOCALSTORAGE
     // ============================================================================
     const STORAGE_KEY = 'conociendo_jesus_state_v1';
+    let storageWarningShown = false;
     let appState = {
       view: 'cover', // 'cover', 'toc', 'day-1'...'day-16', 'reflection', 'closing', 'notes'
       completedDays: [],
@@ -1726,19 +457,38 @@
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
+          if (!parsed || typeof parsed !== 'object') throw new Error('El estado guardado no es válido');
+          const responses = parsed.responses && typeof parsed.responses === 'object' ? parsed.responses : {};
+          const validResponses = { ...appState.responses };
+          Object.keys(validResponses).forEach(key => {
+            if (typeof responses[key] === 'string') validResponses[key] = responses[key];
+          });
           appState = {
             ...appState,
             ...parsed,
-            responses: { ...appState.responses, ...(parsed.responses || {}) }
+            view: typeof parsed.view === 'string' && VIEW_ORDER.includes(parsed.view) ? parsed.view : 'cover',
+            completedDays: Array.isArray(parsed.completedDays)
+              ? [...new Set(parsed.completedDays.filter(day => Number.isInteger(day) && day >= 1 && day <= 16))]
+              : [],
+            responses: validResponses
           };
         }
-      } catch (e) {}
+      } catch (error) {
+        console.error('No se pudo cargar el progreso guardado:', error);
+        showToast('No se pudieron recuperar los datos guardados');
+      }
     }
 
     function saveState() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-      } catch (e) {}
+      } catch (error) {
+        console.error('No se pudo guardar el progreso:', error);
+        if (!storageWarningShown) {
+          storageWarningShown = true;
+          showToast('No se pudieron guardar tus cambios en este dispositivo');
+        }
+      }
       updateProgressUI();
     }
 
@@ -1957,12 +707,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t border-forest/10">
               <button id="coverInstallBtn" onclick="triggerDirectInstall()" class="py-3 px-4 rounded-2xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-xs sm:text-sm font-semibold shadow-md transition-all cursor-pointer flex items-center justify-center gap-2">
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"/></svg>
-                <span id="coverInstallText">Instalar App Directo en Celular</span>
+                <span id="coverInstallText">Instalar Maestro en el celular</span>
               </button>
 
               <button onclick="openPrintModal()" class="py-3 px-4 rounded-2xl bg-white hover:bg-sage/25 text-forest border border-forest/20 font-sans text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2">
                 <svg class="w-4 h-4 shrink-0 text-terracotta" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                <span>Descargar PDF / 4 Cuadernillos</span>
+                <span>PDF oficial actualizado</span>
               </button>
             </div>
           </div>
@@ -2014,7 +764,7 @@
             </div>
 
             <!-- Secciones Finales -->
-            <div class="mt-6 pt-6 border-t border-forest/10 grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="mt-6 pt-6 border-t border-forest/10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
               <button onclick="navigateTo('reflection')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Antes de terminar</span>
                 <span class="font-serif font-bold text-base text-forest">Para reflexionar</span>
@@ -2023,6 +773,11 @@
               <button onclick="navigateTo('closing')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
                 <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Para cerrar</span>
                 <span class="font-serif font-bold text-base text-forest">Cristo, el más hermoso</span>
+              </button>
+
+              <button onclick="navigateTo('questionnaire')" class="p-4 rounded-2xl bg-card hover:bg-peach/45 border border-forest/10 text-left transition-colors cursor-pointer">
+                <span class="block font-sans text-[11px] font-bold uppercase tracking-wider text-terracotta">Para repasar</span>
+                <span class="font-serif font-bold text-base text-forest">Cuestionario</span>
               </button>
 
               <button onclick="navigateTo('notes')" class="p-4 rounded-2xl bg-forest text-[#FAF6F0] hover:bg-[#10251D] text-left transition-colors cursor-pointer">
@@ -2035,7 +790,82 @@
       `;
     }
 
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, character => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[character]));
+    }
+
+    function renderSourceContent(content) {
+      const headingLabels = /^(detente un momento|entra en (?:el texto|la escena)|escucha su voz|lo profundo de todo esto|examina tu corazón|oración|para llevar contigo hoy|para seguir en la palabra|lo que sigue|antes de cerrar|antes de empezar|antes de terminar|antes de repasar|quién es jesús|descubre quién es él|un rasgo de su carácter|en conclusión|para reflexionar|mi respuesta|tu punto de partida)$/i;
+      return content.map(text => {
+        const safeText = escapeHtml(text);
+        const isHeading = text.length <= 110 && (headingLabels.test(text) || (/[A-ZÁÉÍÓÚÜÑ]/.test(text) && text === text.toLocaleUpperCase('es')));
+        const inlineHeading = text.match(/^(Oración|Mañana:|En conclusión)\s+(.+)$/i);
+        if (inlineHeading) {
+          return `<h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-7 mb-3">${escapeHtml(inlineHeading[1])}</h2><p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${escapeHtml(inlineHeading[2])}</p>`;
+        }
+        if (/^PARA SEGUIR EN LA PALABRA:/i.test(text)) {
+          return `<p class="font-sans text-sm leading-relaxed text-forest mb-4"><strong class="uppercase tracking-wider">Para seguir en la Palabra:</strong> ${escapeHtml(text.replace(/^PARA SEGUIR EN LA PALABRA:\s*/i, ''))}</p>`;
+        }
+        if (isHeading) {
+          return `<h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mt-7 mb-3">${safeText}</h2>`;
+        }
+        if (/^[«“"]/.test(text)) {
+          return `<blockquote class="my-4 pl-4 sm:pl-5 py-3 pr-4 border-l-4 border-terracotta bg-card/75 rounded-r-2xl font-serif italic text-base sm:text-[17px] leading-relaxed text-forest">${safeText}</blockquote>`;
+        }
+        return `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${safeText}</p>`;
+      }).join('');
+    }
+
+    function renderUpdatedDayView(dayObj) {
+      const isDone = appState.completedDays.includes(dayObj.day);
+      const savedResponseId = dayObj.day === 1 ? 'day1_starting_point' : 'day16_final_reflection';
+      const savedResponseLabel = dayObj.day === 1 ? 'Tu punto de partida' : 'Tu reflexión al terminar';
+      const responseHtml = (dayObj.day === 1 || dayObj.day === 16) ? `
+        <div class="mt-8 bg-white border-2 border-dashed border-terracotta/50 rounded-3xl p-5 sm:p-7">
+          <h2 class="font-serif text-xl font-bold text-forest mb-3">${savedResponseLabel}</h2>
+          <textarea rows="5" oninput="saveResponse('${savedResponseId}', this.value)" placeholder="Escribe aquí; se guarda automáticamente en este dispositivo." class="w-full lined-textarea bg-[#FAF6F0] border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta">${escapeHtml(appState.responses[savedResponseId] || '')}</textarea>
+        </div>
+      ` : '';
+      const startingPoint = dayObj.day === 16 ? appState.responses.day1_starting_point || '' : '';
+      const comparisonHtml = dayObj.day === 16 && startingPoint.trim() ? `
+        <div class="mt-6 bg-peach/25 border border-terracotta/30 rounded-2xl p-4">
+          <h2 class="font-serif font-bold text-forest mb-2">Tu punto de partida · Día 1</h2>
+          <p class="font-serif italic text-ink">«${escapeHtml(startingPoint)}»</p>
+        </div>
+      ` : '';
+
+      return `
+        <article class="bg-white border border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
+          ${renderDayHeaderBadge(dayObj.day)}
+          <header class="mb-6">
+            <h1 class="font-serif text-2xl sm:text-4xl font-bold text-forest leading-tight mb-3">${escapeHtml(dayObj.title)}</h1>
+            <p class="font-serif italic text-base sm:text-lg text-ink/85 leading-relaxed mb-4">${escapeHtml(dayObj.subtitle)}</p>
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-forest text-[#FAF6F0] font-sans text-xs sm:text-sm font-bold tracking-wide">
+              <span class="text-peach">LECTURA:</span>
+              <span>${escapeHtml(dayObj.reading)}</span>
+            </div>
+          </header>
+          <div class="border-t border-forest/10 pt-2">${renderSourceContent(dayObj.content)}</div>
+          ${responseHtml}
+          ${comparisonHtml}
+          <div class="mt-8 pt-6 border-t border-forest/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:bg-[#8E3720] shadow-md'}">
+              <span>${isDone ? `Día ${dayObj.day} Completado ✓` : `Marcar Día ${dayObj.day} como Leído`}</span>
+            </button>
+            <span class="font-sans text-[11px] font-semibold tracking-[0.16em] text-forest/60 uppercase">${escapeHtml(DEVOTIONAL_DATA.authors)}</span>
+          </div>
+        </article>
+      `;
+    }
+
     function renderDayView(dayObj) {
+      if (dayObj.content) return renderUpdatedDayView(dayObj);
       const isDone = appState.completedDays.includes(dayObj.day);
 
       const sectionsHtml = dayObj.sections.map(sec => {
@@ -2227,65 +1057,26 @@
     }
 
     function renderReflectionView() {
-      const ref = DEVOTIONAL_DATA.closingSections.reflection;
-      const blocksHtml = ref.blocks.map(block => {
-        const paras = block.paragraphs.map(p => `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mb-4">${p}</p>`).join('');
-        const nums = block.numbered.map((item, i) => `
-          <div class="flex items-start gap-3.5 bg-[#FAF6F0] p-4 rounded-2xl border border-forest/10">
-            <span class="w-7 h-7 rounded-full bg-forest text-[#FAF6F0] font-serif font-bold text-sm flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
-            <p class="font-serif text-base leading-relaxed text-ink">
-              <strong class="text-forest">${item.lead}</strong> ${item.text}
-            </p>
-          </div>
-        `).join('');
-        const closing = block.closing.map(p => `<p class="font-serif text-base sm:text-[17px] leading-[1.8] text-ink mt-4">${p}</p>`).join('');
-
-        return `
-          <div class="mt-8 pt-6 border-t border-forest/10">
-            <h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mb-4">${block.subtitle}</h2>
-            ${paras}
-            <div class="space-y-3 my-4">${nums}</div>
-            ${block.conclusionHeading ? `<h3 class="font-serif text-xl font-bold text-terracotta mt-6 mb-2">✦ ${block.conclusionHeading}</h3>` : ''}
-            ${closing}
-          </div>
-        `;
-      }).join('');
-
-      return `
-        <article class="bg-white border border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
-          <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">${ref.kicker}</span>
-          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest mt-1 mb-3">${ref.title}</h1>
-          <p class="font-serif italic text-lg text-ink/85">${ref.intro}</p>
-          ${blocksHtml}
-        </article>
-      `;
+      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.reflection);
     }
 
     function renderClosingView() {
-      const cl = DEVOTIONAL_DATA.closingSections.closing;
-      const aspectsHtml = cl.aspects.map(a => `
-        <div class="mt-7">
-          <h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mb-2.5 flex items-center gap-2">
-            <span class="text-terracotta text-base">✦</span>
-            <span>${a.heading}</span>
-          </h2>
-          ${a.quote ? `<blockquote class="my-4 pl-4 py-3 pr-4 border-l-4 border-terracotta bg-card rounded-r-2xl font-serif italic text-base sm:text-[17px] text-forest font-medium">${a.quote}</blockquote>` : ''}
-          <p class="font-serif text-base sm:text-[17px] leading-[1.85] text-ink">${a.text}</p>
-        </div>
-      `).join('');
+      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.closing);
+    }
 
+    function renderQuestionnaireView() {
+      return renderSourceSectionView(DEVOTIONAL_DATA.closingSections.questionnaire);
+    }
+
+    function renderSourceSectionView(section) {
+      const content = section.content.filter((text, index) => {
+        return !(index === 0 && text === section.kicker) && !(index === 1 && text === section.title);
+      });
       return `
         <article class="bg-white border border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
-          <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">${cl.kicker}</span>
-          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest mt-1 mb-3">${cl.title}</h1>
-          <p class="font-serif italic text-lg text-ink/85 pb-4 border-b border-forest/10">${cl.intro}</p>
-          ${aspectsHtml}
-
-          <div class="mt-10 bg-forest text-[#FAF6F0] rounded-3xl p-6 sm:p-8 text-center">
-            <p class="font-serif text-xl sm:text-2xl font-bold mb-1">Conociendo a Jesús a través de las Escrituras</p>
-            <p class="font-sans text-xs tracking-[0.2em] text-peach uppercase mb-4">UN VIAJE EMOCIONANTE</p>
-            <p class="font-serif italic text-base text-sage">Zulma Fuertes y Sebastián Aponte</p>
-          </div>
+          <span class="font-sans text-xs font-bold uppercase tracking-[0.2em] text-terracotta">${escapeHtml(section.kicker)}</span>
+          <h1 class="font-serif text-3xl sm:text-4xl font-bold text-forest mt-1 mb-3">${escapeHtml(section.title)}</h1>
+          <div class="border-t border-forest/10 pt-2">${renderSourceContent(content)}</div>
         </article>
       `;
     }
@@ -2309,13 +1100,13 @@
             oninput="saveResponse('personal_notes', this.value)"
             placeholder="Escribe tus notas aquí..."
             class="w-full lined-textarea bg-[#FAF6F0] border border-forest/20 rounded-2xl px-4 font-serif text-base text-forest focus:outline-none focus:border-terracotta"
-          >${notesVal}</textarea>
+          >${escapeHtml(notesVal)}</textarea>
         </section>
       `;
     }
 
     // ============================================================================
-    // 7. GENERADOR DE PDF IMPRIMIBLE: MODO NORMAL Y MODO 4 CUADERNILLOS COSIDOS
+    // 7. ACCESO AL PDF OFICIAL
     // ============================================================================
     function openPrintModal() {
       const modal = document.getElementById('printModal');
@@ -2327,740 +1118,6 @@
       const modal = document.getElementById('printModal');
       modal.classList.add('hidden');
       modal.classList.remove('flex');
-    }
-
-    // Construye el arreglo lineal de páginas lógicas Media Carta (5.5" x 8.5") con todo el devocional
-    function buildLogicalPages() {
-      const pages = [];
-
-      // Pág 1: Portada
-      pages.push({ type: 'cover' });
-
-      // Pág 2: Tabla de Contenido
-      pages.push({ type: 'toc' });
-
-      // Páginas de cada uno de los 16 días
-      DEVOTIONAL_DATA.days.forEach((d) => {
-        // Primera página del día: Encabezado + Título + Lectura + Primeras secciones
-        let currentItems = [];
-        d.sections.forEach(sec => {
-          currentItems.push({ kind: 'heading', text: sec.heading });
-          if (sec.paragraphs) sec.paragraphs.forEach(p => currentItems.push({ kind: 'para', text: p }));
-          if (sec.quote) currentItems.push({ kind: 'quote', text: sec.quote });
-          if (sec.afterQuote) sec.afterQuote.forEach(p => currentItems.push({ kind: 'para', text: p }));
-          if (sec.bullets) sec.bullets.forEach(b => currentItems.push({ kind: 'bullet', lead: b.lead, text: b.text }));
-          if (sec.closingParagraphs) sec.closingParagraphs.forEach(p => currentItems.push({ kind: 'para', text: p }));
-        });
-
-        // Dividir inteligentemente el contenido del día en páginas de ~32 líneas
-        let pageIdxInDay = 0;
-        let lineBudget = 19; // Primera página tiene el banner del día
-        let bucket = [];
-
-        const flushDayPage = () => {
-          pages.push({
-            type: 'dayContent',
-            day: d,
-            isFirstPage: pageIdxInDay === 0,
-            items: bucket
-          });
-          pageIdxInDay++;
-          bucket = [];
-          lineBudget = 31;
-        };
-
-        currentItems.forEach(item => {
-          const estLines = item.kind === 'heading'
-            ? 2.5
-            : Math.ceil((item.text.length + (item.lead ? item.lead.length : 0)) / 52) + (item.kind === 'quote' ? 1.5 : 0.8);
-
-          if (lineBudget - estLines < 0 && bucket.length > 0) {
-            flushDayPage();
-          }
-          bucket.push(item);
-          lineBudget -= estLines;
-        });
-        if (bucket.length > 0) flushDayPage();
-
-        // Página de Examina tu corazón + Oración + Para llevar contigo hoy
-        pages.push({
-          type: 'dayClosing',
-          day: d
-        });
-      });
-
-      // Secciones finales: Antes de terminar (Para reflexionar)
-      const ref = DEVOTIONAL_DATA.closingSections.reflection;
-      ref.blocks.forEach((blk, bIdx) => {
-        const items = [{ kind: 'heading', text: blk.subtitle }];
-        blk.paragraphs.forEach(p => items.push({ kind: 'para', text: p }));
-        blk.numbered.forEach((n, idx) => items.push({ kind: 'bullet', lead: `${idx + 1}. ${n.lead}`, text: n.text }));
-        if (blk.conclusionHeading) items.push({ kind: 'heading', text: blk.conclusionHeading });
-        blk.closing.forEach(p => items.push({ kind: 'para', text: p }));
-
-        pages.push({
-          type: 'editorialSection',
-          kicker: bIdx === 0 ? ref.kicker : '',
-          title: bIdx === 0 ? ref.title : '',
-          intro: bIdx === 0 ? ref.intro : '',
-          items
-        });
-      });
-
-      // Para cerrar: Cristo, el más hermoso
-      const cl = DEVOTIONAL_DATA.closingSections.closing;
-      const clItems1 = [];
-      const clItems2 = [];
-      cl.aspects.forEach((asp, i) => {
-        const target = i < 4 ? clItems1 : clItems2;
-        target.push({ kind: 'heading', text: asp.heading });
-        if (asp.quote) target.push({ kind: 'quote', text: asp.quote });
-        target.push({ kind: 'para', text: asp.text });
-      });
-
-      pages.push({
-        type: 'editorialSection',
-        kicker: cl.kicker,
-        title: cl.title,
-        intro: cl.intro,
-        items: clItems1
-      });
-      pages.push({
-        type: 'editorialSection',
-        kicker: '',
-        title: '',
-        intro: '',
-        items: clItems2
-      });
-
-      // Ajustar total de páginas para que sea múltiplo de 16 (4 cuadernillos exactos con múltiplo de 4 páginas cada uno)
-      while (pages.length % 16 !== 0) {
-        if (pages.length % 16 === 15) {
-          pages.push({ type: 'backCover' });
-        } else {
-          pages.push({ type: 'notesPage' });
-        }
-      }
-      // Garantizar que la última página sea la contraportada
-      if (pages[pages.length - 1].type !== 'backCover') {
-        pages[pages.length - 1] = { type: 'backCover' };
-      }
-
-      return pages;
-    }
-
-    // Dibuja una página lógica (Media Carta: 139.7mm x 215.9mm) en el offset X indicado de jsPDF
-    function renderLogicalPageToPDF(doc, pageData, pageNum, totalPages, offsetX, pageW, pageH) {
-      const margin = 12;
-      const contentW = pageW - margin * 2;
-      const cx = offsetX + pageW / 2;
-
-      // Fondo crema suave
-      doc.setFillColor(250, 246, 240);
-      doc.rect(offsetX, 0, pageW, pageH, 'F');
-
-      if (pageData.type === 'cover') {
-        // Portada Editorial
-        doc.setDrawColor(166, 68, 42);
-        doc.setLineWidth(0.8);
-        doc.roundedRect(offsetX + 10, 10, pageW - 20, pageH - 20, 6, 6, 'S');
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(9);
-        doc.setTextColor(166, 68, 42);
-        doc.text('DEVOCIONAL', cx, 28, { align: 'center' });
-
-        // Arco decorativo
-        doc.setFillColor(24, 54, 43);
-        doc.roundedRect(cx - 22, 36, 44, 54, 22, 22, 'F');
-        doc.setFillColor(232, 195, 172);
-        doc.circle(cx, 56, 8, 'F');
-
-        doc.setFont('times', 'bold');
-        doc.setFontSize(22);
-        doc.setTextColor(24, 54, 43);
-        doc.text('Conociendo a Jesús', cx, 106, { align: 'center' });
-
-        doc.setFont('times', 'italic');
-        doc.setFontSize(14);
-        doc.setTextColor(166, 68, 42);
-        doc.text('a través de las Escrituras', cx, 114, { align: 'center' });
-
-        doc.setFillColor(243, 236, 225);
-        doc.roundedRect(cx - 32, 124, 64, 14, 4, 4, 'F');
-        doc.setFont('times', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(24, 54, 43);
-        doc.text('16 días', cx, 133, { align: 'center' });
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(8.5);
-        doc.setTextColor(166, 68, 42);
-        doc.text('UN VIAJE EMOCIONANTE', cx, 148, { align: 'center' });
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(8);
-        doc.setTextColor(24, 54, 43);
-        doc.text('POR ZULMA FUERTES Y SEBASTIÁN APONTE', cx, 194, { align: 'center' });
-        return;
-      }
-
-      if (pageData.type === 'toc') {
-        doc.setFont('times', 'bold');
-        doc.setFontSize(18);
-        doc.setTextColor(24, 54, 43);
-        doc.text('Contenido', offsetX + margin, 22);
-
-        doc.setFont('times', 'italic');
-        doc.setFontSize(10);
-        doc.setTextColor(166, 68, 42);
-        doc.text('16 días para conocerlo mejor', offsetX + margin, 28);
-
-        let y = 38;
-        DEVOTIONAL_DATA.days.forEach(d => {
-          doc.setFillColor(d.day % 2 !== 0 ? 232 : 184, d.day % 2 !== 0 ? 195 : 199, d.day % 2 !== 0 ? 172 : 185);
-          doc.circle(offsetX + margin + 3, y - 1.5, 2.8, 'F');
-          doc.setFont('times', 'bold');
-          doc.setFontSize(7.5);
-          doc.setTextColor(24, 54, 43);
-          doc.text(String(d.day), offsetX + margin + 3, y - 0.5, { align: 'center' });
-
-          doc.setFont('times', 'normal');
-          doc.setFontSize(7.8);
-          doc.setTextColor(42, 41, 39);
-          const shortTitle = d.title.length > 52 ? d.title.substring(0, 50) + '...' : d.title;
-          doc.text(shortTitle, offsetX + margin + 8, y);
-          y += 9.2;
-        });
-
-        drawPdfFooter(doc, offsetX, pageW, pageH, pageNum);
-        return;
-      }
-
-      if (pageData.type === 'dayContent') {
-        const d = pageData.day;
-        let y = 16;
-
-        if (pageData.isFirstPage) {
-          // Insignia Día + Número
-          doc.setFillColor(d.day % 2 !== 0 ? 232 : 184, d.day % 2 !== 0 ? 195 : 199, d.day % 2 !== 0 ? 172 : 185);
-          doc.circle(offsetX + margin + 10, y + 7, 9, 'F');
-          doc.setFont('times', 'bold');
-          doc.setFontSize(18);
-          doc.setTextColor(24, 54, 43);
-          doc.text(String(d.day), offsetX + margin + 10, y + 9.5, { align: 'center' });
-
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(7);
-          doc.setTextColor(166, 68, 42);
-          doc.text(`DÍA ${d.day} DE 16`, offsetX + margin + 23, y + 4);
-
-          // 16 puntos de progreso
-          for (let i = 1; i <= 16; i++) {
-            const col = (i - 1) % 8;
-            const row = Math.floor((i - 1) / 8);
-            const dotX = offsetX + margin + 24 + col * 4.2;
-            const dotY = y + 8.5 + row * 4.2;
-            if (i <= d.day) {
-              doc.setFillColor(i === d.day ? 24 : 166, i === d.day ? 54 : 68, i === d.day ? 43 : 42);
-              doc.circle(dotX, dotY, 1.3, 'F');
-            } else {
-              doc.setDrawColor(190, 170, 155);
-              doc.setLineWidth(0.25);
-              doc.circle(dotX, dotY, 1.3, 'S');
-            }
-          }
-
-          y += 23;
-          doc.setFont('times', 'bold');
-          doc.setFontSize(12.5);
-          doc.setTextColor(24, 54, 43);
-          const titleLines = doc.splitTextToSize(d.title, contentW);
-          doc.text(titleLines, offsetX + margin, y);
-          y += titleLines.length * 5.2 + 1.5;
-
-          doc.setFont('times', 'italic');
-          doc.setFontSize(8.8);
-          doc.setTextColor(60, 58, 55);
-          const subLines = doc.splitTextToSize(d.subtitle, contentW);
-          doc.text(subLines, offsetX + margin, y);
-          y += subLines.length * 4 + 2;
-
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(7.5);
-          doc.setTextColor(166, 68, 42);
-          doc.text(`LECTURA: ${d.reading}`, offsetX + margin, y);
-          y += 6;
-        }
-
-        pageData.items.forEach(item => {
-          if (y > pageH - 18) return;
-          if (item.kind === 'heading') {
-            y += 2;
-            doc.setFont('times', 'bold');
-            doc.setFontSize(10);
-            doc.setTextColor(24, 54, 43);
-            doc.text(`✦ ${item.text}`, offsetX + margin, y);
-            y += 4.8;
-          } else if (item.kind === 'quote') {
-            doc.setFont('times', 'italic');
-            doc.setFontSize(8.6);
-            doc.setTextColor(24, 54, 43);
-            const qLines = doc.splitTextToSize(item.text, contentW - 6);
-            doc.setDrawColor(166, 68, 42);
-            doc.setLineWidth(0.6);
-            doc.line(offsetX + margin + 1, y - 2.5, offsetX + margin + 1, y + qLines.length * 3.8 - 2);
-            doc.text(qLines, offsetX + margin + 4, y);
-            y += qLines.length * 3.8 + 2.5;
-          } else if (item.kind === 'bullet') {
-            doc.setFont('times', 'normal');
-            doc.setFontSize(8.6);
-            doc.setTextColor(42, 41, 39);
-            const fullB = `• ${item.lead} ${item.text}`;
-            const bLines = doc.splitTextToSize(fullB, contentW - 2);
-            doc.text(bLines, offsetX + margin + 1, y);
-            y += bLines.length * 3.8 + 1.8;
-          } else {
-            doc.setFont('times', 'normal');
-            doc.setFontSize(8.6);
-            doc.setTextColor(42, 41, 39);
-            const pLines = doc.splitTextToSize(item.text, contentW);
-            doc.text(pLines, offsetX + margin, y);
-            y += pLines.length * 3.8 + 2.2;
-          }
-        });
-
-        drawPdfFooter(doc, offsetX, pageW, pageH, pageNum);
-        return;
-      }
-
-      if (pageData.type === 'dayClosing') {
-        const d = pageData.day;
-        let y = 16;
-
-        // Caja Examina tu corazón
-        doc.setFont('times', 'bold');
-        doc.setFontSize(11);
-        doc.setTextColor(24, 54, 43);
-        doc.text('Examina tu corazón', offsetX + margin, y);
-        y += 5.5;
-
-        d.examina.forEach((q, idx) => {
-          doc.setFillColor(idx % 2 === 0 ? 166 : 24, idx % 2 === 0 ? 68 : 54, idx % 2 === 0 ? 42 : 43);
-          doc.circle(offsetX + margin + 2.2, y - 1.2, 2.2, 'F');
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(6.5);
-          doc.setTextColor(255, 255, 255);
-          doc.text(String(idx + 1), offsetX + margin + 2.2, y - 0.3, { align: 'center' });
-
-          doc.setFont('times', 'normal');
-          doc.setFontSize(8.3);
-          doc.setTextColor(42, 41, 39);
-          const qLines = doc.splitTextToSize(q, contentW - 7);
-          doc.text(qLines, offsetX + margin + 6.5, y);
-          y += qLines.length * 3.6 + 2;
-        });
-
-        y += 3;
-        // Oración
-        doc.setFont('times', 'bold');
-        doc.setFontSize(10.5);
-        doc.setTextColor(166, 68, 42);
-        doc.text('Oración', offsetX + margin, y);
-        y += 4.5;
-
-        doc.setFont('times', 'italic');
-        doc.setFontSize(8.4);
-        doc.setTextColor(24, 54, 43);
-        const prayLines = doc.splitTextToSize(d.prayer, contentW);
-        doc.text(prayLines, offsetX + margin, y);
-        y += prayLines.length * 3.7 + 4;
-
-        // Para llevar contigo hoy
-        doc.setFillColor(243, 236, 225);
-        const takeLines = doc.splitTextToSize(d.takeaway.replace(/\n+/g, ' '), contentW - 6);
-        const boxH = takeLines.length * 3.7 + 16;
-        if (y + boxH < pageH - 14) {
-          doc.roundedRect(offsetX + margin, y, contentW, boxH, 3, 3, 'F');
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(7.2);
-          doc.setTextColor(166, 68, 42);
-          doc.text('PARA LLEVAR CONTIGO HOY', offsetX + margin + 3, y + 5);
-
-          doc.setFont('times', 'normal');
-          doc.setFontSize(8.1);
-          doc.setTextColor(24, 54, 43);
-          doc.text(takeLines, offsetX + margin + 3, y + 9.5);
-
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(6.5);
-          doc.setTextColor(166, 68, 42);
-          const refLines = doc.splitTextToSize(`PARA SEGUIR EN LA PALABRA: ${d.furtherReading}`, contentW - 6);
-          doc.text(refLines, offsetX + margin + 3, y + 9.5 + takeLines.length * 3.7 + 1.5);
-        }
-
-        drawPdfFooter(doc, offsetX, pageW, pageH, pageNum);
-        return;
-      }
-
-      if (pageData.type === 'editorialSection') {
-        let y = 18;
-        if (pageData.kicker) {
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(7.5);
-          doc.setTextColor(166, 68, 42);
-          doc.text(pageData.kicker.toUpperCase(), offsetX + margin, y);
-          y += 5;
-        }
-        if (pageData.title) {
-          doc.setFont('times', 'bold');
-          doc.setFontSize(15);
-          doc.setTextColor(24, 54, 43);
-          doc.text(pageData.title, offsetX + margin, y);
-          y += 6;
-        }
-        if (pageData.intro) {
-          doc.setFont('times', 'italic');
-          doc.setFontSize(8.8);
-          doc.setTextColor(60, 58, 55);
-          const iLines = doc.splitTextToSize(pageData.intro, contentW);
-          doc.text(iLines, offsetX + margin, y);
-          y += iLines.length * 4 + 3;
-        }
-
-        pageData.items.forEach(item => {
-          if (y > pageH - 16) return;
-          if (item.kind === 'heading') {
-            y += 2;
-            doc.setFont('times', 'bold');
-            doc.setFontSize(9.6);
-            doc.setTextColor(24, 54, 43);
-            const hLines = doc.splitTextToSize(item.text, contentW);
-            doc.text(hLines, offsetX + margin, y);
-            y += hLines.length * 4.2 + 1.5;
-          } else if (item.kind === 'quote') {
-            doc.setFont('times', 'italic');
-            doc.setFontSize(8.4);
-            doc.setTextColor(166, 68, 42);
-            const qLines = doc.splitTextToSize(item.text, contentW - 4);
-            doc.text(qLines, offsetX + margin + 3, y);
-            y += qLines.length * 3.7 + 2;
-          } else if (item.kind === 'bullet') {
-            doc.setFont('times', 'normal');
-            doc.setFontSize(8.2);
-            doc.setTextColor(42, 41, 39);
-            const bLines = doc.splitTextToSize(`${item.lead} ${item.text}`, contentW);
-            doc.text(bLines, offsetX + margin, y);
-            y += bLines.length * 3.6 + 1.8;
-          } else {
-            doc.setFont('times', 'normal');
-            doc.setFontSize(8.3);
-            doc.setTextColor(42, 41, 39);
-            const pLines = doc.splitTextToSize(item.text, contentW);
-            doc.text(pLines, offsetX + margin, y);
-            y += pLines.length * 3.6 + 2;
-          }
-        });
-
-        drawPdfFooter(doc, offsetX, pageW, pageH, pageNum);
-        return;
-      }
-
-      if (pageData.type === 'notesPage') {
-        doc.setFont('times', 'bold');
-        doc.setFontSize(14);
-        doc.setTextColor(24, 54, 43);
-        doc.text('Notas', offsetX + margin, 20);
-
-        doc.setDrawColor(205, 195, 185);
-        doc.setLineWidth(0.25);
-        for (let ly = 32; ly <= pageH - 22; ly += 8.5) {
-          doc.line(offsetX + margin, ly, offsetX + pageW - margin, ly);
-        }
-        drawPdfFooter(doc, offsetX, pageW, pageH, pageNum);
-        return;
-      }
-
-      if (pageData.type === 'backCover') {
-        doc.setFillColor(24, 54, 43);
-        doc.rect(offsetX, 0, pageW, pageH, 'F');
-
-        // Arco doble en contraportada
-        doc.setDrawColor(166, 68, 42);
-        doc.setLineWidth(0.9);
-        doc.roundedRect(cx - 28, 35, 56, 85, 28, 28, 'S');
-
-        doc.setDrawColor(232, 195, 172);
-        doc.setLineWidth(0.6);
-        doc.roundedRect(cx - 22, 41, 44, 79, 22, 22, 'S');
-
-        doc.setFillColor(232, 195, 172);
-        doc.circle(cx, 66, 9, 'F');
-
-        doc.setFont('times', 'bold');
-        doc.setFontSize(13);
-        doc.setTextColor(250, 246, 240);
-        doc.text('Conociendo a Jesús a', cx, 145, { align: 'center' });
-        doc.text('través de las Escrituras', cx, 152, { align: 'center' });
-
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(7.5);
-        doc.setTextColor(232, 195, 172);
-        doc.text('UN VIAJE EMOCIONANTE', cx, 163, { align: 'center' });
-
-        doc.setFont('times', 'italic');
-        doc.setFontSize(9.5);
-        doc.setTextColor(184, 199, 185);
-        doc.text('Zulma Fuertes y Sebastián Aponte', cx, 176, { align: 'center' });
-      }
-    }
-
-    function drawPdfFooter(doc, offsetX, pageW, pageH, pageNum) {
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(6.5);
-      doc.setTextColor(120, 115, 110);
-      doc.text('ZULMA FUERTES Y SEBASTIÁN APONTE', offsetX + 12, pageH - 8);
-      doc.setFont('times', 'bold');
-      doc.setFontSize(8);
-      doc.setTextColor(24, 54, 43);
-      doc.text(String(pageNum), offsetX + pageW - 12, pageH - 8, { align: 'right' });
-    }
-
-    // Dibuja la página 1 de instrucciones en el PDF de 4 Cuadernillos
-    function renderBookletInstructionsPdfPage(doc, sheetW, sheetH, pagesPerSig) {
-      doc.setFillColor(250, 246, 240);
-      doc.rect(0, 0, sheetW, sheetH, 'F');
-
-      doc.setDrawColor(24, 54, 43);
-      doc.setLineWidth(0.7);
-      doc.roundedRect(12, 12, sheetW - 24, sheetH - 24, 5, 5, 'S');
-
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9);
-      doc.setTextColor(166, 68, 42);
-      doc.text('GUÍA DE IMPRESIÓN Y ENCUADERNACIÓN ARTESANAL EN CASA (4 CUADERNILLOS)', sheetW / 2, 25, { align: 'center' });
-
-      doc.setFont('times', 'bold');
-      doc.setFontSize(20);
-      doc.setTextColor(24, 54, 43);
-      doc.text('Conociendo a Jesús — Edición Cosida en 4 Cuadernillos', sheetW / 2, 35, { align: 'center' });
-
-      const sheetsPerSig = pagesPerSig / 4;
-      const colW = (sheetW - 44) / 2;
-
-      // Columna Izquierda: Configuración de Impresión
-      doc.setFillColor(255, 255, 255);
-      doc.roundedRect(18, 44, colW, 74, 4, 4, 'F');
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9.5);
-      doc.setTextColor(166, 68, 42);
-      doc.text('1. CONFIGURACIÓN DE IMPRESORA (NO IMPRIMAS ESTA HOJA EN EL LIBRO)', 24, 53);
-
-      doc.setFont('times', 'normal');
-      doc.setFontSize(10);
-      doc.setTextColor(42, 41, 39);
-      const printRules = [
-        `• Imprime desde la PÁGINA 2 en adelante (esta página 1 es solo guía).`,
-        `• Tamaño de papel: Carta (Letter 8.5" x 11") o A4.`,
-        `• Orientación: Horizontal (Landscape).`,
-        `• Escala: Tamaño real / 100% (sin reducir márgenes).`,
-        `• Doble cara: Activa "Imprimir a doble cara" volteando por el BORDE CORTO`,
-        `  (Flip on short edge) para que el reverso quede derecho.`
-      ];
-      let py = 62;
-      printRules.forEach(line => {
-        doc.text(line, 24, py);
-        py += 7.5;
-      });
-
-      // Columna Derecha: División en 4 Cuadernillos
-      doc.setFillColor(243, 236, 225);
-      doc.roundedRect(26 + colW, 44, colW, 74, 4, 4, 'F');
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9.5);
-      doc.setTextColor(24, 54, 43);
-      doc.text(`2. DIVISIÓN EN 4 CUADERNILLOS (${sheetsPerSig} HOJAS POR CUADERNILLO)`, 32 + colW, 53);
-
-      doc.setFont('times', 'normal');
-      doc.setFontSize(10);
-      doc.setTextColor(42, 41, 39);
-      const sigRules = [
-        `• Cuadernillo 1 (Pliegos 1 al ${sheetsPerSig}): Portada, Contenido y Días 1–3.`,
-        `• Cuadernillo 2 (Pliegos ${sheetsPerSig + 1} al ${sheetsPerSig * 2}): Días 4–8.`,
-        `• Cuadernillo 3 (Pliegos ${sheetsPerSig * 2 + 1} al ${sheetsPerSig * 3}): Días 9–13.`,
-        `• Cuadernillo 4 (Pliegos ${sheetsPerSig * 3 + 1} al ${sheetsPerSig * 4}): Días 14–16, Reflexión, Notas y Contraportada.`,
-        `• Toma cada grupo de ${sheetsPerSig} hojas impresas por ambas caras y dóblalas juntas`,
-        `  por la mitad (siguiendo la línea punteada central) para formar cada fascículo.`
-      ];
-      let sy = 62;
-      sigRules.forEach(line => {
-        doc.text(line, 32 + colW, sy);
-        sy += 7.5;
-      });
-
-      // Paso 3: Instrucciones de Cosido
-      doc.setFillColor(255, 255, 255);
-      doc.roundedRect(18, 125, sheetW - 36, 68, 4, 4, 'F');
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(9.5);
-      doc.setTextColor(166, 68, 42);
-      doc.text('3. PASO A PASO PARA PERFORAR Y COSER LOS 4 CUADERNILLOS', 24, 134);
-
-      doc.setFont('times', 'normal');
-      doc.setFontSize(10);
-      doc.setTextColor(42, 41, 39);
-      const sewSteps = [
-        'Paso A — Alinear y prensar: Apila los 4 cuadernillos doblados en orden (1 arriba, 4 abajo). Golpea suavemente el lomo sobre la mesa para nivelarlos.',
-        'Paso B — Marcar 5 estaciones: En el doblez central de cada cuadernillo verás 5 marcas pequeñas (•) para perforar con un punzón o aguja gruesa.',
-        'Paso C — Cosido en cadeneta (French Link / Kettle Stitch): Con hilo encerado o hilo de algodón resistente, entra por el hueco 1 del Cuadernillo 1,',
-        '   sal por el 2, entra por el 3, sal por el 4 y entra por el 5. Sube al Cuadernillo 2 y repite en sentido inverso enlazando las puntadas del cuadernillo anterior.',
-        'Paso D — Remate y cubierta: Al terminar el Cuadernillo 4, haz un nudo firme en el hilo. Opcionalmente pega una cartulina gruesa en el lomo para protegerlo.'
-      ];
-      let wy = 143;
-      sewSteps.forEach(line => {
-        doc.text(line, 24, wy);
-        wy += 8.2;
-      });
-    }
-
-    async function generatePDF(mode) {
-      const { jsPDF } = window.jspdf;
-      const progressBox = document.getElementById('pdfProgressBox');
-      const progressBar = document.getElementById('pdfProgressBar');
-      const progressLabel = document.getElementById('pdfProgressLabel');
-      const progressPct = document.getElementById('pdfProgressPct');
-
-      progressBox.classList.remove('hidden');
-      progressBar.style.width = '10%';
-      progressPct.textContent = '10%';
-      progressLabel.textContent = 'Preparando páginas editoriales...';
-
-      await new Promise(r => setTimeout(r, 60));
-
-      const logicalPages = buildLogicalPages();
-      const totalLogical = logicalPages.length;
-
-      if (mode === 'normal') {
-        // PDF Media Carta (139.7mm x 215.9mm) secuencial
-        const pageW = 139.7;
-        const pageH = 215.9;
-        const doc = new jsPDF({
-          orientation: 'portrait',
-          unit: 'mm',
-          format: [pageW, pageH]
-        });
-
-        for (let i = 0; i < totalLogical; i++) {
-          if (i > 0) doc.addPage([pageW, pageH], 'portrait');
-          renderLogicalPageToPDF(doc, logicalPages[i], i + 1, totalLogical, 0, pageW, pageH);
-
-          if (i % 8 === 0) {
-            const pct = Math.min(95, Math.round(((i + 1) / totalLogical) * 100));
-            progressBar.style.width = `${pct}%`;
-            progressPct.textContent = `${pct}%`;
-            progressLabel.textContent = `Generando página ${i + 1} de ${totalLogical}...`;
-            await new Promise(r => setTimeout(r, 10));
-          }
-        }
-
-        progressBar.style.width = '100%';
-        progressPct.textContent = '100%';
-        progressLabel.textContent = '¡PDF Normal listo! Descargando...';
-        doc.save('Conociendo_a_Jesus_Devocional_16_Dias_Normal.pdf');
-        showToast('PDF Impresión Normal descargado ✓');
-      } else {
-        // PDF Imposición en 4 Cuadernillos en hoja Carta Horizontal (279.4mm x 215.9mm)
-        const sheetW = 279.4;
-        const sheetH = 215.9;
-        const halfW = sheetW / 2; // 139.7mm
-
-        const doc = new jsPDF({
-          orientation: 'landscape',
-          unit: 'mm',
-          format: 'letter'
-        });
-
-        // Dividir totalLogical (múltiplo de 16) en 4 cuadernillos exactos
-        const numSignatures = 4;
-        const pagesPerSig = totalLogical / numSignatures; // Múltiplo de 4
-        const sheetsPerSig = pagesPerSig / 4;
-
-        // Página 1 del PDF: Instrucciones completas de impresión y cosido
-        renderBookletInstructionsPdfPage(doc, sheetW, sheetH, pagesPerSig);
-
-        let processedSheets = 0;
-        const totalSheets = sheetsPerSig * numSignatures;
-
-        for (let sig = 0; sig < numSignatures; sig++) {
-          const sigStartIdx = sig * pagesPerSig; // Índice 0-based en logicalPages
-
-          for (let s = 0; s < sheetsPerSig; s++) {
-            // Imposición Saddle-Stitch por cuadernillo:
-            // Frente (Anverso): [Última - 2s, Primera + 2s]
-            const frontLeftIdx = sigStartIdx + (pagesPerSig - 1 - 2 * s);
-            const frontRightIdx = sigStartIdx + (2 * s);
-
-            doc.addPage('letter', 'landscape');
-            renderLogicalPageToPDF(doc, logicalPages[frontLeftIdx], frontLeftIdx + 1, totalLogical, 0, halfW, sheetH);
-            renderLogicalPageToPDF(doc, logicalPages[frontRightIdx], frontRightIdx + 1, totalLogical, halfW, halfW, sheetH);
-
-            // Línea guía de doblez + encabezado de cuadernillo
-            drawFoldAndSewingMarks(doc, sheetW, sheetH, sig + 1, s + 1, sheetsPerSig, 'ANVERSO', s === sheetsPerSig - 1);
-
-            // Reverso: [Primera + 2s + 1, Última - 2s - 1]
-            const backLeftIdx = sigStartIdx + (2 * s + 1);
-            const backRightIdx = sigStartIdx + (pagesPerSig - 2 - 2 * s);
-
-            doc.addPage('letter', 'landscape');
-            renderLogicalPageToPDF(doc, logicalPages[backLeftIdx], backLeftIdx + 1, totalLogical, 0, halfW, sheetH);
-            renderLogicalPageToPDF(doc, logicalPages[backRightIdx], backRightIdx + 1, totalLogical, halfW, halfW, sheetH);
-
-            drawFoldAndSewingMarks(doc, sheetW, sheetH, sig + 1, s + 1, sheetsPerSig, 'REVERSO', false);
-
-            processedSheets++;
-            const pct = Math.min(95, Math.round((processedSheets / totalSheets) * 100));
-            progressBar.style.width = `${pct}%`;
-            progressPct.textContent = `${pct}%`;
-            progressLabel.textContent = `Imponiendo Cuadernillo ${sig + 1}/4 (Pliego ${s + 1}/${sheetsPerSig})...`;
-            await new Promise(r => setTimeout(r, 15));
-          }
-        }
-
-        progressBar.style.width = '100%';
-        progressPct.textContent = '100%';
-        progressLabel.textContent = '¡PDF en 4 Cuadernillos listo! Descargando...';
-        doc.save('Conociendo_a_Jesus_4_Cuadernillos_Cosido.pdf');
-        showToast('PDF 4 Cuadernillos Cosido descargado ✓');
-      }
-
-      setTimeout(() => {
-        progressBox.classList.add('hidden');
-      }, 2500);
-    }
-
-    function drawFoldAndSewingMarks(doc, sheetW, sheetH, sigNum, sheetNum, totalSheetsInSig, sideLabel, isCenterfold) {
-      const midX = sheetW / 2;
-
-      // Marcas sutiles de doblez superior e inferior
-      doc.setDrawColor(166, 68, 42);
-      doc.setLineWidth(0.3);
-      doc.line(midX, 0, midX, 6);
-      doc.line(midX, sheetH - 6, midX, sheetH);
-
-      // Etiqueta diminuta en el borde superior central para organizar los 4 cuadernillos
-      doc.setFont('helvetica', 'bold');
-      doc.setFontSize(5.5);
-      doc.setTextColor(166, 68, 42);
-      doc.text(`CUADERNILLO ${sigNum}/4 · HOJA ${sheetNum}/${totalSheetsInSig} (${sideLabel})`, midX, 4.5, { align: 'center' });
-
-      // Si es el pliego central de cada cuadernillo, dibujar las 5 estaciones de perforación para coser
-      if (isCenterfold) {
-        doc.setFillColor(166, 68, 42);
-        const stations = [28, 68, sheetH / 2, sheetH - 68, sheetH - 28];
-        stations.forEach(sy => {
-          doc.circle(midX, sy, 0.9, 'F');
-        });
-      }
     }
 
     // ============================================================================
