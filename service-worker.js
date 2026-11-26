@@ -1,6 +1,6 @@
-const CACHE_NAME = 'maestro-app-v2';
+const CACHE_NAME = 'maestro-app-v3';
 const APP_ASSETS = [
-  './Devocional.html',
+  './index.html',
   './maestro-content.js',
   './Logo.jpg',
   './icon-192.png',
@@ -68,7 +68,7 @@ self.addEventListener('fetch', event => {
     networkResponse.catch(error => caches.match(request).then(cached => {
       if (cached) return cached;
       if (request.mode === 'navigate') {
-        return caches.match('./Devocional.html').then(fallback => fallback || Promise.reject(error));
+        return caches.match('./index.html').then(fallback => fallback || Promise.reject(error));
       }
       return Promise.reject(error);
     }))

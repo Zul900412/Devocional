@@ -2,7 +2,7 @@
   "name": "Maestro — Devocional: Conociendo a Jesús",
   "short_name": "Maestro",
   "description": "Devocional de 16 días para conocer a Jesús a través de las Escrituras.",
-  "start_url": "./Devocional.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",

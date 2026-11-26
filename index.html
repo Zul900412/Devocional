@@ -454,16 +454,16 @@
     }
 
     function shareDevotional() {
-      const repositoryUrl = 'https://github.com/Zul900412/Devocional';
+      const appUrl = 'https://zul900412.github.io/Devocional/';
       const shareData = {
         title: 'Maestro — Conociendo a Jesús',
         text: 'Te comparto este devocional profundo de 16 días por Zulma Fuertes y Sebastián Aponte para conocer al Señor Jesús a través de las Escrituras:',
-        url: repositoryUrl
+        url: appUrl
       };
       if (navigator.share) {
         navigator.share(shareData).catch(() => {});
       } else {
-        copyLinkFallback(repositoryUrl);
+        copyLinkFallback(appUrl);
       }
     }
 
