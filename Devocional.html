@@ -108,8 +108,8 @@
       right: -4px;
       bottom: 2px;
       height: 9px;
-      background-color: #B8C7B9;
-      opacity: 0.65;
+      background-color: #E8C3AC;
+      opacity: 0.8;
       z-index: -1;
       border-radius: 4px;
     }
@@ -168,7 +168,7 @@
         </button>
 
         <!-- Botón Imprimir / Descargar PDF Cuadernillo -->
-        <button onclick="openPrintModal()" title="Descargar o abrir el PDF oficial" class="flex items-center gap-1.5 bg-forest/10 hover:bg-forest/20 text-forest font-sans text-xs sm:text-sm font-semibold px-2.5 sm:px-3 py-2 rounded-full transition-colors cursor-pointer">
+        <button onclick="openPrintModal()" title="Descargar versiones para imprimir" class="flex items-center gap-1.5 bg-forest/10 hover:bg-forest/20 text-forest font-sans text-xs sm:text-sm font-semibold px-2.5 sm:px-3 py-2 rounded-full transition-colors cursor-pointer">
           <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
           </svg>
@@ -223,23 +223,81 @@
     </div>
   </nav>
 
-  <!-- MODAL DE DESCARGA DEL PDF OFICIAL -->
+  <!-- MODAL DE DESCARGAS E INSTRUCCIONES DE IMPRESIÓN -->
   <div id="printModal" class="no-print fixed inset-0 z-50 hidden items-center justify-center bg-forest/70 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto">
     <div class="bg-[#FAF6F0] border-2 border-forest/15 rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-5 sm:p-8 relative my-auto">
-      <!-- Botón Cerrar Modal -->
       <button onclick="closePrintModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-card hover:bg-peach/50 text-forest flex items-center justify-center transition-colors cursor-pointer" aria-label="Cerrar">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
 
-      <div class="flex items-center gap-2 text-terracotta font-sans text-xs font-bold uppercase tracking-widest mb-1">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-        <span>PDF actualizado</span>
+      <div class="border-b border-forest/10 pb-4 mb-5 pr-10">
+        <p class="font-sans text-xs font-bold uppercase tracking-widest text-terracotta mb-1">Impresión · Media carta</p>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-forest mb-2">Descargar Devocional en PDF</h2>
+        <p class="font-sans text-sm text-ink/70">Imprime tu ejemplar de <strong>Maestro: Conociendo a Jesús a través de las Escrituras</strong> en casa o en litografía.</p>
       </div>
-      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-forest mb-2">Edición oficial del devocional</h2>
-      <p class="font-serif text-sm sm:text-base text-ink/85 mb-6">Descarga o abre el PDF original de 112 páginas, que conserva el diseño completo para leer e imprimir.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <a href="./Devocional.pdf" download="Maestro_Devocional.pdf" class="py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-[#FAF6F0] font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all">Descargar edición actual</a>
-        <a href="./Devocional.pdf" target="_blank" rel="noopener" class="py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold flex items-center justify-center gap-2 shadow-md transition-all">Abrir para leer o imprimir</a>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+        <section class="bg-white border-2 border-forest/10 rounded-2xl p-5 flex flex-col">
+          <div class="flex items-start justify-between mb-3">
+            <span class="w-10 h-10 rounded-xl bg-sage/30 text-forest flex items-center justify-center" aria-hidden="true">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3.75h8l4 4v12.5H6z"/><path d="M14 3.75v4h4M9 12h6M9 15h6"/></svg>
+            </span>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-forest mb-2">Modo Lectura / Estándar</h3>
+          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">Páginas secuenciales en formato media carta. Ideal para leer en pantalla, anillar o imprimir página por página.</p>
+          <a href="./Devocional.pdf" download="Devocional.pdf" class="w-full py-3 px-4 rounded-xl bg-forest hover:bg-[#10251D] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar PDF Normal</a>
+        </section>
+
+        <section class="bg-[#F7ECE2] border-2 border-terracotta/40 rounded-2xl p-5 flex flex-col">
+          <div class="flex items-start justify-between mb-3">
+            <span class="w-10 h-10 rounded-xl bg-terracotta text-white flex items-center justify-center" aria-hidden="true">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.5 5.5c2.8-.8 5-.3 8.5 1.5v13c-3.5-1.8-5.7-2.3-8.5-1.5zM20.5 5.5c-2.8-.8-5-.3-8.5 1.5v13c3.5-1.8 5.7-2.3 8.5-1.5z"/></svg>
+            </span>
+            <span class="rounded-full bg-terracotta px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">Encuadernación</span>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-forest mb-2">4 Cuadernillos Cosidos</h3>
+          <p class="font-sans text-sm text-ink/70 leading-relaxed mb-5 flex-1">Pliegos en Carta horizontal, dos páginas por cara, divididos en cuatro cuadernillos con marcas de doblez y perforación.</p>
+          <a href="./Devocional_Cuadernillo.pdf" download="Devocional_Cuadernillo.pdf" class="w-full py-3 px-4 rounded-xl bg-terracotta hover:bg-[#8E3720] text-white font-sans text-sm font-semibold text-center transition-colors">Descargar 4 Cuadernillos</a>
+        </section>
+      </div>
+
+      <section class="rounded-2xl border border-[#D8CBBE] bg-[#F4ECE2] p-4 sm:p-5">
+        <h3 class="font-serif text-lg font-bold text-forest mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 shrink-0 text-terracotta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 11v5m0-8h.01"/></svg>
+          <span>Instrucciones ilustradas: Cómo imprimir y coser los 4 cuadernillos</span>
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
+            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Dos páginas enfrentadas con marca de doblez">
+              <rect x="34" y="12" width="54" height="62" rx="4" fill="white" stroke="#81543E" stroke-width="1.5"/>
+              <rect x="88" y="12" width="54" height="62" rx="4" fill="white" stroke="#81543E" stroke-width="1.5"/>
+              <path d="M88 12v62" stroke="#A6442A" stroke-width="2" stroke-dasharray="4 3"/>
+              <text x="61" y="46" text-anchor="middle" fill="#18362B" font-size="9">Pág. Izq.</text>
+              <text x="115" y="46" text-anchor="middle" fill="#18362B" font-size="9">Pág. Der.</text>
+            </svg>
+            <h4 class="font-sans text-xs font-bold text-forest mb-1">1. Imprime doble cara</h4>
+            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Papel Carta, horizontal; voltea por el borde corto.</p>
+          </article>
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
+            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Cuadernillo doblado con tres marcas de perforación">
+              <path d="M48 22l42 9 42-9v44l-42 9-42-9z" fill="#E8C3AC" stroke="#81543E" stroke-width="1.5"/>
+              <path d="M90 31v44" stroke="#A6442A" stroke-width="1.5" stroke-dasharray="3 2"/>
+              <circle cx="90" cy="40" r="2" fill="#18362B"/><circle cx="90" cy="53" r="2" fill="#18362B"/><circle cx="90" cy="66" r="2" fill="#18362B"/>
+            </svg>
+            <h4 class="font-sans text-xs font-bold text-forest mb-1">2. Dobla 4 cuadernillos</h4>
+            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Agrupa cada cuadernillo por separado, dóblalo y perfora los tres puntos guía.</p>
+          </article>
+          <article class="rounded-xl border border-forest/10 bg-[#FAF6F0] p-3">
+            <svg class="w-full h-20 mb-2" viewBox="0 0 180 90" role="img" aria-label="Lomo cosido con puntada de tres hoyos">
+              <rect x="55" y="13" width="70" height="64" rx="5" fill="#E8C3AC" stroke="#81543E" stroke-width="1.5"/>
+              <path d="M68 14v62" stroke="#18362B" stroke-width="2"/>
+              <circle cx="68" cy="28" r="2.5" fill="#A6442A"/><circle cx="68" cy="45" r="2.5" fill="#A6442A"/><circle cx="68" cy="62" r="2.5" fill="#A6442A"/>
+              <path d="M64 28c10 5 10 12 0 17s-10 12 0 17" fill="none" stroke="#A6442A" stroke-width="2"/>
+            </svg>
+            <h4 class="font-sans text-xs font-bold text-forest mb-1">3. Cose con puntada de 3 hoyos</h4>
+            <p class="font-sans text-[11px] leading-relaxed text-ink/65">Une los cuatro cuadernillos en orden con hilo resistente y pega la portada envolvente.</p>
+          </article>
+        </div>
       </div>
     </div>
   </div>
@@ -353,19 +411,15 @@
       const headerTxt = document.getElementById('headerInstallText');
       const coverBtn = document.getElementById('coverInstallBtn');
       const coverTxt = document.getElementById('coverInstallText');
+      const shouldShowInstall = !isInstalled;
 
-      if (isInstalled) {
-        if (headerBtn && headerTxt) {
-          headerTxt.textContent = 'Instalada ✓';
-          headerBtn.classList.remove('bg-terracotta');
-          headerBtn.classList.add('bg-forest', 'border', 'border-peach/40');
-        }
-        if (coverBtn && coverTxt) {
-          coverTxt.textContent = 'App Instalada en tu Celular ✓';
-          coverBtn.classList.remove('bg-terracotta');
-          coverBtn.classList.add('bg-forest');
-        }
-      }
+      [headerBtn, coverBtn].forEach(button => {
+        if (!button) return;
+        button.classList.toggle('hidden', !shouldShowInstall);
+      });
+
+      if (shouldShowInstall && headerTxt) headerTxt.textContent = 'Instalar Maestro';
+      if (shouldShowInstall && coverTxt) coverTxt.textContent = 'Instalar Maestro';
     }
 
     // DISPARADOR DIRECTO Y AUTOMÁTICO DE INSTALACIÓN (Sin mostrar instrucciones manuales)
@@ -375,44 +429,47 @@
         return;
       }
 
-      if (deferredPrompt) {
-        try {
-          deferredPrompt.prompt();
-          const { outcome } = await deferredPrompt.userChoice;
-          if (outcome === 'accepted') {
-            isInstalled = true;
-            updateInstallButtonsUI();
-          }
-          deferredPrompt = null;
-        } catch (err) {
-          console.error(err);
-        }
+      if (!deferredPrompt) {
+        showToast('Este navegador no permite la instalación directa');
         return;
       }
 
-      if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
-        showToast('En Safari: toca Compartir y elige «Añadir a pantalla de inicio»');
-      } else {
-        showToast('Abre el menú del navegador y elige «Instalar aplicación» o «Añadir a pantalla de inicio»');
+      const installEvent = deferredPrompt;
+      deferredPrompt = null;
+      updateInstallButtonsUI();
+
+      try {
+        await installEvent.prompt();
+        const { outcome } = await installEvent.userChoice;
+        if (outcome === 'accepted') {
+          isInstalled = true;
+          updateInstallButtonsUI();
+        } else {
+          showToast('Instalación cancelada');
+        }
+      } catch (error) {
+        console.error('No se pudo iniciar la instalación:', error);
+        showToast('No se pudo iniciar la instalación desde este navegador');
       }
     }
 
     function shareDevotional() {
+      const repositoryUrl = 'https://github.com/Zul900412/Devocional';
       const shareData = {
         title: 'Maestro — Conociendo a Jesús',
         text: 'Te comparto este devocional profundo de 16 días por Zulma Fuertes y Sebastián Aponte para conocer al Señor Jesús a través de las Escrituras:',
-        url: window.location.href
+        url: repositoryUrl
       };
       if (navigator.share) {
         navigator.share(shareData).catch(() => {});
       } else {
-        copyLinkFallback();
+        copyLinkFallback(repositoryUrl);
       }
     }
 
-    function copyLinkFallback() {
+    function copyLinkFallback(url) {
       const tempInput = document.createElement('input');
-      tempInput.value = `${window.location.href} — Devocional "Conociendo a Jesús a través de las Escrituras (16 días)" por Zulma Fuertes y Sebastián Aponte`;
+      tempInput.value = `${url} — Devocional "Conociendo a Jesús a través de las Escrituras (16 días)" por Zulma Fuertes y Sebastián Aponte`;
       document.body.appendChild(tempInput);
       tempInput.select();
       try {
@@ -712,7 +769,7 @@
 
               <button onclick="openPrintModal()" class="py-3 px-4 rounded-2xl bg-white hover:bg-sage/25 text-forest border border-forest/20 font-sans text-xs sm:text-sm font-semibold shadow-sm transition-all cursor-pointer flex items-center justify-center gap-2">
                 <svg class="w-4 h-4 shrink-0 text-terracotta" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                <span>PDF oficial actualizado</span>
+                <span>Descargar para imprimir</span>
               </button>
             </div>
           </div>
@@ -801,7 +858,7 @@
     }
 
     function renderSourceContent(content) {
-      const headingLabels = /^(detente un momento|entra en (?:el texto|la escena)|escucha su voz|lo profundo de todo esto|examina tu corazón|oración|para llevar contigo hoy|para seguir en la palabra|lo que sigue|antes de cerrar|antes de empezar|antes de terminar|antes de repasar|quién es jesús|descubre quién es él|un rasgo de su carácter|en conclusión|para reflexionar|mi respuesta|tu punto de partida)$/i;
+      const headingLabels = /^(detente un momento|entra en (?:el texto|la escena)|escucha su voz|lo profundo de todo esto|examina tu corazón|oración|para llevar contigo hoy|para seguir en la palabra|lo que sigue|antes de cerrar|antes de empezar|antes de terminar|antes de repasar|quién es jesús|descubre quién es él|un rasgo de su carácter|en conclusión|para reflexionar|mi respuesta|tu punto de partida|responde por escrito|del «quién» a su llamado)$/i;
       return content.map(text => {
         const safeText = escapeHtml(text);
         const isHeading = text.length <= 110 && (headingLabels.test(text) || (/[A-ZÁÉÍÓÚÜÑ]/.test(text) && text === text.toLocaleUpperCase('es')));
@@ -826,6 +883,94 @@
       const isDone = appState.completedDays.includes(dayObj.day);
       const savedResponseId = dayObj.day === 1 ? 'day1_starting_point' : 'day16_final_reflection';
       const savedResponseLabel = dayObj.day === 1 ? 'Tu punto de partida' : 'Tu reflexión al terminar';
+      const content = dayObj.content;
+      const reflectionIndex = content.findIndex(text => /^Examina tu corazón$/i.test(text.trim()));
+      const prayerIndex = content.findIndex(text => /^Oración(?:\s|$)/i.test(text.trim()));
+      const takeawayIndex = content.findIndex(text => /^Para llevar contigo hoy$/i.test(text.trim()));
+      const introEnd = reflectionIndex >= 0 ? reflectionIndex : Math.min(
+        prayerIndex >= 0 ? prayerIndex : content.length,
+        takeawayIndex >= 0 ? takeawayIndex : content.length
+      );
+      const reflectionEnd = prayerIndex >= 0 ? prayerIndex : content.length;
+      const reflectionItems = reflectionIndex >= 0
+        ? content.slice(reflectionIndex + 1, reflectionEnd)
+        : [];
+      const additionalSectionIndex = reflectionItems.findIndex(text =>
+        /^(tu punto de partida|responde por escrito|del «quién» a su llamado)$/i.test(text.trim())
+      );
+      const questionItems = additionalSectionIndex >= 0
+        ? reflectionItems.slice(0, additionalSectionIndex)
+        : reflectionItems;
+      const additionalItems = additionalSectionIndex >= 0
+        ? reflectionItems.slice(additionalSectionIndex)
+        : [];
+
+      const questions = [];
+      let currentQuestion = '';
+      let pendingNumber = '';
+      const orderedQuestionItems = [];
+      for (let index = 0; index < questionItems.length; index++) {
+        const text = questionItems[index].trim();
+        const trailingNumberedFragment = text.match(/^(\d+)[.)]\s+(.+)$/);
+        const nextText = questionItems[index + 1] ? questionItems[index + 1].trim() : '';
+        if (
+          trailingNumberedFragment &&
+          !trailingNumberedFragment[2].startsWith('¿') &&
+          trailingNumberedFragment[2].endsWith('?') &&
+          nextText.startsWith('¿') &&
+          !nextText.endsWith('?')
+        ) {
+          orderedQuestionItems.push(`${trailingNumberedFragment[1]}. ${nextText} ${trailingNumberedFragment[2]}`);
+          index++;
+        } else {
+          orderedQuestionItems.push(text);
+        }
+      }
+
+      const flushQuestion = () => {
+        if (currentQuestion) questions.push(currentQuestion.trim());
+        currentQuestion = '';
+      };
+
+      orderedQuestionItems.forEach(text => {
+        if (/^\d+[.)]?$/.test(text)) {
+          flushQuestion();
+          pendingNumber = text.replace(/[.)]/g, '');
+          return;
+        }
+        const numberedQuestion = text.match(/^(\d+)[.)]\s*(.+)$/);
+        if (numberedQuestion) {
+          flushQuestion();
+          currentQuestion = numberedQuestion[2];
+          pendingNumber = '';
+          return;
+        }
+        if (pendingNumber) {
+          currentQuestion = `${pendingNumber}. ${text}`;
+          pendingNumber = '';
+          return;
+        }
+        if (currentQuestion && text.startsWith('¿')) flushQuestion();
+        currentQuestion = currentQuestion ? `${currentQuestion} ${text}` : text;
+      });
+      flushQuestion();
+
+      const questionsHtml = questions.length ? `
+        <section class="mt-8">
+          <h2 class="font-serif text-xl sm:text-2xl font-bold text-forest mb-4">
+            <span class="examina-underline">Examina tu corazón</span>
+          </h2>
+          <ol class="space-y-3">
+            ${questions.map((question, index) => `
+              <li class="flex items-start gap-3">
+                <span class="w-7 h-7 rounded-full ${index % 2 === 0 ? 'bg-terracotta text-white' : 'bg-forest text-white'} font-sans text-sm font-bold flex items-center justify-center shrink-0">${index + 1}</span>
+                <span class="font-serif text-base sm:text-[17px] leading-relaxed text-ink pt-0.5">${escapeHtml(question.replace(/^\d+[.)]\s*/, ''))}</span>
+              </li>
+            `).join('')}
+          </ol>
+        </section>
+      ` : '';
+
       const responseHtml = (dayObj.day === 1 || dayObj.day === 16) ? `
         <div class="mt-8 bg-white border-2 border-dashed border-terracotta/50 rounded-3xl p-5 sm:p-7">
           <h2 class="font-serif text-xl font-bold text-forest mb-3">${savedResponseLabel}</h2>
@@ -839,6 +984,55 @@
           <p class="font-serif italic text-ink">«${escapeHtml(startingPoint)}»</p>
         </div>
       ` : '';
+      const prayerParts = prayerIndex >= 0
+        ? content.slice(prayerIndex, takeawayIndex >= 0 ? takeawayIndex : content.length)
+        : [];
+      if (prayerParts.length) {
+        prayerParts[0] = prayerParts[0].replace(/^Oración\s*/i, '').trim();
+      }
+      const prayerHtml = prayerParts.some(part => part.trim()) ? `
+        <section class="mt-7 bg-[#EEF2ED] border border-[#CDD8CF] rounded-3xl p-5 sm:p-6">
+          <h2 class="font-serif text-xl font-bold text-forest mb-2">Oración</h2>
+          ${prayerParts.filter(part => part.trim()).map(part => `<p class="font-serif italic text-base sm:text-[17px] leading-[1.65] text-ink mb-2 last:mb-0">${escapeHtml(part.trim())}</p>`).join('')}
+        </section>
+      ` : '';
+
+      const takeawayText = takeawayIndex >= 0
+        ? content.slice(takeawayIndex + 1).join(' ').replace(/\s+/g, ' ').trim()
+        : '';
+      const readingMarker = takeawayText.match(/PARA SEGUIR EN LA PALABRA:\s*/i);
+      let takeawayMessage = readingMarker
+        ? takeawayText.slice(0, readingMarker.index).trim()
+        : takeawayText;
+      let readingAndTomorrow = readingMarker
+        ? takeawayText.slice(readingMarker.index + readingMarker[0].length).trim()
+        : '';
+      const tomorrowMarker = readingAndTomorrow.match(/Mañana:\s*/i);
+      let furtherReading = tomorrowMarker
+        ? readingAndTomorrow.slice(0, tomorrowMarker.index).trim()
+        : readingAndTomorrow;
+      const tomorrow = tomorrowMarker
+        ? readingAndTomorrow.slice(tomorrowMarker.index + tomorrowMarker[0].length).trim()
+        : '';
+      let closingMessage = '';
+      const closingStart = furtherReading.indexOf('Este recorrido termina aquí');
+      if (closingStart >= 0) {
+        closingMessage = furtherReading.slice(closingStart).trim();
+        furtherReading = furtherReading.slice(0, closingStart).trim();
+      }
+      const takeawayHtml = takeawayIndex >= 0 ? `
+        <section class="mt-7 bg-forest text-[#FAF6F0] rounded-3xl p-5 sm:p-7 shadow-md">
+          <h2 class="font-sans text-[11px] font-bold uppercase tracking-[0.16em] text-peach mb-2">Para llevar contigo hoy</h2>
+          <p class="font-serif text-base sm:text-[17px] font-semibold leading-relaxed mb-4">${escapeHtml(takeawayMessage)}</p>
+          ${closingMessage ? `<p class="font-serif text-sm sm:text-base leading-relaxed mb-4">${escapeHtml(closingMessage)}</p>` : ''}
+          ${furtherReading || tomorrow ? `
+            <div class="pt-3 border-t border-white/20 space-y-2 text-xs sm:text-sm">
+              ${furtherReading ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Para seguir en la Palabra:</strong> <span class="text-white/90">${escapeHtml(furtherReading)}</span></p>` : ''}
+              ${tomorrow ? `<p class="font-sans leading-relaxed"><strong class="text-peach uppercase tracking-wide">Mañana:</strong> <span class="text-white/90">${escapeHtml(tomorrow)}</span></p>` : ''}
+            </div>
+          ` : ''}
+        </section>
+      ` : '';
 
       return `
         <article class="bg-white border border-forest/15 rounded-[2rem] p-5 sm:p-10 shadow-md">
@@ -851,9 +1045,13 @@
               <span>${escapeHtml(dayObj.reading)}</span>
             </div>
           </header>
-          <div class="border-t border-forest/10 pt-2">${renderSourceContent(dayObj.content)}</div>
+          <div class="border-t border-forest/10 pt-2">${renderSourceContent(content.slice(0, introEnd))}</div>
+          ${questionsHtml}
+          ${additionalItems.length ? `<div class="mt-6">${renderSourceContent(additionalItems)}</div>` : ''}
           ${responseHtml}
           ${comparisonHtml}
+          ${prayerHtml}
+          ${takeawayHtml}
           <div class="mt-8 pt-6 border-t border-forest/10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <button onclick="toggleDayCompleted(${dayObj.day})" class="w-full sm:w-auto px-5 py-3 rounded-2xl font-sans text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${isDone ? 'bg-sage text-forest' : 'bg-terracotta text-white hover:bg-[#8E3720] shadow-md'}">
               <span>${isDone ? `Día ${dayObj.day} Completado ✓` : `Marcar Día ${dayObj.day} como Leído`}</span>
@@ -1106,7 +1304,7 @@
     }
 
     // ============================================================================
-    // 7. ACCESO AL PDF OFICIAL
+    // 7. IMPRESIÓN DEL CUADERNILLO
     // ============================================================================
     function openPrintModal() {
       const modal = document.getElementById('printModal');
@@ -1120,9 +1318,6 @@
       modal.classList.remove('flex');
     }
 
-    // ============================================================================
-    // 8. INICIALIZACIÓN AL CARGAR LA VENTANA
-    // ============================================================================
     window.addEventListener('DOMContentLoaded', () => {
       loadState();
       setupPWA();

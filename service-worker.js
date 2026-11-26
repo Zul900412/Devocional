@@ -1,11 +1,10 @@
-const CACHE_NAME = 'maestro-app-v1';
+const CACHE_NAME = 'maestro-app-v2';
 const APP_ASSETS = [
   './Devocional.html',
   './maestro-content.js',
   './Logo.jpg',
   './icon-192.png',
-  './icon-512.png',
-  './Devocional.pdf'
+  './icon-512.png'
 ];
 const OPTIONAL_ASSETS = [
   { url: 'https://cdn.tailwindcss.com/', mode: 'no-cors' },
